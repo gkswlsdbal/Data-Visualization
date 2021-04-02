@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1627</width>
-    <height>753</height>
+    <width>1667</width>
+    <height>864</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -21,23 +21,117 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="3">
-     <widget class="QListWidget" name="listWidget_2">
-      <property name="maximumSize">
+    <item row="1" column="4">
+     <widget class="QWidget" name="chartBtnWidget" native="true">
+      <property name="minimumSize">
        <size>
-        <width>250</width>
+        <width>0</width>
         <height>100</height>
        </size>
       </property>
-      <property name="dragDropMode">
-       <enum>QAbstractItemView::DragDrop</enum>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="1" column="0">
+        <widget class="QPushButton" name="pieChartBtn">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>img/파이.png</normaloff>img/파이.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="lineGraphBtn">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>img/꺽은선.png</normaloff>img/꺽은선.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="barGraphBtn">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>img/막대2.png</normaloff>img/막대2.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="scatterChartBtn">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>img/산포도.png</normaloff>img/산포도.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="0" rowspan="2">
+     <widget class="QListWidget" name="FileList">
+      <property name="maximumSize">
+       <size>
+        <width>250</width>
+        <height>1000</height>
+       </size>
       </property>
-      <property name="defaultDropAction">
-       <enum>Qt::MoveAction</enum>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="dragDropMode">
+       <enum>QAbstractItemView::InternalMove</enum>
       </property>
      </widget>
     </item>
-    <item row="3" column="3">
+    <item row="2" column="4">
      <widget class="QListWidget" name="cellList">
       <property name="maximumSize">
        <size>
@@ -61,92 +155,71 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="1" rowspan="4">
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="currentIndex">
-       <number>1</number>
+    <item row="0" column="0">
+     <widget class="QPushButton" name="insertButton">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>50</height>
+       </size>
       </property>
-      <widget class="QWidget" name="tab">
+      <property name="text">
+       <string>Add FIle</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="4">
+     <widget class="QPushButton" name="addTabBtn">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>img/플러스.png</normaloff>img/플러스.png</iconset>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1" rowspan="3">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="styleSheet">
+       <string notr="true">font: 11pt &quot;KoPub돋움체 Bold&quot;;</string>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>50</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="tabsClosable">
+       <bool>true</bool>
+      </property>
+      <property name="movable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="tab_1">
        <attribute name="title">
-        <string>Tab 1</string>
+        <string>이름</string>
        </attribute>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="1" column="0">
+         <widget class="QGraphicsView" name="graphicsView"/>
+        </item>
+        <item row="2" column="0" colspan="2">
+         <widget class="QTableWidget" name="tableWidget"/>
+        </item>
+        <item row="1" column="1">
+         <widget class="QListView" name="listView"/>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
-        <string>Tab 2</string>
+        <string/>
        </attribute>
-       <widget class="QTableWidget" name="tableWidget">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>380</y>
-          <width>1091</width>
-          <height>311</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QListView" name="listView">
-        <property name="geometry">
-         <rect>
-          <x>600</x>
-          <y>10</y>
-          <width>481</width>
-          <height>361</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QGraphicsView" name="graphicsView">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>10</y>
-          <width>581</width>
-          <height>361</height>
-         </rect>
-        </property>
-       </widget>
       </widget>
-     </widget>
-    </item>
-    <item row="1" column="0" rowspan="3">
-     <widget class="QListWidget" name="FileList">
-      <property name="maximumSize">
-       <size>
-        <width>250</width>
-        <height>1000</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="dragDropMode">
-       <enum>QAbstractItemView::InternalMove</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QPushButton" name="insertButton">
-      <property name="text">
-       <string>Insert</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="3">
-     <widget class="QListWidget" name="listWidget_3">
-      <property name="maximumSize">
-       <size>
-        <width>250</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="dragDropMode">
-       <enum>QAbstractItemView::DragDrop</enum>
-      </property>
-      <property name="defaultDropAction">
-       <enum>Qt::MoveAction</enum>
-      </property>
      </widget>
     </item>
    </layout>
@@ -156,7 +229,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1627</width>
+     <width>1667</width>
      <height>21</height>
     </rect>
    </property>
@@ -164,6 +237,17 @@
     <property name="title">
      <string>File</string>
     </property>
+    <widget class="QMenu" name="menuabsorption">
+     <property name="title">
+      <string>Absorption</string>
+     </property>
+     <addaction name="actionFileAbsorption"/>
+     <addaction name="actionCellAbsorption"/>
+    </widget>
+    <addaction name="menuSave"/>
+    <addaction name="actionSave"/>
+    <addaction name="menuabsorption"/>
+    <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuChart">
     <property name="title">
@@ -174,7 +258,44 @@
    <addaction name="menuChart"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save as</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="menuSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionFile">
+   <property name="text">
+    <string>File</string>
+   </property>
+  </action>
+  <action name="actionCell">
+   <property name="text">
+    <string>Cell</string>
+   </property>
+  </action>
+  <action name="actionFileAbsorption">
+   <property name="text">
+    <string>FileAbsorption</string>
+   </property>
+  </action>
+  <action name="actionCellAbsorption">
+   <property name="text">
+    <string>CellAbsorption</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="ProjectUI.ui"/>
+ </resources>
  <connections/>
 </ui>
