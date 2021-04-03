@@ -3,6 +3,9 @@ from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 import main_event as ev
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
 form_class = uic.loadUiType('ProjectUI.ui')[0]
 
@@ -17,8 +20,18 @@ class WindowClass(QMainWindow, form_class):
         self.installEventFilter(self)
         self.setAcceptDrops(True)
         self.FileList.itemDoubleClicked.connect(self.fileClick)
-        self.actionCellAbsorption.triggered.connect(self.actionCells)
-        self.actionFileAbsorption.triggered.connect(self.actionFiles)
+        #self.actionCellAbsorption.triggered.connect(self.actionCells)
+        #self.actionFileAbsorption.triggered.connect(self.actionFiles)
+        self.cellList.itemClicked.connect(self.cellClick)
+
+        self.fig = plt.Figure()
+        self.canvas = FigureCanvas(self.fig)
+        self.graphLayout.addWidget(self.canvas)
+
+        path = '/Windows/Fonts/gulim.ttc'
+        font_name = fm.FontProperties(fname=path, size=50).get_name()
+        plt.rc('font', family=font_name)
+
 
     # 파일 드레그앤 드랍
     def eventFilter(self, object, event):
@@ -41,6 +54,8 @@ class WindowClass(QMainWindow, form_class):
     def actionFiles(self):
         ev.FileAbsorption(self)
 
+    def cellClick(self):
+        ev.cellClick(self)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
