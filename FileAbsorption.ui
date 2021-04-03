@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>492</width>
-    <height>240</height>
+    <width>837</width>
+    <height>575</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,21 +23,11 @@
     </rect>
    </property>
   </widget>
-  <widget class="QListWidget" name="abList">
-   <property name="geometry">
-    <rect>
-     <x>270</x>
-     <y>10</y>
-     <width>211</width>
-     <height>51</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QPushButton" name="innerBtn">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>70</y>
+     <x>470</x>
+     <y>90</y>
      <width>101</width>
      <height>71</height>
     </rect>
@@ -54,7 +44,7 @@
    </property>
    <property name="iconSize">
     <size>
-     <width>120</width>
+     <width>140</width>
      <height>60</height>
     </size>
    </property>
@@ -62,8 +52,8 @@
   <widget class="QPushButton" name="fullBtn">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>150</y>
+     <x>690</x>
+     <y>330</y>
      <width>101</width>
      <height>71</height>
     </rect>
@@ -80,7 +70,7 @@
    </property>
    <property name="iconSize">
     <size>
-     <width>120</width>
+     <width>140</width>
      <height>60</height>
     </size>
    </property>
@@ -88,8 +78,8 @@
   <widget class="QPushButton" name="leftBtn">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>70</y>
+     <x>690</x>
+     <y>220</y>
      <width>101</width>
      <height>71</height>
     </rect>
@@ -107,15 +97,15 @@
    <property name="iconSize">
     <size>
      <width>140</width>
-     <height>63</height>
+     <height>60</height>
     </size>
    </property>
   </widget>
-  <widget class="QPushButton" name="rigthtBtn">
+  <widget class="QPushButton" name="rightBtn">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>150</y>
+     <x>280</x>
+     <y>340</y>
      <width>101</width>
      <height>71</height>
     </rect>
@@ -132,22 +122,29 @@
    </property>
    <property name="iconSize">
     <size>
-     <width>120</width>
+     <width>140</width>
      <height>60</height>
     </size>
    </property>
   </widget>
-  <widget class="Line" name="line">
+  <widget class="QListWidget" name="abList">
    <property name="geometry">
     <rect>
-     <x>370</x>
-     <y>10</y>
-     <width>16</width>
+     <x>280</x>
+     <y>100</y>
+     <width>161</width>
      <height>51</height>
     </rect>
    </property>
-   <property name="orientation">
-    <enum>Qt::Vertical</enum>
+  </widget>
+  <widget class="QListWidget" name="abList_2">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>100</y>
+     <width>161</width>
+     <height>51</height>
+    </rect>
    </property>
   </widget>
  </widget>

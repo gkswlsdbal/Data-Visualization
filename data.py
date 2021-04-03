@@ -5,8 +5,11 @@ cmCount = 0
 # 파일 리스트위젯 길이 변수 저장
 fileCount = 0
 
+# 파일 경로 리스트
+fileLinks = []
+
 # 파일 이름 리스트
-links = []
+fileName = []
 
 # 콤보 박스 데이터 플래그
 flag = False
@@ -14,14 +17,17 @@ flag = False
 # 파일 데이터프레임 리스트
 dfs = []
 
-# 리스트아이템 추가
-Itemlist = []
+# 열 리스트아이템 저장
+cellItemList = []
+
+# 파일 리스트 아이템 저장
+fileItemList = []
 
 # 분리된 데이터프레임 저장
 dfsList = []
 
-# 파일 항목 리스트
-checkfl = []
+# 중복되는 파일인지 판별하는 리스트
+checkFl = []
 
 
 

@@ -5,9 +5,6 @@ import data
 import cellAbsorption as ca
 import fileAbsorption as fa
 
-# 파일 이름 리스트
-data.links = []
-
 
 # insert 버튼 클릭할때 실행
 def btnClick(self):
@@ -19,17 +16,18 @@ def btnClick(self):
 # 파일 리스트안에 있는 파일 더블클릭할 때 실행
 def fileClick(self):
     i = self.FileList.currentRow()
-    self.fileCheck("".join(data.links[i]))
+    self.fileCheck("".join(data.fileLinks[i]))
 
 
 # 파일리스트에 이미 파일 있는지 검사
 def fileCheck(self, file):
-    if file in data.links:
+    if file in data.fileLinks:
         ft.draw(self, file)
     else:
-        data.links.append(file)
+        data.fileLinks.append(file)
         site = file.split("/")
         self.FileList.addItem(site[-1])
+        data.fileName.append(site[-1])
         ft.draw(self, file)
 
 

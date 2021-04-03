@@ -18,7 +18,7 @@ class OptionWindow(QDialog):
         self.abButton.clicked.connect(self.btnClick)
         self.myParent = parent
         self.comboBox.addItem('파일 선택')
-        for i in range(0, len(data.links)):
+        for i in range(0, len(data.fileLinks)):
             self.comboBox.addItem(parent.FileList.item(i).text())
 
         self.comboBox.currentIndexChanged.connect(self.BoxClick)

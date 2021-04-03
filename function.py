@@ -36,3 +36,4 @@ def draw(self, fl):
             if s == 'nan':
                 s = ''
             table.setItem(j, i, QtWidgets.QTableWidgetItem(s))
+
