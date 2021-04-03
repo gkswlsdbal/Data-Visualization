@@ -20,8 +20,8 @@ class WindowClass(QMainWindow, form_class):
         self.installEventFilter(self)
         self.setAcceptDrops(True)
         self.FileList.itemDoubleClicked.connect(self.fileClick)
-        #self.actionCellAbsorption.triggered.connect(self.actionCells)
-        #self.actionFileAbsorption.triggered.connect(self.actionFiles)
+        self.actionCellAbsorption.triggered.connect(self.actionCells)
+        self.actionFileAbsorption.triggered.connect(self.actionFiles)
         self.cellList.itemClicked.connect(self.cellClick)
 
         self.fig = plt.Figure()
