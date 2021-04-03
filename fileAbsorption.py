@@ -2,12 +2,16 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic
 import data
 import Absorption_event as ab
+import Join
+from tkinter import messagebox as msg, Tk
 
 form_class1 = uic.loadUiType('FileAbsorption.ui')[0]
 
 
 # 새창 띄우는 역할
 class OptionWindow(QDialog):
+    Join = ''
+    JoinCellList = []
 
     def __init__(self, parent):
         super(OptionWindow, self).__init__(parent)
@@ -17,23 +21,30 @@ class OptionWindow(QDialog):
             self.FileList.addItem(parent.FileList.item(i).text())
         self.myParent = parent
         self.FileList.itemClicked.connect(self.itemClick)
-        self.innerBtn.clicked.connect(self.inBtnClick)
-        self.leftBtn.clicked.connect(self.leftBtnClick)
-        self.rightBtn.clicked.connect(self.rightBtnClick)
-        self.fullBtn.clicked.connect(self.fullBtnClick)
+        self.JoinBtn.clicked.connect(self.JoinClick)
+        self.saveBtn.clicked.connect(self.saveClick)
         self.show()
 
     def itemClick(self):
         ab.fileItemClick(self)
 
-    def inBtnClick(self):
-        ab.innerBtnClick(self)
+    def JoinClick(self):
+        Join.OptionWindow(self)
 
-    def leftBtnClick(self):
-        ab.leftBtnClick(self)
+    def saveClick(self):
+        if self.Join == 'Inner':
+            ab.innerBtnClick(self)
+            self.JoinCellList.clear()
 
-    def rightBtnClick(self):
-        ab.rightBtnClick(self)
+        elif self.Join == 'left':
+            ab.leftBtnClick(self)
+            self.JoinCellList.clear()
 
-    def fullBtnClick(self):
-        ab.fullBtnClick(self)
+        elif self.Join == 'right':
+            ab.rightBtnClick(self)
+            self.JoinCellList.clear()
+
+        elif self.Join == 'full':
+            ab.fullBtnClick(self)
+            self.JoinCellList.clear()
+

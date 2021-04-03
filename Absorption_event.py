@@ -48,29 +48,25 @@ def cellBtnClick(self):
     self.close()
 
 
-RowList = []
-
-
 # 파일 리스트 클릭
 def fileItemClick(self):
     text = self.FileList.currentItem().text()
     if text not in data.fileItemList:
         if data.cmCount == 0:
-            RowList.append(self.FileList.currentRow())
+            data.RowList.append(self.FileList.currentRow())
             data.fileItemList.append(text)
             self.abList.addItem(self.FileList.currentItem().text())
             data.cmCount += 1
         elif data.cmCount < 2:
-            RowList.append(self.FileList.currentRow())
+            data.RowList.append(self.FileList.currentRow())
             data.fileItemList.append(text)
             self.abList_2.addItem(self.FileList.currentItem().text())
             data.cmCount += 1
 
 
 def innerBtnClick(self):
-    i = RowList[0]
-    j = RowList[1]
-    inner = pd.concat([data.dfs[i], data.dfs[j]], join='inner', ignore_index=True)
+    print(self.JoinCellList[0])
+    inner = pd.merge(data.dfs[data.RowList[0]], data.dfs[data.RowList[1]], how='inner', on=self.JoinCellList[0])
     AbsorptionSave(self, inner)
     data.fileItemList.clear()
     data.cmCount = 0
@@ -78,12 +74,8 @@ def innerBtnClick(self):
 
 
 def leftBtnClick(self):
-    i = RowList[0]
-    j = RowList[1]
-    inner = pd.concat([data.dfs[i], data.dfs[j]], join='inner')
-    title = list(inner.columns)
-    print(title[2])
-    merge_inner = pd.merge(data.dfs[i], data.dfs[j], how='left', on=title[2], indicator=True)
+    merge_inner = pd.merge(data.dfs[data.RowList[0]], data.dfs[data.RowList[1]], how='left',
+                           left_on=self.JoinCellList[0], right_on=self.JoinCellList[1])
     AbsorptionSave(self, merge_inner)
     data.fileItemList.clear()
     data.cmCount = 0
@@ -91,11 +83,8 @@ def leftBtnClick(self):
 
 
 def rightBtnClick(self):
-    i = RowList[0]
-    j = RowList[1]
-    inner = pd.concat([data.dfs[i], data.dfs[j]], join='inner')
-    title = list(inner.columns)
-    merge_inner = pd.merge(data.dfs[i], data.dfs[j], how='left', on=title[0], axis=1)
+    merge_inner = pd.merge(data.dfs[data.RowList[0]], data.dfs[data.RowList[1]], how='right',
+                           left_on=self.JoinCellList[0], right_on=self.JoinCellList[1])
     AbsorptionSave(self, merge_inner)
     data.fileItemList.clear()
     data.cmCount = 0
@@ -103,9 +92,7 @@ def rightBtnClick(self):
 
 
 def fullBtnClick(self):
-    i = RowList[0]
-    j = RowList[1]
-    outer = pd.concat([data.dfs[i], data.dfs[j]], join='outer', axis=1)
+    outer = pd.merge(data.dfs[data.RowList[0]], data.dfs[data.RowList[1]], how='outer', on=self.JoinCellList[0])
     AbsorptionSave(self, outer)
     data.fileItemList.clear()
     data.cmCount = 0
@@ -114,14 +101,14 @@ def fullBtnClick(self):
 
 def AbsorptionSave(self, dataFrame):
     newFile = QFileDialog.getSaveFileName(self, self.tr("Save Data files"), "./",
-                                          self.tr("Data Files (*.csv *.xls *.xlsx))"))
+                                          self.tr("Data Files (*.xlsx *.xls *.csv))"))
     newline = "".join(newFile[0])
     data.fileLinks.append(newline)
     newlineSite = newline.split("/")
     data.dfs.append(dataFrame)
-    data.dfs[-1].to_csv(newline, index=None)
+    print(newline)
+    data.dfs[-1].to_excel(newline, index=None)
     if newlineSite[-1] not in data.fileName:
         self.myParent.FileList.addItem(newlineSite[-1])
     data.fileName.append(newlineSite[-1])
     self.myParent.repaint()
-

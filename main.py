@@ -3,15 +3,13 @@ from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 import main_event as ev
-import matplotlib.pyplot as plt
-import matplotlib.font_manager as fm
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
 form_class = uic.loadUiType('ProjectUI.ui')[0]
 
 
 # 화면을 띄우는데 사용되는 Class 선언
 class WindowClass(QMainWindow, form_class):
+    fileCount = 0
 
     def __init__(self):
         super().__init__()
@@ -22,16 +20,8 @@ class WindowClass(QMainWindow, form_class):
         self.FileList.itemDoubleClicked.connect(self.fileClick)
         self.actionCellAbsorption.triggered.connect(self.actionCells)
         self.actionFileAbsorption.triggered.connect(self.actionFiles)
-        self.cellList.itemClicked.connect(self.cellClick)
-
-        self.fig = plt.Figure()
-        self.canvas = FigureCanvas(self.fig)
-        self.graphLayout.addWidget(self.canvas)
-
-        path = '/Windows/Fonts/gulim.ttc'
-        font_name = fm.FontProperties(fname=path, size=50).get_name()
-        plt.rc('font', family=font_name)
-
+        self.menuSave.triggered.connect(self.actionSaves)
+        self.tableWidget.cellDoubleClicked.connect(self.cellChange)
 
     # 파일 드레그앤 드랍
     def eventFilter(self, object, event):
@@ -54,8 +44,12 @@ class WindowClass(QMainWindow, form_class):
     def actionFiles(self):
         ev.FileAbsorption(self)
 
-    def cellClick(self):
-        ev.cellClick(self)
+    def actionSaves(self):
+        ev.FileSave(self, self.fileCount)
+
+    def cellChange(self):
+        ev.cellChange(self)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

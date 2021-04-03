@@ -6,7 +6,7 @@ import data
 
 # 표 그리는 함수
 def draw(self, fl):
-    df = pd.read_csv(fl)
+    df = pd.read_excel(fl)
     data.dfs.append(df)
 
     # 리스트로 변환후 파일이름 가져오기
