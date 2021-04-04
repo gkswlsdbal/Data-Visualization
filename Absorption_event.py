@@ -1,3 +1,5 @@
+# noinspection PyUnresolvedReferences
+import os.path
 import pandas as pd
 from PyQt5.QtWidgets import *
 import data
@@ -101,13 +103,18 @@ def fullBtnClick(self):
 
 def AbsorptionSave(self, dataFrame):
     newFile = QFileDialog.getSaveFileName(self, self.tr("Save Data files"), "./",
-                                          self.tr("Data Files (*.xlsx *.xls *.csv))"))
-    newline = "".join(newFile[0])
-    data.fileLinks.append(newline)
-    newlineSite = newline.split("/")
-    data.dfs.append(dataFrame)
-    data.dfs[-1].to_excel(newline, index=None)
-    if newlineSite[-1] not in data.fileName:
-        self.myParent.FileList.addItem(newlineSite[-1])
-    data.fileName.append(newlineSite[-1])
-    self.myParent.repaint()
+                                          'All File(*);; Csv File(*.csv);; Data File(*.xlsx)')
+    if newFile[0]:
+        path, ext = os.path.splitext(newFile[0])
+        newline = "".join(newFile[0])
+        data.fileLinks.append(newline)
+        newlineSite = newline.split("/")
+        data.dfs.append(dataFrame)
+        if ext == ".xlsx":
+            data.dfs[-1].to_excel(path+ext, index=None)
+        elif ext == ".csv":
+            data.dfs[-1].to_csv(path + ext, index=None)
+        if newlineSite[-1] not in data.fileName:
+            self.myParent.FileList.addItem(newlineSite[-1])
+        data.fileName.append(newlineSite[-1])
+        self.myParent.repaint()

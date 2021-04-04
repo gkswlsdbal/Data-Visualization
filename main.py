@@ -1,11 +1,11 @@
 import sys
-from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtWidgets import *
+from PyQt5 import QtWidgets
 from PyQt5 import uic
+from PyQt5.QtWidgets import *
+
 import main_event as ev
 
 form_class = uic.loadUiType('ProjectUI.ui')[0]
-
 
 # 화면을 띄우는데 사용되는 Class 선언
 class WindowClass(QMainWindow, form_class):

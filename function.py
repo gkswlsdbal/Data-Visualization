@@ -1,3 +1,5 @@
+# noinspection PyUnresolvedReferences
+import os.path
 import pandas as pd
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtCore import Qt
@@ -6,8 +8,12 @@ import data
 
 # 표 그리는 함수
 def draw(self, fl):
-
-    df = pd.read_excel(fl)
+    path, ext = os.path.splitext(fl)
+    if ext == ".xlsx":
+        print(ext)
+        df = pd.read_excel(fl)
+    elif ext == ".csv":
+        df = pd.read_csv(fl)
     data.dfs.append(df)
 
     # 리스트로 변환후 파일이름 가져오기

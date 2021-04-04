@@ -1,8 +1,8 @@
-
-from PyQt5.QtWidgets import *
 from PyQt5 import uic
-import data
+from PyQt5.QtWidgets import *
+
 import Absorption_event as ab
+import data
 
 form_class1 = uic.loadUiType('CellAbsorption.ui')[0]
 
