@@ -10,6 +10,8 @@ form_class = uic.loadUiType('ProjectUI.ui')[0]
 # 화면을 띄우는데 사용되는 Class 선언
 class WindowClass(QMainWindow, form_class):
     fileCount = 0
+    currentData = ''
+    newData = ''
 
     def __init__(self):
         super().__init__()
@@ -21,7 +23,7 @@ class WindowClass(QMainWindow, form_class):
         self.actionCellAbsorption.triggered.connect(self.actionCells)
         self.actionFileAbsorption.triggered.connect(self.actionFiles)
         self.menuSave.triggered.connect(self.actionSaves)
-        self.tableWidget.cellDoubleClicked.connect(self.cellChange)
+        self.actionSave.triggered.connect(self.newSaves)
 
     # 파일 드레그앤 드랍
     def eventFilter(self, object, event):
@@ -45,10 +47,10 @@ class WindowClass(QMainWindow, form_class):
         ev.FileAbsorption(self)
 
     def actionSaves(self):
-        ev.FileSave(self, self.fileCount)
+        ev.FileSave(self)
 
-    def cellChange(self):
-        ev.cellChange(self)
+    def newSaves(self):
+        ev.newSave(self)
 
 
 if __name__ == "__main__":

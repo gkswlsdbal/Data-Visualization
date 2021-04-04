@@ -1,3 +1,5 @@
+import os
+
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
@@ -58,25 +60,26 @@ class OptionWindow(QDialog):
 
     # 버튼 이미지 바꾸기
     def innerClick(self):
-        self.myParent.JoinBtn.setIcon(QIcon('C:/Users/admin/Desktop/pythonProject/absorptionImg/innerjoin.png'))
+        self.myParent.JoinBtn.setIcon(QIcon(os.getcwd()+'/absorptionImg/innerjoin.png'))
         self.myParent.repaint()
         self.myParent.Join = 'Inner'
         self.close()
 
     def leftClick(self):
-        self.myParent.JoinBtn.setIcon(QIcon('C:/Users/admin/Desktop/pythonProject/absorptionImg/leftouter.png'))
+        print(os.getcwd())
+        self.myParent.JoinBtn.setIcon(QIcon(os.getcwd()+'/absorptionImg/leftouter.png'))
         self.myParent.repaint()
         self.myParent.Join = 'left'
         self.close()
 
     def rightClick(self):
-        self.myParent.JoinBtn.setIcon(QIcon('C:/Users/admin/Desktop/pythonProject/absorptionImg/rightouter.png'))
+        self.myParent.JoinBtn.setIcon(QIcon(os.getcwd()+'/absorptionImg/rightouter.png'))
         self.myParent.repaint()
         self.myParent.Join = 'right'
         self.close()
 
     def fullClick(self):
-        self.myParent.JoinBtn.setIcon(QIcon('C:/Users/admin/Desktop/pythonProject/absorptionImg/fullouter.png'))
+        self.myParent.JoinBtn.setIcon(QIcon(os.getcwd()+'/absorptionImg/fullouter.png'))
         self.myParent.repaint()
         self.myParent.Join = 'full'
         self.close()

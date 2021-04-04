@@ -3,7 +3,6 @@ from PyQt5 import uic
 import data
 import Absorption_event as ab
 import Join
-from tkinter import messagebox as msg, Tk
 
 form_class1 = uic.loadUiType('FileAbsorption.ui')[0]
 

@@ -106,7 +106,6 @@ def AbsorptionSave(self, dataFrame):
     data.fileLinks.append(newline)
     newlineSite = newline.split("/")
     data.dfs.append(dataFrame)
-    print(newline)
     data.dfs[-1].to_excel(newline, index=None)
     if newlineSite[-1] not in data.fileName:
         self.myParent.FileList.addItem(newlineSite[-1])

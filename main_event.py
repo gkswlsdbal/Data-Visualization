@@ -55,15 +55,24 @@ def eventFilter(self, object, event):
 
 
 # 파일 저장
-def FileSave(self, fileCount):
-    print(data.dfs)
-    data.dfs[-1].to_excel(data.fileLinks[fileCount], index=None)
+def FileSave(self):
+    if data.fileName[self.fileCount] in data.fileLinks[self.fileCount]:
+        data.dfs[-1].to_excel(data.fileLinks[self.fileCount], index=None)
+    else:
+        newSave(self)
 
 
-# 표 수정
-def cellChange(self):
-    print(self.tableWidget.currentItem().text())
-    ft.draw(self, data.fileLinks[self.fileCount])
+# 다른이름으로 저장
+def newSave(self):
+    newFile = QFileDialog.getSaveFileName(self, self.tr("Save Data files"), "./",
+                                          self.tr("Data Files (*.xlsx *.xls *.csv))"))
+    newline = "".join(newFile[0])
+    data.fileLinks.append(newline)
+    newlineSite = newline.split("/")
+    data.dfs[-1].to_excel(data.fileLinks[self.fileCount], index=None)
+    if newlineSite[-1] not in data.fileName:
+        self.FileList.addItem(newlineSite[-1])
+    data.fileName.append(newlineSite[-1])
     self.repaint()
 
 

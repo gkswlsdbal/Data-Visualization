@@ -6,6 +6,7 @@ import data
 
 # 표 그리는 함수
 def draw(self, fl):
+
     df = pd.read_excel(fl)
     data.dfs.append(df)
 
