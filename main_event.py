@@ -85,3 +85,20 @@ def CellAbsorption(self):
 # 파일 병합 실행
 def FileAbsorption(self):
     fa.OptionWindow(self)
+
+#셀리스트의 셀제목을 클릭했을때 실행
+def cellClick(self):
+    self.fig.clear()
+    table = self.tableWidget
+    col = table.columnCount()
+    y = []
+    for i in range(0, col-1):
+        aa = table.item(i, self.cellList.currentRow()).text()
+        y.append(float(aa))
+    x = np.arange(0, col-1, 1)
+    ax = self.fig.add_subplot(111)
+    ax.bar(x, y)
+    ax.set_xlabel("x")
+    ax.set_xlabel("y")
+    ax.set_title(self.cellList.currentItem().text())
+    self.canvas.draw()
