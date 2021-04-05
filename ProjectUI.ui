@@ -148,7 +148,7 @@
        <number>1</number>
       </property>
       <property name="dragDropMode">
-       <enum>QAbstractItemView::DragDrop</enum>
+       <enum>QAbstractItemView::NoDragDrop</enum>
       </property>
       <property name="defaultDropAction">
        <enum>Qt::MoveAction</enum>
@@ -204,9 +204,6 @@
         <string>이름</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="1" column="0">
-         <widget class="QGraphicsView" name="graphicsView"/>
-        </item>
         <item row="2" column="0" colspan="2">
          <widget class="QTableWidget" name="tableWidget">
           <property name="editTriggers">
@@ -216,6 +213,9 @@
         </item>
         <item row="1" column="1">
          <widget class="QListView" name="listView"/>
+        </item>
+        <item row="1" column="0">
+         <layout class="QVBoxLayout" name="graphLayout"/>
         </item>
        </layout>
       </widget>
