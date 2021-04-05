@@ -24,6 +24,17 @@ class WindowClass(QMainWindow, form_class):
         self.actionFileAbsorption.triggered.connect(self.actionFiles)
         self.menuSave.triggered.connect(self.actionSaves)
         self.actionSave.triggered.connect(self.newSaves)
+        self.cellList.itemClicked.connect(self.cellClick)
+
+        # 차트 생성
+        self.fig = plt.Figure()
+        self.canvas = FigureCanvas(self.fig)
+        self.graphLayout.addWidget(self.canvas)
+        
+        # 차트 폰트 설정
+        path = '/Windows/Fonts/gulim.ttc'
+        font_name = fm.FontProperties(fname=path, size=50).get_name()
+        plt.rc('font', family=font_name)
 
     # 파일 드레그앤 드랍
     def eventFilter(self, object, event):
@@ -52,6 +63,8 @@ class WindowClass(QMainWindow, form_class):
     def newSaves(self):
         ev.newSave(self)
 
+    def cellClick(self):
+        ev.cellClick(self)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
