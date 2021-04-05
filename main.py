@@ -5,6 +5,12 @@ from PyQt5.QtWidgets import *
 
 import main_event as ev
 
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+
 form_class = uic.loadUiType('ProjectUI.ui')[0]
 
 # 화면을 띄우는데 사용되는 Class 선언
