@@ -6,6 +6,7 @@ from PyQt5 import QtWidgets, QtCore
 import data
 import cellAbsorption as ca
 import fileAbsorption as fa
+import numpy as np
 
 # insert 버튼 클릭할때 실행
 def btnClick(self):
