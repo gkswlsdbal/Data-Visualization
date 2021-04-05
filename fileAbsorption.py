@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
-import data
+import fileData
 import Absorption_event as ab
 import Join
 
@@ -16,7 +16,7 @@ class OptionWindow(QDialog):
         super(OptionWindow, self).__init__(parent)
         option_ui = 'FileAbsorption.ui'
         uic.loadUi(option_ui, self)
-        for i in range(0, len(data.fileLinks)):
+        for i in range(0, len(fileData.fileLinks)):
             self.FileList.addItem(parent.FileList.item(i).text())
         self.myParent = parent
         self.FileList.itemClicked.connect(self.itemClick)
@@ -46,4 +46,3 @@ class OptionWindow(QDialog):
         elif self.Join == 'full':
             ab.fullBtnClick(self)
             self.JoinCellList.clear()
-

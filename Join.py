@@ -3,7 +3,7 @@ import os
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
-import data
+import data, fileData
 
 form_class1 = uic.loadUiType('JoinUi.ui')[0]
 
@@ -27,14 +27,14 @@ class OptionWindow(QDialog):
         self.rightBtn.clicked.connect(self.rightClick)
         self.fullBtn.clicked.connect(self.fullClick)
 
-        self.fileName.setText(data.fileName[data.RowList[0]])
-        self.fileName2.setText(data.fileName[data.RowList[1]])
+        self.fileName.setText(fileData.fileName[data.RowList[0]])
+        self.fileName2.setText(fileData.fileName[data.RowList[1]])
 
-        col = len(data.dfs[data.RowList[0]].columns)
-        title = list(data.dfs[data.RowList[0]].columns)
+        col = len(fileData.dfs[data.RowList[0]].columns)
+        title = list(fileData.dfs[data.RowList[0]].columns)
 
-        col2 = len(data.dfs[data.RowList[1]].columns)
-        title2 = list(data.dfs[data.RowList[1]].columns)
+        col2 = len(fileData.dfs[data.RowList[1]].columns)
+        title2 = list(fileData.dfs[data.RowList[1]].columns)
 
         self.JoinList.clear()
         self.JoinList2.clear()
@@ -83,3 +83,12 @@ class OptionWindow(QDialog):
         self.myParent.repaint()
         self.myParent.Join = 'full'
         self.close()
+
+    def closeEvent(self, event):
+        self.fileName.setText("")
+        self.fileName2.setText("")
+        self.cellName.setText("")
+        self.cellName.setText("")
+        self.JoinList.clear()
+        self.JoinList2.clear()
+

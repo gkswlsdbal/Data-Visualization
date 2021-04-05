@@ -1,17 +1,15 @@
 import sys
-from PyQt5 import QtWidgets
-from PyQt5 import uic
+from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import *
-
+from PyQt5 import uic
 import main_event as ev
-
-import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
-from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+import function
 
 form_class = uic.loadUiType('ProjectUI.ui')[0]
+
 
 # 화면을 띄우는데 사용되는 Class 선언
 class WindowClass(QMainWindow, form_class):
@@ -31,18 +29,15 @@ class WindowClass(QMainWindow, form_class):
         self.menuSave.triggered.connect(self.actionSaves)
         self.actionSave.triggered.connect(self.newSaves)
         self.cellList.itemClicked.connect(self.cellClick)
-
-        # 차트 생성
-        self.fig = plt.Figure()
+        self.fig = plt.figure()
+        self.fig.set_size_inches(5.5, 4)
         self.canvas = FigureCanvas(self.fig)
         self.graphLayout.addWidget(self.canvas)
-        
-        # 차트 폰트 설정
+
         path = '/Windows/Fonts/gulim.ttc'
         font_name = fm.FontProperties(fname=path, size=50).get_name()
         plt.rc('font', family=font_name)
 
-    # 파일 드레그앤 드랍
     def eventFilter(self, object, event):
         if object is self:
             ev.eventFilter(self, object, event)
@@ -52,6 +47,7 @@ class WindowClass(QMainWindow, form_class):
         ev.btnClick(self)
 
     def fileClick(self):
+        self.colInfoListWidget.clear()
         ev.fileClick(self)
 
     def fileCheck(self, file):
@@ -70,7 +66,8 @@ class WindowClass(QMainWindow, form_class):
         ev.newSave(self)
 
     def cellClick(self):
-        ev.cellClick(self)
+        function.cellInfo(self)
+        function.cellClick(self)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

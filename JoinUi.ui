@@ -30,7 +30,7 @@
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>absorptionImg/leftouter.PNG</normaloff>absorptionImg/leftouter.PNG</iconset>
+     <normaloff>absorptionImg/rightouter.png</normaloff>absorptionImg/rightouter.png</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -59,7 +59,7 @@
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>absorptionImg/rightouter.PNG</normaloff>absorptionImg/rightouter.PNG</iconset>
+     <normaloff>absorptionImg/leftouter.png</normaloff>absorptionImg/leftouter.png</iconset>
    </property>
    <property name="iconSize">
     <size>

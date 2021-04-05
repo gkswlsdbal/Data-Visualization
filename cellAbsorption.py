@@ -1,8 +1,8 @@
-from PyQt5 import uic
-from PyQt5.QtWidgets import *
 
+from PyQt5.QtWidgets import *
+from PyQt5 import uic
+import data, fileData
 import Absorption_event as ab
-import data
 
 form_class1 = uic.loadUiType('CellAbsorption.ui')[0]
 
@@ -18,7 +18,7 @@ class OptionWindow(QDialog):
         self.abButton.clicked.connect(self.btnClick)
         self.myParent = parent
         self.comboBox.addItem('파일 선택')
-        for i in range(0, len(data.fileLinks)):
+        for i in range(0, len(fileData.fileLinks)):
             self.comboBox.addItem(parent.FileList.item(i).text())
 
         self.comboBox.currentIndexChanged.connect(self.BoxClick)

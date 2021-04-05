@@ -148,7 +148,7 @@
        <number>1</number>
       </property>
       <property name="dragDropMode">
-       <enum>QAbstractItemView::NoDragDrop</enum>
+       <enum>QAbstractItemView::DragDrop</enum>
       </property>
       <property name="defaultDropAction">
        <enum>Qt::MoveAction</enum>
@@ -205,14 +205,24 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="2" column="0" colspan="2">
-         <widget class="QTableWidget" name="tableWidget">
-          <property name="editTriggers">
-           <set>QAbstractItemView::DoubleClicked</set>
-          </property>
-         </widget>
+         <widget class="QTableWidget" name="tableWidget"/>
         </item>
         <item row="1" column="1">
-         <widget class="QListView" name="listView"/>
+         <widget class="QListWidget" name="colInfoListWidget">
+          <property name="font">
+           <font>
+            <family>KoPub돋움체 Bold</family>
+            <pointsize>11</pointsize>
+            <weight>50</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+            <stylestrategy>PreferDefault</stylestrategy>
+           </font>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
+          </property>
+         </widget>
         </item>
         <item row="1" column="0">
          <layout class="QVBoxLayout" name="graphLayout"/>
