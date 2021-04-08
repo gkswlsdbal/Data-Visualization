@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
-import fileData
+import fileData,data
 import Absorption_event as ab
 import Join
 
@@ -46,3 +46,8 @@ class OptionWindow(QDialog):
         elif self.Join == 'full':
             ab.fullBtnClick(self)
             self.JoinCellList.clear()
+
+    def closeEvent(self, event):
+        data.RowList.clear()
+        fileData.fileItemList.clear()
+        data.cmCount = 0
