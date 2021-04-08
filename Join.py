@@ -85,10 +85,11 @@ class OptionWindow(QDialog):
         self.close()
 
     def closeEvent(self, event):
-        self.fileName.setText("")
-        self.fileName2.setText("")
-        self.cellName.setText("")
-        self.cellName.setText("")
+
+        self.fileName.setText("hi ")
+        self.fileName2.setText(" ")
+        self.cellName.setText(" ")
+        self.cellName.setText(" ")
         self.JoinList.clear()
         self.JoinList2.clear()
 
