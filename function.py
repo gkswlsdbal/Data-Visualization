@@ -3,6 +3,8 @@ import os.path
 import pandas as pd
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtCore import Qt
+from matplotlib.pyplot import pie
+
 import data, fileData
 import numpy as np
 import math
@@ -51,18 +53,28 @@ def draw(self, fl):
 
 # 셀리스트의 셀제목을 클릭했을때 실행
 def cellClick(self):
+    resetGraphType(self)
     self.fig.clear()
     table = self.tableWidget
-    col = table.columnCount()
+    row = table.rowCount()
     y = []
-    for i in range(0, col - 1):
+    for i in range(0, row):
         aa = table.item(i, self.cellList.currentRow()).text()
         y.append(float(aa))
-    x = np.arange(0, col - 1, 1)
+    x = np.arange(1, row + 1, 1)
     ax = self.fig.add_subplot(111)
-    ax.bar(x, y)
-    ax.set_xlabel("x")
-    ax.set_xlabel("y")
+    if data.graphType == 0:
+        self.barGraphBtn.toggle()
+        ax.bar(x, y)
+    elif data.graphType == 1:
+        self.lineGraphBtn.toggle()
+        ax.plot(x, y)
+    elif data.graphType == 2:
+        self.pieChartBtn.toggle()
+        ax.pie(x,y)
+    elif data.graphType == 3:
+        self.scatterChartBtn.toggle()
+        ax.scatter(x, y)
     ax.set_title(self.cellList.currentItem().text())
     self.canvas.draw()
 
@@ -137,3 +149,57 @@ def countEmptyRow(df):
         if str(i).isspace():
             empty += 1
     return empty
+
+
+# 데이터 프레임 수정
+def tableChange(self):
+    data = []
+    headerlist = []
+    for i in range(0, self.tableWidget.columnCount()):
+        headerlist.append(self.tableWidget.horizontalHeaderItem(i).text())
+    # 셀 내용 채우기
+    for i in range(0, self.tableWidget.rowCount()):
+        data.append([])
+        for j in range(0, self.tableWidget.columnCount()):
+            a = (self.tableWidget.item(i, j))
+            data[i].append(a.text())
+    data_df = pd.DataFrame(data, columns=headerlist)
+    fileData.dfs[self.fileCount] = data_df.copy()
+
+
+def barGraphBtnClick(self):
+    resetGraphType(self)
+    self.barGraphBtn.toggle()
+    data.graphType = 0
+    cellClick(self)
+
+def lineGraphBtnClick(self):
+    resetGraphType(self)
+    self.lineGraphBtn.toggle()
+    data.graphType = 1
+    cellClick(self)
+
+
+def pieChartBtnClick(self):
+    resetGraphType(self)
+    self.pieChartBtn.toggle()
+    data.graphType = 2
+    cellClick(self)
+
+
+def scatterChartBtnClick(self):
+    resetGraphType(self)
+    self.scatterChartBtn.toggle()
+    data.graphType = 3
+    cellClick(self)
+
+
+def resetGraphType(self):
+    if self.barGraphBtn.isChecked():
+        self.barGraphBtn.toggle()
+    if self.lineGraphBtn.isChecked():
+        self.lineGraphBtn.toggle()
+    if self.pieChartBtn.isChecked():
+        self.pieChartBtn.toggle()
+    if self.scatterChartBtn.isChecked():
+        self.scatterChartBtn.toggle()

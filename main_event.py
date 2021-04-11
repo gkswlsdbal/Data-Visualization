@@ -4,34 +4,36 @@ import sys
 from PyQt5.QtWidgets import *
 import function as ft
 from PyQt5 import QtWidgets, QtCore
-import data
+import fileData, data
 import cellAbsorption as ca
 import fileAbsorption as fa
+
 
 # insert 버튼 클릭할때 실행
 def btnClick(self):
     filename = QFileDialog.getOpenFileNames(self)
-    for i in filename[0]:
-        file = "".join(i)
-        self.fileCheck(file)
+    if filename[0]:
+        for i in filename[0]:
+            file = "".join(i)
+            self.fileCheck(file)
 
 
 # 파일 리스트안에 있는 파일 더블클릭할 때 실행
 def fileClick(self):
     i = self.FileList.currentRow()
     self.fileCount = i
-    self.fileCheck("".join(data.fileLinks[i]))
+    self.fileCheck("".join(fileData.fileLinks[i]))
 
 
 # 파일리스트에 이미 파일 있는지 검사
 def fileCheck(self, file):
-    if file in data.fileLinks:
+    if file in fileData.fileLinks:
         ft.draw(self, file)
     else:
-        data.fileLinks.append(file)
+        fileData.fileLinks.append(file)
         site = file.split("/")
         self.FileList.addItem(site[-1])
-        data.fileName.append(site[-1])
+        fileData.fileName.append(site[-1])
         ft.draw(self, file)
 
 
@@ -55,34 +57,40 @@ def eventFilter(self, object, event):
             file = "".join(i)
             self.fileCheck(file)
 
+
         return False
 
 
 # 파일 저장
 def FileSave(self):
-    if data.fileName[self.fileCount] in data.fileLinks[self.fileCount]:
-        data.dfs[-1].to_excel(data.fileLinks[self.fileCount], index=None)
+    path, ext = os.path.splitext(fileData.fileLinks[self.fileCount])
+    if self.cellFlag:
+        ft.tableChange(self)
+    if fileData.fileName[self.fileCount] in fileData.fileLinks[self.fileCount]:
+        if ext == ".xlsx":
+            fileData.dfs[self.fileCount].to_excel(fileData.fileLinks[self.fileCount], index=None)
+        elif ext == ".csv":
+            fileData.dfs[self.fileCount].to_csv(fileData.fileLinks[self.fileCount], index=None)
     else:
         newSave(self)
+
 
 # 다른이름으로 저장
 def newSave(self):
     newFile = QFileDialog.getSaveFileName(self, self.tr("Save Data files"), "./",
-                                          'All File(*);; Csv File(*.csv);; Data File(*.xlsx)')
+                                          self.tr('All File(*);; Csv File(*.csv);; Data File(*.xlsx)'))
     if newFile[0]:
+        if self.cellFlag:
+            ft.tableChange(self)
         path, ext = os.path.splitext(newFile[0])
         if ext == ".xlsx":
-            print(data.fileLinks[self.fileCount])
-            data.dfs[-1].to_excel(path+ext, index=None)
+            fileData.dfs[self.fileCount].to_excel(path + ext, index=None)
         elif ext == ".csv":
-            data.dfs[-1].to_csv(path+ext, index=None)
-        self.repaint()
-
+            fileData.dfs[self.fileCount].to_csv(path + ext, index=None)
 
 # 프로그램 종료
 def exitAction(self):
     sys.exit()
-
 
 # 열 병합 실행
 def CellAbsorption(self):
@@ -92,3 +100,6 @@ def CellAbsorption(self):
 # 파일 병합 실행
 def FileAbsorption(self):
     fa.OptionWindow(self)
+
+
+
