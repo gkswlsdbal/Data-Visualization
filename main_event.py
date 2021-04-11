@@ -1,18 +1,18 @@
 # noinspection PyUnresolvedReferences
 import os.path
+import sys
 from PyQt5.QtWidgets import *
 import function as ft
 from PyQt5 import QtWidgets, QtCore
-import fileData
+import data
 import cellAbsorption as ca
 import fileAbsorption as fa
-
 
 # insert 버튼 클릭할때 실행
 def btnClick(self):
     filename = QFileDialog.getOpenFileNames(self)
-    if filename[0]:
-        file = "".join(filename[0])
+    for i in filename[0]:
+        file = "".join(i)
         self.fileCheck(file)
 
 
@@ -20,18 +20,18 @@ def btnClick(self):
 def fileClick(self):
     i = self.FileList.currentRow()
     self.fileCount = i
-    self.fileCheck("".join(fileData.fileLinks[i]))
+    self.fileCheck("".join(data.fileLinks[i]))
 
 
 # 파일리스트에 이미 파일 있는지 검사
 def fileCheck(self, file):
-    if file in fileData.fileLinks:
+    if file in data.fileLinks:
         ft.draw(self, file)
     else:
-        fileData.fileLinks.append(file)
+        data.fileLinks.append(file)
         site = file.split("/")
         self.FileList.addItem(site[-1])
-        fileData.fileName.append(site[-1])
+        data.fileName.append(site[-1])
         ft.draw(self, file)
 
 
@@ -51,32 +51,37 @@ def eventFilter(self, object, event):
             for url in event.mimeData().urls():
                 link.append(str(url.toLocalFile()))
 
-        file = "".join(link)
-        self.fileCheck(file)
+        for i in link:
+            file = "".join(i)
+            self.fileCheck(file)
 
         return False
 
 
 # 파일 저장
 def FileSave(self):
-    if fileData.fileName[self.fileCount] in fileData.fileLinks[self.fileCount]:
-        fileData.dfs[-1].to_excel(fileData.fileLinks[self.fileCount], index=None)
+    if data.fileName[self.fileCount] in data.fileLinks[self.fileCount]:
+        data.dfs[-1].to_excel(data.fileLinks[self.fileCount], index=None)
     else:
         newSave(self)
-
 
 # 다른이름으로 저장
 def newSave(self):
     newFile = QFileDialog.getSaveFileName(self, self.tr("Save Data files"), "./",
-                                          self.tr('All File(*);; Csv File(*.csv);; Data File(*.xlsx)'))
+                                          'All File(*);; Csv File(*.csv);; Data File(*.xlsx)')
     if newFile[0]:
         path, ext = os.path.splitext(newFile[0])
         if ext == ".xlsx":
-            print(fileData.fileLinks[self.fileCount])
-            fileData.dfs[-1].to_excel(path + ext, index=None)
+            print(data.fileLinks[self.fileCount])
+            data.dfs[-1].to_excel(path+ext, index=None)
         elif ext == ".csv":
-            fileData.dfs[-1].to_csv(path + ext, index=None)
+            data.dfs[-1].to_csv(path+ext, index=None)
         self.repaint()
+
+
+# 프로그램 종료
+def exitAction(self):
+    sys.exit()
 
 
 # 열 병합 실행
