@@ -123,8 +123,15 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>14</pointsize>
+        <family>맑은 고딕</family>
+        <pointsize>10</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 10pt &quot;맑은 고딕&quot;;</string>
       </property>
       <property name="dragDropMode">
        <enum>QAbstractItemView::InternalMove</enum>
@@ -170,6 +177,12 @@
     </item>
     <item row="0" column="4">
      <widget class="QPushButton" name="addTabBtn">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -204,6 +217,9 @@
         <string>이름</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
+        <item row="1" column="0">
+         <widget class="QGraphicsView" name="graphicsView"/>
+        </item>
         <item row="2" column="0" colspan="2">
          <widget class="QTableWidget" name="tableWidget"/>
         </item>
@@ -211,21 +227,17 @@
          <widget class="QListWidget" name="colInfoListWidget">
           <property name="font">
            <font>
-            <family>KoPub돋움체 Bold</family>
-            <pointsize>11</pointsize>
+            <family>맑은 고딕</family>
+            <pointsize>14</pointsize>
             <weight>50</weight>
             <italic>false</italic>
             <bold>false</bold>
-            <stylestrategy>PreferDefault</stylestrategy>
            </font>
           </property>
-          <property name="editTriggers">
-           <set>QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
+          <property name="styleSheet">
+           <string notr="true">font: 14pt &quot;맑은 고딕&quot;;</string>
           </property>
          </widget>
-        </item>
-        <item row="1" column="0">
-         <layout class="QVBoxLayout" name="graphLayout"/>
         </item>
        </layout>
       </widget>
@@ -244,7 +256,7 @@
      <x>0</x>
      <y>0</y>
      <width>1667</width>
-     <height>21</height>
+     <height>31</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
