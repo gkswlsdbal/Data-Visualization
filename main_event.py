@@ -1,9 +1,10 @@
 # noinspection PyUnresolvedReferences
 import os.path
+import sys
 from PyQt5.QtWidgets import *
 import function as ft
 from PyQt5 import QtWidgets, QtCore
-import fileData
+import fileData, data
 import cellAbsorption as ca
 import fileAbsorption as fa
 
@@ -12,8 +13,9 @@ import fileAbsorption as fa
 def btnClick(self):
     filename = QFileDialog.getOpenFileNames(self)
     if filename[0]:
-        file = "".join(filename[0])
-        self.fileCheck(file)
+        for i in filename[0]:
+            file = "".join(i)
+            self.fileCheck(file)
 
 
 # 파일 리스트안에 있는 파일 더블클릭할 때 실행
@@ -51,16 +53,24 @@ def eventFilter(self, object, event):
             for url in event.mimeData().urls():
                 link.append(str(url.toLocalFile()))
 
-        file = "".join(link)
-        self.fileCheck(file)
+        for i in link:
+            file = "".join(i)
+            self.fileCheck(file)
+
 
         return False
 
 
 # 파일 저장
 def FileSave(self):
+    path, ext = os.path.splitext(fileData.fileLinks[self.fileCount])
+    if self.cellFlag:
+        ft.tableChange(self)
     if fileData.fileName[self.fileCount] in fileData.fileLinks[self.fileCount]:
-        fileData.dfs[-1].to_excel(fileData.fileLinks[self.fileCount], index=None)
+        if ext == ".xlsx":
+            fileData.dfs[self.fileCount].to_excel(fileData.fileLinks[self.fileCount], index=None)
+        elif ext == ".csv":
+            fileData.dfs[self.fileCount].to_csv(fileData.fileLinks[self.fileCount], index=None)
     else:
         newSave(self)
 
@@ -70,14 +80,17 @@ def newSave(self):
     newFile = QFileDialog.getSaveFileName(self, self.tr("Save Data files"), "./",
                                           self.tr('All File(*);; Csv File(*.csv);; Data File(*.xlsx)'))
     if newFile[0]:
+        if self.cellFlag:
+            ft.tableChange(self)
         path, ext = os.path.splitext(newFile[0])
         if ext == ".xlsx":
-            print(fileData.fileLinks[self.fileCount])
-            fileData.dfs[-1].to_excel(path + ext, index=None)
+            fileData.dfs[self.fileCount].to_excel(path + ext, index=None)
         elif ext == ".csv":
-            fileData.dfs[-1].to_csv(path + ext, index=None)
-        self.repaint()
+            fileData.dfs[self.fileCount].to_csv(path + ext, index=None)
 
+# 프로그램 종료
+def exitAction(self):
+    sys.exit()
 
 # 열 병합 실행
 def CellAbsorption(self):
@@ -87,3 +100,6 @@ def CellAbsorption(self):
 # 파일 병합 실행
 def FileAbsorption(self):
     fa.OptionWindow(self)
+
+
+
