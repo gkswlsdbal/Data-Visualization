@@ -36,6 +36,7 @@ class WindowClass(QMainWindow, form_class):
         self.scatterChartBtn.clicked.connect(self.scatterChartBtnClick)
         self.actionExit.triggered.connect(self.exitAction)
         self.tabWidget.setCornerWidget(self.addTabBtn, Qt.TopRightCorner)
+        self.tabWidget.resize(1300, 1000)
 
         self.fig = plt.figure()
         self.fig.set_size_inches(5.5, 4)
