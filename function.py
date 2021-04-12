@@ -82,11 +82,21 @@ def cellClick(self):
 # 셀 정보를 출력하는 함수
 def cellInfo(self):
     self.colInfoListWidget.clear()
+    datas = []
+    headerlist = []
+    for i in range(0, self.tableWidget.columnCount()):
+        headerlist.append(self.tableWidget.horizontalHeaderItem(i).text())
+    # 셀 내용 채우기
+    for i in range(0, self.tableWidget.rowCount()):
+        datas.append([])
+        for j in range(0, self.tableWidget.columnCount()):
+            a = (self.tableWidget.item(i, j))
+            datas[i].append(a.text())
+    data_df = pd.DataFrame(datas, columns=headerlist)
 
     coltitle = self.cellList.currentItem().text()  # 열 제목
     roundnum = 4  # 평균을 구할 때 소수점 아래로 남길 숫자 개수
-
-    collist = list(data.tableDf[coltitle])  # 열을 리스트 타입으로 바꿉니다.
+    collist = list(data_df[coltitle])  # 열을 리스트 타입으로 바꿉니다.
     collist = deleteSpaceVal(collist)
 
     coltable = pd.DataFrame(collist)  # 정리된 리스트를 다시 dataframe으로 바꿉니다.

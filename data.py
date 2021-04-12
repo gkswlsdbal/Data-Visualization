@@ -17,9 +17,6 @@ checkFl = []
 # 병합 데이터에서 선택한 파일 찾기
 RowList = []
 
-# 현재 출력된 표의 데이터프레임 .
-tableDf = None
-
 # 현재 선택된 그래프 타입
 graphType = 0
 
