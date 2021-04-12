@@ -71,7 +71,7 @@ def cellClick(self):
         ax.plot(x, y)
     elif data.graphType == 2:
         self.pieChartBtn.toggle()
-        ax.pie(x,y)
+        ax.pie(x, labels=x)
     elif data.graphType == 3:
         self.scatterChartBtn.toggle()
         ax.scatter(x, y)
