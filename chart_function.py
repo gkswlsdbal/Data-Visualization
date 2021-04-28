@@ -161,31 +161,35 @@ def scat_move_cursor(self, event):
 
 # 막대 그래프 버튼
 def barGraphBtnClick(self):
-    resetGraphType(self)
-    self.barGraphBtn.toggle()
-    data.graphType = 0
-    cellClick(self)
+    if data.graphOn:
+        resetGraphType(self)
+        self.barGraphBtn.toggle()
+        data.graphType = 0
+        cellClick(self)
 
 
 # 꺽은선 그래프 버튼
 def lineGraphBtnClick(self):
-    resetGraphType(self)
-    self.lineGraphBtn.toggle()
-    data.graphType = 1
-    cellClick(self)
+    if data.graphOn:
+        resetGraphType(self)
+        self.lineGraphBtn.toggle()
+        data.graphType = 1
+        cellClick(self)
 
 
 # 원 그래프 버튼
 def pieChartBtnClick(self):
-    resetGraphType(self)
-    self.pieChartBtn.toggle()
-    data.graphType = 2
-    cellClick(self)
+    if data.graphOn:
+        resetGraphType(self)
+        self.pieChartBtn.toggle()
+        data.graphType = 2
+        cellClick(self)
 
 
 # 스케터 그래프 버튼
 def scatterChartBtnClick(self):
-    resetGraphType(self)
-    self.scatterChartBtn.toggle()
-    data.graphType = 3
-    cellClick(self)
+    if data.graphOn:
+        resetGraphType(self)
+        self.scatterChartBtn.toggle()
+        data.graphType = 3
+        cellClick(self)
