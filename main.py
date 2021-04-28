@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import function
+import preprocessing
 
 form_class = uic.loadUiType('ProjectUI.ui')[0]
 
@@ -38,11 +39,10 @@ class WindowClass(QMainWindow, form_class):
         self.pieChartBtn.clicked.connect(self.pieChartBtnClick)
         self.scatterChartBtn.clicked.connect(self.scatterChartBtnClick)
         self.actionExit.triggered.connect(self.exitAction)
-        self.tabWidget.setCornerWidget(self.addTabBtn, Qt.TopRightCorner)
         self.tabWidget.resize(200, 300)
 
         self.fig = plt.figure(1)
-        self.fig.set_size_inches(6.5, 4)
+        self.fig.set_size_inches(7.8, 3.5)
         self.canvas = FigureCanvas(self.fig)
         self.graphLayout.addWidget(self.canvas)
         self.cid = self.canvas.mpl_connect('motion_notify_event', self.move_cursor)
@@ -84,13 +84,17 @@ class WindowClass(QMainWindow, form_class):
         exitAction.setStatusTip('Exit')
         exitAction.triggered.connect(self.exitAction)
 
+        preprocessAction = QAction(QIcon('img/preprocessing.png'), 'preprocessing', self)
+        preprocessAction.setStatusTip('preprocessing')
+        preprocessAction.triggered.connect(self.preprocessAction)
+
         self.toolbar = self.addToolBar('toolBar')
         self.toolbar.addAction(saveAction)
+        self.toolbar.addAction(preprocessAction)
         self.toolbar.addAction(fAbsorAction)
         self.toolbar.addAction(cAbsorAction)
         self.toolbar.addAction(settAction)
         self.toolbar.addAction(exitAction)
-
 
     def contextMenu(self):
         saveAction = QAction('Save')
@@ -105,7 +109,6 @@ class WindowClass(QMainWindow, form_class):
         contextMenu.setContextMenuPolicy(Qt.ActionsContextMenu)
 
         contextMenu.exec_(QCursor().pos())
-
 
     def eventFilter(self, object, event):
         if object is self:
@@ -135,11 +138,10 @@ class WindowClass(QMainWindow, form_class):
     def newSaves(self):
         ev.newSave(self)
 
-    #추가
+    # 추가
     def UISetting(self):
         ev.openSettingWindow(self)
         self.actionSetting.setEnabled(False)
-
 
     def cellClick(self):
         function.cellInfo(self)
@@ -163,10 +165,13 @@ class WindowClass(QMainWindow, form_class):
     def exitAction(self):
         ev.exitAction(self)
 
+    def preprocessAction(self):
+        preprocessing.OptionWindow(self)
+
     def move_cursor(self, event):
         chart_function.move_cursor(self, event)
 
-    #창이 닫힐때 진짜 닫을 껀지 물어봅니다.
+    # 창이 닫힐때 진짜 닫을 껀지 물어봅니다.
     # def closeEvent(self, event):
     #     reply = QtWidgets.QMessageBox.question(self, 'Message',"종료하시겠습니까?",
     #                                        QMessageBox.Yes | QMessageBox.No,)

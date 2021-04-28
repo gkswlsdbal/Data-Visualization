@@ -171,77 +171,7 @@
          <string>Table</string>
         </attribute>
         <layout class="QGridLayout" name="gridLayout_2">
-         <item row="1" column="1">
-          <widget class="QListWidget" name="colInfoListWidget">
-           <property name="font">
-            <font>
-             <family>맑은 고딕</family>
-             <pointsize>11</pointsize>
-             <weight>50</weight>
-             <italic>false</italic>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="contextMenuPolicy">
-            <enum>Qt::DefaultContextMenu</enum>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">font: 11pt &quot;맑은 고딕&quot;;</string>
-           </property>
-           <property name="editTriggers">
-            <set>QAbstractItemView::NoEditTriggers</set>
-           </property>
-           <property name="selectionMode">
-            <enum>QAbstractItemView::NoSelection</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QPushButton" name="addTabBtn">
-           <property name="contextMenuPolicy">
-            <enum>Qt::DefaultContextMenu</enum>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(255, 255, 255);</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>img/plus.png</normaloff>img/plus.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>30</width>
-             <height>30</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0" colspan="2">
-          <widget class="QTableWidget" name="tableWidget">
-           <property name="font">
-            <font>
-             <family>맑은 고딕</family>
-             <pointsize>11</pointsize>
-             <weight>50</weight>
-             <italic>false</italic>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="contextMenuPolicy">
-            <enum>Qt::DefaultContextMenu</enum>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">font: 11pt &quot;맑은 고딕&quot;;</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <layout class="QVBoxLayout" name="graphLayout"/>
-         </item>
-         <item row="0" column="2" rowspan="3">
+         <item row="0" column="2" rowspan="2">
           <layout class="QVBoxLayout" name="fstRightLayout">
            <property name="spacing">
             <number>9</number>
@@ -268,7 +198,7 @@
                <number>0</number>
               </property>
               <property name="bottomMargin">
-               <number>10</number>
+               <number>0</number>
               </property>
               <item row="1" column="0">
                <widget class="QPushButton" name="pieChartBtn">
@@ -379,6 +309,12 @@
            </item>
            <item>
             <widget class="QListWidget" name="cellList">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>515</height>
+              </size>
+             </property>
              <property name="maximumSize">
               <size>
                <width>16777215</width>
@@ -388,7 +324,7 @@
              <property name="font">
               <font>
                <family>맑은 고딕</family>
-               <pointsize>11</pointsize>
+               <pointsize>10</pointsize>
                <weight>50</weight>
                <italic>false</italic>
                <bold>false</bold>
@@ -398,7 +334,7 @@
               <enum>Qt::DefaultContextMenu</enum>
              </property>
              <property name="styleSheet">
-              <string notr="true">font: 11pt &quot;맑은 고딕&quot;;</string>
+              <string notr="true">font: 10pt &quot;맑은 고딕&quot;;</string>
              </property>
              <property name="lineWidth">
               <number>1</number>
@@ -413,9 +349,75 @@
            </item>
           </layout>
          </item>
+         <item row="1" column="0">
+          <widget class="QTableWidget" name="tableWidget">
+           <property name="minimumSize">
+            <size>
+             <width>750</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>맑은 고딕</family>
+             <pointsize>11</pointsize>
+             <weight>50</weight>
+             <italic>false</italic>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="contextMenuPolicy">
+            <enum>Qt::DefaultContextMenu</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font: 11pt &quot;맑은 고딕&quot;;</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <layout class="QHBoxLayout" name="frstMidTopLayout">
+           <item>
+            <layout class="QVBoxLayout" name="graphLayout"/>
+           </item>
+           <item>
+            <widget class="QListWidget" name="colInfoListWidget">
+             <property name="font">
+              <font>
+               <family>맑은 고딕</family>
+               <pointsize>10</pointsize>
+               <weight>50</weight>
+               <italic>false</italic>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="contextMenuPolicy">
+              <enum>Qt::DefaultContextMenu</enum>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 10pt &quot;맑은 고딕&quot;;</string>
+             </property>
+             <property name="editTriggers">
+              <set>QAbstractItemView::NoEditTriggers</set>
+             </property>
+             <property name="selectionMode">
+              <enum>QAbstractItemView::NoSelection</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
         </layout>
        </widget>
        <widget class="QWidget" name="tab_2">
+        <property name="font">
+         <font>
+          <family>Yu Gothic Medium</family>
+          <pointsize>10</pointsize>
+          <weight>7</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
         <attribute name="title">
          <string>ColumnChart-Missing Value</string>
         </attribute>
@@ -537,9 +539,7 @@
                     <enum>Qt::LeftToRight</enum>
                    </property>
                    <property name="styleSheet">
-                    <string notr="true">background-color: transparent;
-border: 1px solid;
-border-color: transparent;
+                    <string notr="true">background-color: rgb(250, 250, 250);
 font: 63 12pt &quot;Yu Gothic UI Semibold&quot;;</string>
                    </property>
                    <property name="verticalScrollBarPolicy">
@@ -547,6 +547,9 @@ font: 63 12pt &quot;Yu Gothic UI Semibold&quot;;</string>
                    </property>
                    <property name="horizontalScrollBarPolicy">
                     <enum>Qt::ScrollBarAlwaysOff</enum>
+                   </property>
+                   <property name="readOnly">
+                    <bool>true</bool>
                    </property>
                    <property name="html">
                     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -593,9 +596,7 @@ p, li { white-space: pre-wrap; }
                     </size>
                    </property>
                    <property name="styleSheet">
-                    <string notr="true">background-color: transparent;
-border: 1px solid;
-border-color: transparent;
+                    <string notr="true">background-color: rgb(250, 250, 250);
 font: 63 12pt &quot;Yu Gothic UI Semibold&quot;;</string>
                    </property>
                    <property name="verticalScrollBarPolicy">
@@ -603,6 +604,9 @@ font: 63 12pt &quot;Yu Gothic UI Semibold&quot;;</string>
                    </property>
                    <property name="horizontalScrollBarPolicy">
                     <enum>Qt::ScrollBarAlwaysOff</enum>
+                   </property>
+                   <property name="readOnly">
+                    <bool>true</bool>
                    </property>
                    <property name="html">
                     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;

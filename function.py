@@ -6,7 +6,7 @@ from PyQt5.QtCore import Qt
 import data, fileData
 import numpy as np
 import math
-
+import preprocessing
 
 # 표 그리는 함수
 def draw(self, fl):

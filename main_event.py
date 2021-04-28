@@ -35,6 +35,10 @@ def fileCheck(self, file):
         site = file.split("/")
         self.FileList.addItem(site[-1])
         fileData.fileName.append(site[-1])
+        if ".xlsx" in site[-1]:
+            fileData.excelList.append(site[-1])
+        elif ".csv" in site[-1]:
+            fileData.csvList.append(site[-1])
         ft.draw(self, file)
 
 

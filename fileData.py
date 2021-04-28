@@ -12,3 +12,9 @@ dfs = []
 
 # 파일 리스트 아이템 저장
 fileItemList = []
+
+# 엑셀 파일 이름 저장
+excelList = []
+
+# csv 파일 이름 저장
+csvList = []
