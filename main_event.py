@@ -7,6 +7,7 @@ from PyQt5 import QtWidgets, QtCore
 import fileData, data
 import cellAbsorption as ca
 import fileAbsorption as fa
+import setting as st
 
 
 # insert 버튼 클릭할때 실행
@@ -57,7 +58,6 @@ def eventFilter(self, object, event):
             file = "".join(i)
             self.fileCheck(file)
 
-
         return False
 
 
@@ -88,9 +88,11 @@ def newSave(self):
         elif ext == ".csv":
             fileData.dfs[self.fileCount].to_csv(path + ext, index=None)
 
+
 # 프로그램 종료
 def exitAction(self):
     sys.exit()
+
 
 # 열 병합 실행
 def CellAbsorption(self):
@@ -102,4 +104,5 @@ def FileAbsorption(self):
     fa.OptionWindow(self)
 
 
-
+def openSettingWindow(self):
+    st.SettingDialog(self)

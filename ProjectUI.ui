@@ -16,20 +16,39 @@
     <height>100000</height>
    </size>
   </property>
+  <property name="font">
+   <font>
+    <family>굴림</family>
+    <weight>50</weight>
+    <bold>false</bold>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Triangular</enum>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>false</bool>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <property name="sizeConstraint">
-     <enum>QLayout::SetDefaultConstraint</enum>
+    <property name="bottomMargin">
+     <number>0</number>
     </property>
     <item row="0" column="0">
      <widget class="QSplitter" name="splitter">
+      <property name="contextMenuPolicy">
+       <enum>Qt::DefaultContextMenu</enum>
+      </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
       <widget class="QWidget" name="layoutWidget">
+       <property name="contextMenuPolicy">
+        <enum>Qt::DefaultContextMenu</enum>
+       </property>
        <layout class="QVBoxLayout" name="leftLayout">
         <property name="sizeConstraint">
          <enum>QLayout::SetDefaultConstraint</enum>
@@ -48,8 +67,32 @@
             <height>16777215</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Yu Gothic UI Semibold</family>
+            <pointsize>12</pointsize>
+            <weight>50</weight>
+            <italic>false</italic>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="contextMenuPolicy">
+           <enum>Qt::DefaultContextMenu</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
           <property name="text">
-           <string>Add FIle</string>
+           <string>Add File</string>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+          <property name="flat">
+           <bool>false</bool>
           </property>
          </widget>
         </item>
@@ -63,8 +106,12 @@
           </property>
           <property name="font">
            <font>
+            <family>맑은 고딕</family>
             <pointsize>11</pointsize>
            </font>
+          </property>
+          <property name="contextMenuPolicy">
+           <enum>Qt::DefaultContextMenu</enum>
           </property>
           <property name="dragDropMode">
            <enum>QAbstractItemView::InternalMove</enum>
@@ -80,8 +127,23 @@
          <height>0</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <family>Yu Gothic Medium</family>
+         <pointsize>10</pointsize>
+         <weight>7</weight>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="contextMenuPolicy">
+        <enum>Qt::CustomContextMenu</enum>
+       </property>
        <property name="styleSheet">
-        <string notr="true">font: 11pt &quot;KoPub돋움체 Bold&quot;;</string>
+        <string notr="true">font: 57 10pt &quot;Yu Gothic Medium&quot;;</string>
+       </property>
+       <property name="tabShape">
+        <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
         <number>0</number>
@@ -92,6 +154,9 @@
          <height>50</height>
         </size>
        </property>
+       <property name="elideMode">
+        <enum>Qt::ElideNone</enum>
+       </property>
        <property name="tabsClosable">
         <bool>true</bool>
        </property>
@@ -99,43 +164,52 @@
         <bool>true</bool>
        </property>
        <widget class="QWidget" name="tab_1">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
         <attribute name="title">
-         <string>이름</string>
+         <string>Table</string>
         </attribute>
         <layout class="QGridLayout" name="gridLayout_2">
-         <item row="2" column="0" colspan="2">
-          <widget class="QTableWidget" name="tableWidget"/>
-         </item>
          <item row="1" column="1">
           <widget class="QListWidget" name="colInfoListWidget">
            <property name="font">
             <font>
              <family>맑은 고딕</family>
-             <pointsize>14</pointsize>
+             <pointsize>11</pointsize>
              <weight>50</weight>
              <italic>false</italic>
              <bold>false</bold>
             </font>
            </property>
+           <property name="contextMenuPolicy">
+            <enum>Qt::DefaultContextMenu</enum>
+           </property>
            <property name="styleSheet">
-            <string notr="true">font: 14pt &quot;맑은 고딕&quot;;</string>
+            <string notr="true">font: 11pt &quot;맑은 고딕&quot;;</string>
            </property>
            <property name="editTriggers">
-            <set>QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::NoSelection</enum>
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
-          <layout class="QVBoxLayout" name="graphLayout"/>
-         </item>
          <item row="0" column="1">
           <widget class="QPushButton" name="addTabBtn">
+           <property name="contextMenuPolicy">
+            <enum>Qt::DefaultContextMenu</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 255, 255);</string>
+           </property>
            <property name="text">
             <string/>
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>img/플러스.png</normaloff>img/플러스.png</iconset>
+             <normaloff>img/plus.png</normaloff>img/plus.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -145,157 +219,426 @@
            </property>
           </widget>
          </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="tab_2">
-        <attribute name="title">
-         <string/>
-        </attribute>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="layoutWidget">
-       <layout class="QVBoxLayout" name="rightLayout">
-        <item>
-         <widget class="QWidget" name="chartBtnWidget" native="true">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>100</height>
-           </size>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_3">
-           <property name="leftMargin">
-            <number>0</number>
+         <item row="2" column="0" colspan="2">
+          <widget class="QTableWidget" name="tableWidget">
+           <property name="font">
+            <font>
+             <family>맑은 고딕</family>
+             <pointsize>11</pointsize>
+             <weight>50</weight>
+             <italic>false</italic>
+             <bold>false</bold>
+            </font>
            </property>
-           <property name="topMargin">
-            <number>0</number>
+           <property name="contextMenuPolicy">
+            <enum>Qt::DefaultContextMenu</enum>
            </property>
-           <property name="rightMargin">
-            <number>0</number>
+           <property name="styleSheet">
+            <string notr="true">font: 11pt &quot;맑은 고딕&quot;;</string>
            </property>
-           <property name="bottomMargin">
-            <number>10</number>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <layout class="QVBoxLayout" name="graphLayout"/>
+         </item>
+         <item row="0" column="2" rowspan="3">
+          <layout class="QVBoxLayout" name="fstRightLayout">
+           <property name="spacing">
+            <number>9</number>
            </property>
-           <item row="1" column="0">
-            <widget class="QPushButton" name="pieChartBtn">
-             <property name="styleSheet">
-              <string notr="true">background-color: rgb(255, 255, 255);</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset>
-               <normaloff>img/파이.png</normaloff>img/파이.png</iconset>
-             </property>
-             <property name="iconSize">
+           <item>
+            <widget class="QWidget" name="chartBtnWidget" native="true">
+             <property name="minimumSize">
               <size>
-               <width>50</width>
-               <height>115</height>
+               <width>0</width>
+               <height>100</height>
               </size>
              </property>
-             <property name="checkable">
-              <bool>true</bool>
+             <property name="contextMenuPolicy">
+              <enum>Qt::DefaultContextMenu</enum>
              </property>
+             <layout class="QGridLayout" name="gridLayout_3">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>10</number>
+              </property>
+              <item row="1" column="0">
+               <widget class="QPushButton" name="pieChartBtn">
+                <property name="contextMenuPolicy">
+                 <enum>Qt::DefaultContextMenu</enum>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(255, 255, 255);</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>img/파이.png</normaloff>img/파이.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>50</width>
+                  <height>115</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QPushButton" name="barGraphBtn">
+                <property name="contextMenuPolicy">
+                 <enum>Qt::DefaultContextMenu</enum>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(255, 255, 255);</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>img/막대2.png</normaloff>img/막대2.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>50</width>
+                  <height>115</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QPushButton" name="scatterChartBtn">
+                <property name="contextMenuPolicy">
+                 <enum>Qt::DefaultContextMenu</enum>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(255, 255, 255);</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>img/산포도.png</normaloff>img/산포도.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>50</width>
+                  <height>115</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QPushButton" name="lineGraphBtn">
+                <property name="contextMenuPolicy">
+                 <enum>Qt::DefaultContextMenu</enum>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(255, 255, 255);</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>img/꺽은선.png</normaloff>img/꺽은선.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>50</width>
+                  <height>115</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </item>
-           <item row="0" column="1">
-            <widget class="QPushButton" name="lineGraphBtn">
-             <property name="styleSheet">
-              <string notr="true">background-color: rgb(255, 255, 255);</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset>
-               <normaloff>img/꺽은선.png</normaloff>img/꺽은선.png</iconset>
-             </property>
-             <property name="iconSize">
+           <item>
+            <widget class="QListWidget" name="cellList">
+             <property name="maximumSize">
               <size>
-               <width>50</width>
-               <height>115</height>
+               <width>16777215</width>
+               <height>16777215</height>
               </size>
              </property>
-             <property name="checkable">
-              <bool>true</bool>
+             <property name="font">
+              <font>
+               <family>맑은 고딕</family>
+               <pointsize>11</pointsize>
+               <weight>50</weight>
+               <italic>false</italic>
+               <bold>false</bold>
+              </font>
              </property>
-            </widget>
-           </item>
-           <item row="0" column="0">
-            <widget class="QPushButton" name="barGraphBtn">
+             <property name="contextMenuPolicy">
+              <enum>Qt::DefaultContextMenu</enum>
+             </property>
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(255, 255, 255);</string>
+              <string notr="true">font: 11pt &quot;맑은 고딕&quot;;</string>
              </property>
-             <property name="text">
-              <string/>
+             <property name="lineWidth">
+              <number>1</number>
              </property>
-             <property name="icon">
-              <iconset>
-               <normaloff>img/막대2.png</normaloff>img/막대2.png</iconset>
+             <property name="dragDropMode">
+              <enum>QAbstractItemView::DragDrop</enum>
              </property>
-             <property name="iconSize">
-              <size>
-               <width>50</width>
-               <height>115</height>
-              </size>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QPushButton" name="scatterChartBtn">
-             <property name="styleSheet">
-              <string notr="true">background-color: rgb(255, 255, 255);</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset>
-               <normaloff>img/산포도.png</normaloff>img/산포도.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>50</width>
-               <height>115</height>
-              </size>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
+             <property name="defaultDropAction">
+              <enum>Qt::MoveAction</enum>
              </property>
             </widget>
            </item>
           </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QListWidget" name="cellList">
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="lineWidth">
-           <number>1</number>
-          </property>
-          <property name="dragDropMode">
-           <enum>QAbstractItemView::DragDrop</enum>
-          </property>
-          <property name="defaultDropAction">
-           <enum>Qt::MoveAction</enum>
-          </property>
-         </widget>
-        </item>
-       </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tab_2">
+        <attribute name="title">
+         <string>ColumnChart-Missing Value</string>
+        </attribute>
+        <layout class="QGridLayout" name="gridLayout_4">
+         <item row="0" column="1">
+          <layout class="QVBoxLayout" name="secRightLayout">
+           <property name="spacing">
+            <number>24</number>
+           </property>
+           <property name="topMargin">
+            <number>12</number>
+           </property>
+           <item>
+            <widget class="QComboBox" name="secChartCombo">
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>12</pointsize>
+               <weight>50</weight>
+               <italic>false</italic>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+             </property>
+             <item>
+              <property name="text">
+               <string>Column</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Column + Missing value</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Missing value</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="secSortCombo">
+             <property name="styleSheet">
+              <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+             </property>
+             <item>
+              <property name="text">
+               <string>Missing value - Ascending</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Missing value - Descending</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="secColListLayout">
+             <property name="spacing">
+              <number>5</number>
+             </property>
+             <item>
+              <layout class="QVBoxLayout" name="secColListLeftLayout">
+               <property name="spacing">
+                <number>20</number>
+               </property>
+               <item>
+                <widget class="QPushButton" name="notshowBtn">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>Arial</family>
+                   <pointsize>12</pointsize>
+                   <weight>50</weight>
+                   <italic>false</italic>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                 <property name="layoutDirection">
+                  <enum>Qt::LeftToRight</enum>
+                 </property>
+                 <property name="autoFillBackground">
+                  <bool>false</bool>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>show nothing</string>
+                 </property>
+                 <property name="flat">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="secColListLeft">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QTextEdit" name="secColListLeftTitle">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>31</height>
+                    </size>
+                   </property>
+                   <property name="layoutDirection">
+                    <enum>Qt::LeftToRight</enum>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">background-color: transparent;
+border: 1px solid;
+border-color: transparent;
+font: 63 12pt &quot;Yu Gothic UI Semibold&quot;;</string>
+                   </property>
+                   <property name="verticalScrollBarPolicy">
+                    <enum>Qt::ScrollBarAlwaysOff</enum>
+                   </property>
+                   <property name="horizontalScrollBarPolicy">
+                    <enum>Qt::ScrollBarAlwaysOff</enum>
+                   </property>
+                   <property name="html">
+                    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Yu Gothic UI Semibold'; font-size:12pt; font-weight:56; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt; font-weight:400;&quot;&gt;showing column&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QListWidget" name="showingColList"/>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="secColListRightLayout">
+               <property name="spacing">
+                <number>20</number>
+               </property>
+               <item>
+                <widget class="QPushButton" name="showBtn">
+                 <property name="styleSheet">
+                  <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>show everything</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="secColListRight">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QTextEdit" name="secColListRightTitle">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>31</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">background-color: transparent;
+border: 1px solid;
+border-color: transparent;
+font: 63 12pt &quot;Yu Gothic UI Semibold&quot;;</string>
+                   </property>
+                   <property name="verticalScrollBarPolicy">
+                    <enum>Qt::ScrollBarAlwaysOff</enum>
+                   </property>
+                   <property name="horizontalScrollBarPolicy">
+                    <enum>Qt::ScrollBarAlwaysOff</enum>
+                   </property>
+                   <property name="html">
+                    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Yu Gothic UI Semibold'; font-size:12pt; font-weight:56; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt; font-weight:400;&quot;&gt;unshowing column&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QListWidget" name="unshowingColList">
+                   <property name="font">
+                    <font>
+                     <family>Yu Gothic Medium</family>
+                     <pointsize>10</pointsize>
+                     <weight>7</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item row="0" column="0">
+          <layout class="QVBoxLayout" name="secGraphLayout"/>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </widget>
     </item>
@@ -309,6 +652,19 @@
      <width>1667</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Yu Gothic UI Semilight</family>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::DefaultContextMenu</enum>
+   </property>
+   <property name="nativeMenuBar">
+    <bool>false</bool>
    </property>
    <widget class="QMenu" name="menu">
     <property name="title">
@@ -324,6 +680,7 @@
     <addaction name="menuSave"/>
     <addaction name="actionSave"/>
     <addaction name="menuabsorption"/>
+    <addaction name="actionSetting"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuChart">
@@ -368,6 +725,11 @@
   <action name="actionCellAbsorption">
    <property name="text">
     <string>CellAbsorption</string>
+   </property>
+  </action>
+  <action name="actionSetting">
+   <property name="text">
+    <string>Setting</string>
    </property>
   </action>
  </widget>

@@ -3,8 +3,6 @@ import os.path
 import pandas as pd
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtCore import Qt
-from matplotlib.pyplot import pie
-
 import data, fileData
 import numpy as np
 import math
@@ -47,37 +45,6 @@ def draw(self, fl):
             if s == 'nan':
                 s = ''
             table.setItem(j, i, QtWidgets.QTableWidgetItem(s))
-
-
-# 차트 그리는 함수
-
-# 셀리스트의 셀제목을 클릭했을때 실행
-def cellClick(self):
-    resetGraphType(self)
-    self.fig.clear()
-    table = self.tableWidget
-    row = table.rowCount()
-    y = []
-    for i in range(0, row):
-        aa = table.item(i, self.cellList.currentRow()).text()
-        y.append(float(aa))
-    x = np.arange(1, row + 1, 1)
-    ax = self.fig.add_subplot(111)
-    if data.graphType == 0:
-        self.barGraphBtn.toggle()
-        ax.bar(x, y)
-    elif data.graphType == 1:
-        self.lineGraphBtn.toggle()
-        ax.plot(x, y)
-    elif data.graphType == 2:
-        self.pieChartBtn.toggle()
-        ax.pie(x, labels=x)
-    elif data.graphType == 3:
-        self.scatterChartBtn.toggle()
-        ax.scatter(x, y)
-    ax.set_title(self.cellList.currentItem().text())
-    self.canvas.draw()
-
 
 # 셀 정보를 출력하는 함수
 def cellInfo(self):
@@ -177,39 +144,3 @@ def tableChange(self):
     fileData.dfs[self.fileCount] = data_df.copy()
 
 
-def barGraphBtnClick(self):
-    resetGraphType(self)
-    self.barGraphBtn.toggle()
-    data.graphType = 0
-    cellClick(self)
-
-def lineGraphBtnClick(self):
-    resetGraphType(self)
-    self.lineGraphBtn.toggle()
-    data.graphType = 1
-    cellClick(self)
-
-
-def pieChartBtnClick(self):
-    resetGraphType(self)
-    self.pieChartBtn.toggle()
-    data.graphType = 2
-    cellClick(self)
-
-
-def scatterChartBtnClick(self):
-    resetGraphType(self)
-    self.scatterChartBtn.toggle()
-    data.graphType = 3
-    cellClick(self)
-
-
-def resetGraphType(self):
-    if self.barGraphBtn.isChecked():
-        self.barGraphBtn.toggle()
-    if self.lineGraphBtn.isChecked():
-        self.lineGraphBtn.toggle()
-    if self.pieChartBtn.isChecked():
-        self.pieChartBtn.toggle()
-    if self.scatterChartBtn.isChecked():
-        self.scatterChartBtn.toggle()

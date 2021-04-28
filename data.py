@@ -20,5 +20,6 @@ RowList = []
 # 현재 선택된 그래프 타입
 graphType = 0
 
-
+# 그래프 생성 상태
+graphOn = False
 
