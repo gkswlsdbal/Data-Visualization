@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1667</width>
-    <height>864</height>
+    <height>808</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -18,13 +18,18 @@
   </property>
   <property name="font">
    <font>
-    <family>굴림</family>
+    <family>맑은 고딕</family>
+    <pointsize>10</pointsize>
     <weight>50</weight>
+    <italic>false</italic>
     <bold>false</bold>
    </font>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
   </property>
   <property name="tabShape">
    <enum>QTabWidget::Triangular</enum>
@@ -32,7 +37,10 @@
   <property name="unifiedTitleAndToolBarOnMac">
    <bool>false</bool>
   </property>
-  <widget class="QWidget" name="centralwidget">
+  <widget class="QWidget" name="widget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <layout class="QGridLayout" name="gridLayout">
     <property name="bottomMargin">
      <number>0</number>
@@ -69,7 +77,7 @@
           </property>
           <property name="font">
            <font>
-            <family>Yu Gothic UI Semibold</family>
+            <family>맑은 고딕</family>
             <pointsize>12</pointsize>
             <weight>50</weight>
             <italic>false</italic>
@@ -80,7 +88,7 @@
            <enum>Qt::DefaultContextMenu</enum>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">font: 12pt</string>
           </property>
           <property name="text">
            <string>Add File</string>
@@ -107,7 +115,10 @@
           <property name="font">
            <font>
             <family>맑은 고딕</family>
-            <pointsize>11</pointsize>
+            <pointsize>10</pointsize>
+            <weight>50</weight>
+            <italic>false</italic>
+            <bold>false</bold>
            </font>
           </property>
           <property name="contextMenuPolicy">
@@ -131,7 +142,7 @@
         <font>
          <family>Yu Gothic Medium</family>
          <pointsize>10</pointsize>
-         <weight>7</weight>
+         <weight>50</weight>
          <italic>false</italic>
          <bold>false</bold>
         </font>
@@ -140,7 +151,7 @@
         <enum>Qt::CustomContextMenu</enum>
        </property>
        <property name="styleSheet">
-        <string notr="true">font: 57 10pt &quot;Yu Gothic Medium&quot;;</string>
+        <string notr="true"/>
        </property>
        <property name="tabShape">
         <enum>QTabWidget::Rounded</enum>
@@ -181,7 +192,7 @@
              <property name="minimumSize">
               <size>
                <width>0</width>
-               <height>100</height>
+               <height>136</height>
               </size>
              </property>
              <property name="contextMenuPolicy">
@@ -334,7 +345,7 @@
               <enum>Qt::DefaultContextMenu</enum>
              </property>
              <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;맑은 고딕&quot;;</string>
+              <string notr="true"/>
              </property>
              <property name="lineWidth">
               <number>1</number>
@@ -370,7 +381,7 @@
             <enum>Qt::DefaultContextMenu</enum>
            </property>
            <property name="styleSheet">
-            <string notr="true">font: 11pt &quot;맑은 고딕&quot;;</string>
+            <string notr="true"/>
            </property>
           </widget>
          </item>
@@ -394,7 +405,7 @@
               <enum>Qt::DefaultContextMenu</enum>
              </property>
              <property name="styleSheet">
-              <string notr="true">font: 10pt &quot;맑은 고딕&quot;;</string>
+              <string notr="true"/>
              </property>
              <property name="editTriggers">
               <set>QAbstractItemView::NoEditTriggers</set>
@@ -413,7 +424,7 @@
          <font>
           <family>Yu Gothic Medium</family>
           <pointsize>10</pointsize>
-          <weight>7</weight>
+          <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
          </font>
@@ -434,15 +445,15 @@
             <widget class="QComboBox" name="secChartCombo">
              <property name="font">
               <font>
-               <family>Arial</family>
-               <pointsize>12</pointsize>
+               <family>맑은 고딕</family>
+               <pointsize>10</pointsize>
                <weight>50</weight>
                <italic>false</italic>
                <bold>false</bold>
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+              <string notr="true"/>
              </property>
              <item>
               <property name="text">
@@ -463,8 +474,14 @@
            </item>
            <item>
             <widget class="QComboBox" name="secSortCombo">
+             <property name="font">
+              <font>
+               <family>맑은 고딕</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
              <property name="styleSheet">
-              <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+              <string notr="true"/>
              </property>
              <item>
               <property name="text">
@@ -498,8 +515,8 @@
                  </property>
                  <property name="font">
                   <font>
-                   <family>Arial</family>
-                   <pointsize>12</pointsize>
+                   <family>맑은 고딕</family>
+                   <pointsize>10</pointsize>
                    <weight>50</weight>
                    <italic>false</italic>
                    <bold>false</bold>
@@ -512,7 +529,7 @@
                   <bool>false</bool>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+                  <string notr="true"/>
                  </property>
                  <property name="text">
                   <string>show nothing</string>
@@ -539,8 +556,7 @@
                     <enum>Qt::LeftToRight</enum>
                    </property>
                    <property name="styleSheet">
-                    <string notr="true">background-color: rgb(250, 250, 250);
-font: 63 12pt &quot;Yu Gothic UI Semibold&quot;;</string>
+                    <string notr="true"/>
                    </property>
                    <property name="verticalScrollBarPolicy">
                     <enum>Qt::ScrollBarAlwaysOff</enum>
@@ -555,8 +571,8 @@ font: 63 12pt &quot;Yu Gothic UI Semibold&quot;;</string>
                     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Yu Gothic UI Semibold'; font-size:12pt; font-weight:56; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt; font-weight:400;&quot;&gt;showing column&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Gulim'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Yu Gothic UI Semibold'; font-size:11pt;&quot;&gt;showing column&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
                   </widget>
                  </item>
@@ -574,8 +590,14 @@ p, li { white-space: pre-wrap; }
                </property>
                <item>
                 <widget class="QPushButton" name="showBtn">
+                 <property name="font">
+                  <font>
+                   <family>맑은 고딕</family>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
                  <property name="styleSheet">
-                  <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+                  <string notr="true"/>
                  </property>
                  <property name="text">
                   <string>show everything</string>
@@ -596,8 +618,7 @@ p, li { white-space: pre-wrap; }
                     </size>
                    </property>
                    <property name="styleSheet">
-                    <string notr="true">background-color: rgb(250, 250, 250);
-font: 63 12pt &quot;Yu Gothic UI Semibold&quot;;</string>
+                    <string notr="true"/>
                    </property>
                    <property name="verticalScrollBarPolicy">
                     <enum>Qt::ScrollBarAlwaysOff</enum>
@@ -612,8 +633,8 @@ font: 63 12pt &quot;Yu Gothic UI Semibold&quot;;</string>
                     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Yu Gothic UI Semibold'; font-size:12pt; font-weight:56; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt; font-weight:400;&quot;&gt;unshowing column&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Gulim'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Yu Gothic UI Semibold'; font-size:11pt;&quot;&gt;unshowing column&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
                   </widget>
                  </item>
@@ -623,7 +644,7 @@ p, li { white-space: pre-wrap; }
                     <font>
                      <family>Yu Gothic Medium</family>
                      <pointsize>10</pointsize>
-                     <weight>7</weight>
+                     <weight>50</weight>
                      <italic>false</italic>
                      <bold>false</bold>
                     </font>
@@ -654,13 +675,15 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1667</width>
-     <height>31</height>
+     <height>34</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Yu Gothic UI Semilight</family>
+     <family>맑은 고딕</family>
+     <pointsize>10</pointsize>
      <weight>50</weight>
+     <italic>false</italic>
      <bold>false</bold>
     </font>
    </property>

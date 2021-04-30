@@ -3,14 +3,16 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5 import uic
-
-import chart_function
-import main_event as ev
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+import main_event as ev
+import chart_function
 import function
 import preprocessing
+
+#추가
+import checkIniFile
 
 form_class = uic.loadUiType('ProjectUI.ui')[0]
 
@@ -96,6 +98,17 @@ class WindowClass(QMainWindow, form_class):
         self.toolbar.addAction(settAction)
         self.toolbar.addAction(exitAction)
 
+        ##변경
+        self.chckIniFile()
+        ##
+
+    def chckIniFile(self):
+        checkIniFile.chckInitFst(self)
+
+    def closeEvent(self, event):
+        checkIniFile.writeIniLast(self)
+    ##
+
     def contextMenu(self):
         saveAction = QAction('Save')
         saveAction.triggered.connect(self.actionSaves)
@@ -138,7 +151,6 @@ class WindowClass(QMainWindow, form_class):
     def newSaves(self):
         ev.newSave(self)
 
-    # 추가
     def UISetting(self):
         ev.openSettingWindow(self)
         self.actionSetting.setEnabled(False)

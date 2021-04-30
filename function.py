@@ -3,7 +3,8 @@ import os.path
 import pandas as pd
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtCore import Qt
-import data, fileData
+import data
+import fileData
 import numpy as np
 import math
 import preprocessing
@@ -49,21 +50,24 @@ def draw(self, fl):
 # 셀 정보를 출력하는 함수
 def cellInfo(self):
     self.colInfoListWidget.clear()
-    datas = []
-    headerlist = []
-    for i in range(0, self.tableWidget.columnCount()):
-        headerlist.append(self.tableWidget.horizontalHeaderItem(i).text())
-    # 셀 내용 채우기
-    for i in range(0, self.tableWidget.rowCount()):
-        datas.append([])
-        for j in range(0, self.tableWidget.columnCount()):
-            a = (self.tableWidget.item(i, j))
-            datas[i].append(a.text())
-    data_df = pd.DataFrame(datas, columns=headerlist)
+    # datas = []
+    # headerlist = []
+    #
+    # for i in range(0, self.tableWidget.columnCount()):
+    #     headerlist.append(self.tableWidget.horizontalHeaderItem(i).text())
+    #
+    # print(headerlist)
+    # # 셀 내용 채우기
+    # for i in range(0, self.tableWidget.rowCount()):
+    #     datas.append([])
+    #     for j in range(0, self.tableWidget.columnCount()):
+    #         a = (self.tableWidget.item(i, j))
+    #         datas[i].append(a.text())
+    # data_df = pd.DataFrame(datas, columns=headerlist)
 
     coltitle = self.cellList.currentItem().text()  # 열 제목
     roundnum = 4  # 평균을 구할 때 소수점 아래로 남길 숫자 개수
-    collist = list(data_df[coltitle])  # 열을 리스트 타입으로 바꿉니다.
+    collist = list(data.tableDf[coltitle])  # 열을 리스트 타입으로 바꿉니다.
     collist = deleteSpaceVal(collist)
 
     coltable = pd.DataFrame(collist)  # 정리된 리스트를 다시 dataframe으로 바꿉니다.
@@ -71,7 +75,7 @@ def cellInfo(self):
 
     # 열 이름, 행 개수
     self.colInfoListWidget.addItem(str("Title: " + coltitle))
-    self.colInfoListWidget.addItem(str("Row: " + str(self.tableWidget.rowCount())))
+    self.colInfoListWidget.addItem(str("Row: " + str(len(coltable))))
 
     # 열의 타입이 숫자일 경우 열의 평균값, 중간값, 최대값, 열의 최소값, 타입을 출력합니다.
     if isNumber(coltable, coltitle):
@@ -92,7 +96,7 @@ def cellInfo(self):
         self.colInfoListWidget.addItem("Type: String")
 
     # 빈 값 개수입니다.
-    self.colInfoListWidget.addItem(str("Missing: ") + str(countEmptyRow(data.tableDf[coltitle])))
+    self.colInfoListWidget.addItem(str("Missing: ") + str(countEmptyRow(coltable)))
 
 
 # 데이터프레임변수 열의 타입이 실수인지 확인합니다.
@@ -121,7 +125,8 @@ def deleteSpaceVal(collist):
 
 # nan과 빈칸 개수를 셉니다.
 def countEmptyRow(df):
-    empty = df.isnull().sum().sum()
+    # empty = df.isnull().sum()
+    empty = 0
     for i in list(df):
         if str(i).isspace():
             empty += 1

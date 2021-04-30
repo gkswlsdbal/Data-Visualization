@@ -3,6 +3,8 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic
 import data, fileData
 import Absorption_event as ab
+import checkIniFile
+
 
 form_class1 = uic.loadUiType('CellAbsorption.ui')[0]
 
@@ -15,7 +17,14 @@ class OptionWindow(QDialog):
         option_ui = 'CellAbsorption.ui'
         uic.loadUi(option_ui, self)
         self.listWidget.itemClicked.connect(self.itemClick)
-        self.abButton.clicked.connect(self.btnClick)
+        self.slctListWidget.itemClicked.connect(self.slctItemClick)
+
+        ##변경
+        checkIniFile.chckIniCAbsor(self)
+        self.buttonBox.accepted.connect(self.btnClick)
+        self.buttonBox.rejected.connect(self.close)
+        ## 밑에 하나더
+
         self.myParent = parent
         self.comboBox.addItem('파일 선택')
         for i in range(0, len(fileData.fileLinks)):
@@ -31,5 +40,9 @@ class OptionWindow(QDialog):
     def itemClick(self):
         ab.cellItemClick(self)
 
+
     def btnClick(self):
-        ab.cellBtnClick(self)
+        ##변경
+        if self.slctListWidget.count() > 0:
+            ##
+            ab.cellBtnClick(self)

@@ -171,25 +171,25 @@ def barGraphBtnClick(self):
 # 꺽은선 그래프 버튼
 def lineGraphBtnClick(self):
     if data.graphOn:
-        resetGraphType(self)
-        self.lineGraphBtn.toggle()
-        data.graphType = 1
-        cellClick(self)
+      resetGraphType(self)
+      self.lineGraphBtn.toggle()
+      data.graphType = 1
+      cellClick(self)
 
 
 # 원 그래프 버튼
 def pieChartBtnClick(self):
     if data.graphOn:
-        resetGraphType(self)
-        self.pieChartBtn.toggle()
-        data.graphType = 2
-        cellClick(self)
+      resetGraphType(self)
+      self.pieChartBtn.toggle()
+      data.graphType = 2
+      cellClick(self)
 
 
 # 스케터 그래프 버튼
 def scatterChartBtnClick(self):
     if data.graphOn:
-        resetGraphType(self)
-        self.scatterChartBtn.toggle()
-        data.graphType = 3
-        cellClick(self)
+      resetGraphType(self)
+      self.scatterChartBtn.toggle()
+      data.graphType = 3
+      cellClick(self)
