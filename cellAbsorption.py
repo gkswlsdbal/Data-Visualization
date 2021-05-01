@@ -32,6 +32,9 @@ class OptionWindow(QDialog):
 
         self.comboBox.currentIndexChanged.connect(self.BoxClick)
         self.show()
+        
+    def slctItemClick(self):
+        pass
 
     def BoxClick(self):
         data.flag = False
