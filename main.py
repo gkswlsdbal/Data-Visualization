@@ -3,16 +3,16 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5 import uic
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+import chart_function
+import main_event as ev
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
-import main_event as ev
-import chart_function
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import function
 import preprocessing
-
-#추가
+import ColumnChart_function as ccf
 import checkIniFile
+
 
 form_class = uic.loadUiType('ProjectUI.ui')[0]
 
@@ -52,6 +52,23 @@ class WindowClass(QMainWindow, form_class):
         font_name = fm.FontProperties(fname=path, size=50).get_name()
         plt.rc('font', family=font_name)
 
+        self.fig_sec = plt.figure(2)
+        self.fig_sec.set_size_inches(7.8, 3.5)
+        self.fig_sec.subplots_adjust(left=0.125,
+                                     bottom=0.1,
+                                     right=0.9,
+                                     top=0.9,
+                                     wspace=0.2,
+                                     hspace=0.35)
+        self.canvas_sec = FigureCanvas(self.fig_sec)
+        self.secGraphLayout.addWidget(self.canvas_sec)
+
+        self.secChartCombo.currentIndexChanged.connect(self.secChartComboChanged)
+        self.showBtn.clicked.connect(self.secShowBtn)
+        self.notshowBtn.clicked.connect(self.secNotShowBtn)
+        self.showingColList.itemDoubleClicked.connect(self.secShowCellClick)
+        self.unshowingColList.itemDoubleClicked.connect(self.secNotShowCellClick)
+
         self.actionSetting.triggered.connect(self.UISetting)
         self.secColListLeftTitle.setAlignment(Qt.AlignCenter)
         self.secColListRightTitle.setAlignment(Qt.AlignCenter)
@@ -78,9 +95,9 @@ class WindowClass(QMainWindow, form_class):
         cAbsorAction.setStatusTip('Cell absorption')
         cAbsorAction.triggered.connect(self.actionCells)
 
-        settAction = QAction(QIcon('img/setting.png'), 'Setting', self)
-        settAction.setStatusTip('Setting')
-        settAction.triggered.connect(self.UISetting)
+        self.settAction = QAction(QIcon('img/setting.png'), 'Setting', self)
+        self.settAction.setStatusTip('Setting')
+        self.settAction.triggered.connect(self.UISetting)
 
         exitAction = QAction(QIcon('img/exit.png'), 'Exit', self)
         exitAction.setStatusTip('Exit')
@@ -95,19 +112,16 @@ class WindowClass(QMainWindow, form_class):
         self.toolbar.addAction(preprocessAction)
         self.toolbar.addAction(fAbsorAction)
         self.toolbar.addAction(cAbsorAction)
-        self.toolbar.addAction(settAction)
+        self.toolbar.addAction(self.settAction)
         self.toolbar.addAction(exitAction)
 
-        ##변경
         self.chckIniFile()
-        ##
 
     def chckIniFile(self):
         checkIniFile.chckInitFst(self)
 
     def closeEvent(self, event):
         checkIniFile.writeIniLast(self)
-    ##
 
     def contextMenu(self):
         saveAction = QAction('Save')
@@ -132,7 +146,10 @@ class WindowClass(QMainWindow, form_class):
         ev.btnClick(self)
 
     def fileClick(self):
+
         self.cellFlag = False
+        self.fig.clear()
+        self.canvas.draw()
         self.colInfoListWidget.clear()
         ev.fileClick(self)
 
@@ -151,6 +168,7 @@ class WindowClass(QMainWindow, form_class):
     def newSaves(self):
         ev.newSave(self)
 
+    # 추가
     def UISetting(self):
         ev.openSettingWindow(self)
         self.actionSetting.setEnabled(False)
@@ -191,6 +209,21 @@ class WindowClass(QMainWindow, form_class):
     #         event.accept()
     #     else:
     #         event.ignore()
+
+    def secChartComboChanged(self):
+        ccf.secChartComboChanged(self)
+
+    def secShowBtn(self):
+        ccf.secShowBtn(self)
+
+    def secNotShowBtn(self):
+        ccf.secNotShowBtn(self)
+
+    def secShowCellClick(self):
+        ccf.secShowCellClick(self)
+
+    def secNotShowCellClick(self):
+        ccf.secNotShowCellClick(self)
 
 
 if __name__ == "__main__":

@@ -4,7 +4,6 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 import data, fileData
-import checkIniFile
 
 form_class1 = uic.loadUiType('JoinUi.ui')[0]
 
@@ -18,7 +17,7 @@ class OptionWindow(QDialog):
         super(OptionWindow, self).__init__(parent)
         option_ui = 'JoinUi.ui'
         uic.loadUi(option_ui, self)
-        # self.setGeometry(880, 440, 416, 310)
+        self.setGeometry(880, 440, 416, 310)
         self.myParent = parent
 
         self.JoinList.itemClicked.connect(self.JoinClick)
@@ -30,10 +29,6 @@ class OptionWindow(QDialog):
 
         self.fileName.setText(fileData.fileName[data.RowList[0]])
         self.fileName2.setText(fileData.fileName[data.RowList[1]])
-
-        ##변경
-        checkIniFile.chckIniJoin(self)
-        ##
 
         col = len(fileData.dfs[data.RowList[0]].columns)
         title = list(fileData.dfs[data.RowList[0]].columns)
@@ -91,7 +86,7 @@ class OptionWindow(QDialog):
 
     def closeEvent(self, event):
 
-        self.fileName.setText(" ")
+        self.fileName.setText("hi ")
         self.fileName2.setText(" ")
         self.cellName.setText(" ")
         self.cellName.setText(" ")

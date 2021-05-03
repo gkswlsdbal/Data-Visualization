@@ -23,3 +23,8 @@ graphType = 0
 # 그래프 생성 상태
 graphOn = False
 
+# 열 전체 데이터프레임 저장
+dfsCell = []
+
+# 텝2 콤보박스 인덱스
+secCombo = 0
