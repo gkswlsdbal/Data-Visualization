@@ -71,7 +71,7 @@ def cellInfo(self):
             datas[i].append(a.text())
     data_df = pd.DataFrame(datas, columns=headerlist)
 
-    coltitle = self.cellList.currentItem().text()  # 열 제목
+    coltitle = self.cellList.currentItem().text()  # 열 제목 
     roundnum = 4  # 평균을 구할 때 소수점 아래로 남길 숫자 개수
     collist = list(data_df[coltitle])  # 열을 리스트 타입으로 바꿉니다.
     
