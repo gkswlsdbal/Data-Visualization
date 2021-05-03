@@ -74,8 +74,8 @@ def cellInfo(self):
     coltitle = self.cellList.currentItem().text()  # 열 제목
     roundnum = 4  # 평균을 구할 때 소수점 아래로 남길 숫자 개수
     collist = list(data_df[coltitle])  # 열을 리스트 타입으로 바꿉니다.
-    collist = deleteSpaceVal(collist)
-
+    
+    collist = chgSpaceToNan(collist)
     coltable = pd.DataFrame(collist)  # 정리된 리스트를 다시 dataframe으로 바꿉니다.
     coltable.columns = [coltitle]
 
@@ -102,7 +102,7 @@ def cellInfo(self):
         self.colInfoListWidget.addItem("Type: String")
 
     # 빈 값 개수입니다.
-    self.colInfoListWidget.addItem(str("Missing: ") + str(countEmptyRow(data.tableDf[coltitle])))
+    self.colInfoListWidget.addItem(str("Missing: ") + str(coltable[coltitle].isnull().sum()))
 
 
 # 데이터프레임변수 열의 타입이 실수인지 확인합니다.
@@ -117,6 +117,15 @@ def isNumber(coltable, title):
         except ValueError:
             return False
 
+# 리스트의 스페이스값과 빈값('')을 nan으로 바꿉니다.
+def chgSpaceToNan(collist):
+    a = 0
+    while a < len(collist) - 1:
+        if str(collist[a]).isspace() or collist[a] == '':
+            collist[a] = np.NAN
+        else:
+            a += 1
+    return collist
 
 # 리스트에 스페이스 값이 들어있으면 지웁니다.
 def deleteSpaceVal(collist):
