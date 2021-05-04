@@ -25,7 +25,6 @@ class SettingDialog(QDialog):
         setUI = 'Setting.ui'
         loadUi(setUI, self)
 
-        ##변경
         import configparser
         config = configparser.ConfigParser()
         config.read('setting.ini')
@@ -34,7 +33,6 @@ class SettingDialog(QDialog):
         self.bgcLabel = QLabel('Color Theme:')
         self.bgcLabel.setFixedSize(150, 30)
         self.bgcCombo = QComboBox()
-        self.bgcCombo.addItem('Black')
         self.bgcCombo.addItem('White')
         self.bgcCombo.addItem('Blue')
         self.bgcCombo.addItem('Green')
