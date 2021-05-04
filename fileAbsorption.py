@@ -21,14 +21,18 @@ class OptionWindow(QDialog):
         self.myParent = parent
         self.FileList.itemClicked.connect(self.itemClick)
         self.JoinBtn.clicked.connect(self.JoinClick)
-        self.saveBtn.clicked.connect(self.saveClick)
+        self.buttonBox.accepted.connect(self.saveClick)
+        self.buttonBox.rejected.connect(self.close)
+        checkIniFile.chckIniFAbsor(self)
+
         self.show()
 
     def itemClick(self):
         ab.fileItemClick(self)
 
     def JoinClick(self):
-        Join.OptionWindow(self)
+        if self.abList.count() > 0 and self.abList2.count() > 0:
+            Join.OptionWindow(self)
 
     def saveClick(self):
         if self.Join == 'Inner':
