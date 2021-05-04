@@ -15,13 +15,15 @@ class OptionWindow(QDialog):
         option_ui = 'CellAbsorption.ui'
         uic.loadUi(option_ui, self)
         self.listWidget.itemClicked.connect(self.itemClick)
-        self.abButton.clicked.connect(self.btnClick)
+        self.buttonBox.accepted.connect(self.btnClick)
+        self.buttonBox.rejected.connect(self.close)
         self.myParent = parent
         self.comboBox.addItem('파일 선택')
         for i in range(0, len(fileData.fileLinks)):
             self.comboBox.addItem(parent.FileList.item(i).text())
 
         self.comboBox.currentIndexChanged.connect(self.BoxClick)
+        checkIniFile.chckIniCAbsor(self)
         self.show()
 
     def BoxClick(self):
@@ -32,4 +34,5 @@ class OptionWindow(QDialog):
         ab.cellItemClick(self)
 
     def btnClick(self):
-        ab.cellBtnClick(self)
+        if self.slctListWidget.count() > 0:
+            ab.cellBtnClick(self)
