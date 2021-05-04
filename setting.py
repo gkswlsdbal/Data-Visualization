@@ -31,7 +31,7 @@ class SettingDialog(QDialog):
 
         # style화면
         self.bgcLabel = QLabel('Color Theme:')
-        self.bgcLabel.setFixedSize(150, 30)
+        # self.bgcLabel.setFixedSize(150, 30)
         self.bgcCombo = QComboBox()
         self.bgcCombo.addItem('White')
         self.bgcCombo.addItem('Blue')
