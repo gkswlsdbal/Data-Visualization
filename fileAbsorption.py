@@ -3,6 +3,8 @@ from PyQt5 import uic
 import fileData,data
 import Absorption_event as ab
 import Join
+import checkIniFile
+
 
 form_class1 = uic.loadUiType('FileAbsorption.ui')[0]
 
