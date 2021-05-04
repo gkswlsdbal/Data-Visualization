@@ -3,6 +3,8 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic
 import data, fileData
 import Absorption_event as ab
+import checkIniFile
+
 
 form_class1 = uic.loadUiType('CellAbsorption.ui')[0]
 
