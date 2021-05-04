@@ -171,7 +171,7 @@ class WindowClass(QMainWindow, form_class):
     # 추가
     def UISetting(self):
         ev.openSettingWindow(self)
-        self.actionSetting.setEnabled(False)
+        self.settAction.setEnabled(False)
 
     def cellClick(self):
         function.cellInfo(self)
