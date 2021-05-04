@@ -4,6 +4,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 import data, fileData
+import checkIniFile
 
 form_class1 = uic.loadUiType('JoinUi.ui')[0]
 
@@ -43,6 +44,8 @@ class OptionWindow(QDialog):
             self.JoinList.addItem(str(title[i]))
         for i in list(range(0, col2)):
             self.JoinList2.addItem(str(title2[i]))
+        
+        checkIniFile.chckIniJoin(self)
         self.show()
 
     # 조인리스트 출력
