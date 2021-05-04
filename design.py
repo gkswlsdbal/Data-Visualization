@@ -309,3 +309,25 @@ def setMainStyle(self, color1, color4, font_family, font_size):
     self.secColListRightTitle.setStyleSheet(f"background-color: {color4.name()};")
     self.showingColList.setStyleSheet("QListWidget {background-color: white; color: black;}")
     self.unshowingColList.setStyleSheet("QListWidget {background-color: white; color: black;}")
+    
+def setProcess(self):
+    self.treeWidget.setStyleSheet(
+        "background-color: rgb(255, 255, 255);"
+        "border-style: solid;"
+        "border-width: 2px;"
+        "border-color: rgb(240, 240, 240);")
+    self.listView.setStyleSheet(
+        "background-color: rgb(240, 240, 240);"
+        "border-style: solid;"
+        "border-color: rgb(240, 240, 240);")
+    self.treeWidget_2.setStyleSheet(
+        "background-color: rgb(255, 255, 255);"
+        "border-style: solid;"
+        "border-width: 2px;"
+        "border-color: rgb(240, 240, 240);")
+
+    self.label.setStyleSheet(
+        "background-color: rgb(255, 255, 255);"
+        "border-style: solid;"
+        "border-width: 2px;"
+        "border-color: rgb(240, 240, 240);")
