@@ -101,7 +101,7 @@ class WindowClass(QMainWindow, form_class):
 
         exitAction = QAction(QIcon('img/exit.png'), 'Exit', self)
         exitAction.setStatusTip('Exit')
-        exitAction.triggered.connect(self.close)
+        exitAction.triggered.connect(self.exitAction)
 
         preprocessAction = QAction(QIcon('img/preprocessing.png'), 'preprocessing', self)
         preprocessAction.setStatusTip('preprocessing')
@@ -121,13 +121,6 @@ class WindowClass(QMainWindow, form_class):
         checkIniFile.chckInitFst(self)
 
     def closeEvent(self, event):
-#        # 창이 닫힐때 진짜 닫을 껀지 물어봅니다.
-#         reply = QtWidgets.QMessageBox.question(self, 'Message',"종료하시겠습니까?",
-#                                            QMessageBox.Yes | QMessageBox.No,)
-#         if reply == QMessageBox.Yes:
-#             event.accept()
-#         else:
-#             event.ignore()
         checkIniFile.writeIniLast(self)
 
     def contextMenu(self):
@@ -178,7 +171,7 @@ class WindowClass(QMainWindow, form_class):
     # 추가
     def UISetting(self):
         ev.openSettingWindow(self)
-        self.settAction.setEnabled(False)
+        self.actionSetting.setEnabled(False)
 
     def cellClick(self):
         function.cellInfo(self)
@@ -207,6 +200,15 @@ class WindowClass(QMainWindow, form_class):
 
     def move_cursor(self, event):
         chart_function.move_cursor(self, event)
+
+    # 창이 닫힐때 진짜 닫을 껀지 물어봅니다.
+    # def closeEvent(self, event):
+    #     reply = QtWidgets.QMessageBox.question(self, 'Message',"종료하시겠습니까?",
+    #                                        QMessageBox.Yes | QMessageBox.No,)
+    #     if reply == QMessageBox.Yes:
+    #         event.accept()
+    #     else:
+    #         event.ignore()
 
     def secChartComboChanged(self):
         ccf.secChartComboChanged(self)

@@ -27,10 +27,10 @@ def cellItemClick(self):
     text = self.listWidget.currentItem().text()
     if text not in data.cellItemList:
         data.cellItemList.append(text)
-        self.slctListWidget.addItem(self.listWidget.currentItem().text())
+        self.listWidget_2.addItem(self.listWidget.currentItem().text())
     elif data.cmCount not in data.checkFl:
         data.cellItemList.append(text)
-        self.slctListWidget.addItem(self.listWidget.currentItem().text())
+        self.listWidget_2.addItem(self.listWidget.currentItem().text())
 
     dfi = fileData.dfs[data.cmCount][text]
     data.dfsList.append(dfi)
@@ -63,7 +63,7 @@ def fileItemClick(self):
         elif data.cmCount < 2:
             data.RowList.append(self.FileList.currentRow())
             fileData.fileItemList.append(text)
-            self.abList2.addItem(self.FileList.currentItem().text())
+            self.abList_2.addItem(self.FileList.currentItem().text())
             data.cmCount += 1
 
 

@@ -3,8 +3,6 @@ from PyQt5 import uic
 import fileData,data
 import Absorption_event as ab
 import Join
-import checkIniFile
-
 
 form_class1 = uic.loadUiType('FileAbsorption.ui')[0]
 
@@ -23,18 +21,14 @@ class OptionWindow(QDialog):
         self.myParent = parent
         self.FileList.itemClicked.connect(self.itemClick)
         self.JoinBtn.clicked.connect(self.JoinClick)
-        self.buttonBox.accepted.connect(self.saveClick)
-        self.buttonBox.rejected.connect(self.close)
-        checkIniFile.chckIniFAbsor(self)
-
+        self.saveBtn.clicked.connect(self.saveClick)
         self.show()
 
     def itemClick(self):
         ab.fileItemClick(self)
 
     def JoinClick(self):
-        if self.abList.count() > 0 and self.abList2.count() > 0:
-            Join.OptionWindow(self)
+        Join.OptionWindow(self)
 
     def saveClick(self):
         if self.Join == 'Inner':

@@ -37,7 +37,6 @@ def MissingData(self):
     if preprocessing_Data.comboBoxIndex == 1:
 
         if preprocessing_Data.selectCell:
-
             if preprocessing_Data.checkFlag:
                 processingDfs = fileData.dfs[fileIndex][preprocessing_Data.selectCell].fillna(
                     fileData.dfs[fileIndex].mean())
@@ -159,6 +158,7 @@ def DuplicateData(self):
             else:
                 checkCell.append(i)
         preprocessing_Data.processingDfs = dfs.drop_duplicates(checkCell, keep=preprocessing_Data.keep)
+        preprocessing_Data.processingDfs = preprocessing_Data.processingDfs.drop(dropCell, axis=1)
     if initial:
         if self.process not in self.name_2.text():
             if self.process not in " ":
@@ -176,7 +176,8 @@ def DuplicateData(self):
         self.pushButton.setVisible(True)
         self.name_2.setVisible(True)
         self.listWidget_2.setVisible(True)
-        preprocessing_Data.selectCell.clear()
+
+
     else:
         pass
     preprocessing_Data.completeDfs.append(preprocessing_Data.processingDfs)
@@ -184,80 +185,86 @@ def DuplicateData(self):
 
 # 표준화
 def SmoteData(self):
-    if preprocessing_Data.completeFlag:
-        fileIndex = preprocessing_Data.completeName.index(preprocessing_Data.filename)
-        data = preprocessing_Data.completeDfs[fileIndex].values
-        preprocessing_Data.processCell.clear()
-        col = len(preprocessing_Data.completeDfs[fileIndex].columns)
-        title = list(preprocessing_Data.completeDfs[fileIndex].columns)
-        for i in list(range(0, col)):
-            preprocessing_Data.processCell.append(str(title[i]))
-        selectIndex = []
-        for i in preprocessing_Data.selectCell:
-            selectIndex.append(preprocessing_Data.processCell.index(i))
-        if len(selectIndex) == 1:
-            preprocessing_Data.SmoteDfs = preprocessing_Data.completeDfs[fileIndex]
-            X, y = data[:, :selectIndex[0]], data[:, selectIndex[0]]
-            y = LabelEncoder().fit_transform(y)
-            smote = SMOTE(sampling_strategy=0.5, k_neighbors=int(SmoteTree.LineEdit2.text()),
-                          random_state=int(SmoteTree.LineEdit3.text()))
-            smote_X, smote_y = smote.fit_resample(X, y)
-            function.SmoteInfo(self, preprocessing_Data.completeDfs[fileIndex])
+    # if preprocessing_Data.completeFlag:
+    #     fileIndex = preprocessing_Data.completeName.index(preprocessing_Data.filename)
+    #     data = preprocessing_Data.completeDfs[fileIndex].values
+    #     preprocessing_Data.processCell.clear()
+    #     col = len(preprocessing_Data.completeDfs[fileIndex].columns)
+    #     title = list(preprocessing_Data.completeDfs[fileIndex].columns)
+    #     for i in list(range(0, col)):
+    #         preprocessing_Data.processCell.append(str(title[i]))
+    #     selectIndex = []
+    #     for i in preprocessing_Data.selectCell:
+    #         selectIndex.append(preprocessing_Data.processCell.index(i))
+    #     if len(selectIndex) == 1:
+    #         preprocessing_Data.SmoteDfs = preprocessing_Data.completeDfs[fileIndex]
+    #         X, y = data[:, :selectIndex[0]], data[:, selectIndex[0]]
+    #         y = LabelEncoder().fit_transform(y)
+    #         smote = SMOTE(sampling_strategy=0.5, k_neighbors=int(SmoteTree.LineEdit2.text()),
+    #                       random_state=int(SmoteTree.LineEdit3.text()))
+    #         smote_X, smote_y = smote.fit_resample(X, y)
+    #         function.SmoteInfo(self, preprocessing_Data.completeDfs[fileIndex])
+    #
+    #         self.listWidget.addItem('  \n{}'.format(pd.get_dummies(y).sum()))
+    #         self.listWidget_2.addItem('  \n{}'.format(pd.get_dummies(smote_y).sum()))
+    #         self.listWidget.setVisible(True)
+    #         self.pushButton.setVisible(True)
+    #         self.name_2.setVisible(True)
+    #         self.listWidget_2.setVisible(True)
 
-            self.listWidget.addItem('  \n{}'.format(pd.get_dummies(y).sum()))
-            self.listWidget_2.addItem('  \n{}'.format(pd.get_dummies(smote_y).sum()))
-            self.listWidget.setVisible(True)
-            self.pushButton.setVisible(True)
-            self.name_2.setVisible(True)
-            self.listWidget_2.setVisible(True)
+    fileIndex = fileData.fileName.index(preprocessing_Data.filename)
+    data = fileData.dfs[fileIndex].values
+    preprocessing_Data.processCell.clear()
+    col = len(fileData.dfs[fileIndex].columns)
+    title = list(fileData.dfs[fileIndex].columns)
+    for i in list(range(0, col)):
+        preprocessing_Data.processCell.append(str(title[i]))
 
-    else:
-        fileIndex = fileData.fileName.index(preprocessing_Data.filename)
-        data = fileData.dfs[fileIndex].values
-        preprocessing_Data.processCell.clear()
-        col = len(fileData.dfs[fileIndex].columns)
-        title = list(fileData.dfs[fileIndex].columns)
-        for i in list(range(0, col)):
-            preprocessing_Data.processCell.append(str(title[i]))
-
-        selectIndex = []
-        for i in preprocessing_Data.selectCell:
-            selectIndex.append(preprocessing_Data.processCell.index(i))
-        if len(selectIndex) == 1:
-            preprocessing_Data.SmoteDfs = fileData.dfs[fileIndex]
-            global data_X
-            global data_y
-            global target
-            target = data[:, selectIndex[0]]
-            data_X, data_y = data[:, :selectIndex[0]], data[:, selectIndex[0]]
-            data_y = LabelEncoder().fit_transform(data_y)
-            label = np.unique(np.array(data_y))
-            if len(label) <= 2:
-                smote = SMOTE(sampling_strategy=float(SmoteTree.LineEdit.text()),
-                              k_neighbors=int(SmoteTree.LineEdit2.text()), random_state=int(SmoteTree.LineEdit3.text()))
+    selectIndex = []
+    for i in preprocessing_Data.selectCell:
+        selectIndex.append(preprocessing_Data.processCell.index(i))
+    if len(selectIndex) == 1:
+        preprocessing_Data.SmoteDfs = fileData.dfs[fileIndex]
+        global data_X
+        global data_y
+        global target
+        target = data[:, selectIndex[0]]
+        le = LabelEncoder()
+        for i in range(0, selectIndex[0]):
+            if data[:, i].dtype == "int32" or data[:, i].dtype == "float64":
+                pass
             else:
-                smote = SMOTE(k_neighbors=int(SmoteTree.LineEdit2.text()), random_state=int(SmoteTree.LineEdit3.text()))
-            global smoteData_X
-            global smoteData_y
-            smoteData_X, smoteData_y = smote.fit_resample(data_X, data_y)
-            smoteData_y = LabelEncoder().fit_transform(smoteData_y)
-            function.SmoteInfo(self, fileData.dfs[fileIndex])
-            self.listWidget.addItem('  \n{}'.format(pd.get_dummies(data_y).sum()))
-            self.listWidget_2.addItem('  \n{}'.format(pd.get_dummies(smoteData_y).sum()))
-            self.listWidget.setVisible(True)
-            self.pushButton.setVisible(True)
-            self.name_2.setVisible(True)
-            self.listWidget_2.setVisible(True)
-            preprocessing.Button.setVisible(True)
-            self.listWidget.addItem("")
-            self.listWidget_2.addItem("")
-            global counter
-            counter = Counter(data_y)
-            for k, v in counter.items():
-                per = v / len(data_y) * 100
-                self.listWidget.addItem('Class=%d, n=%d (%.3f%%)' % (k, v, per))
-            global counter1
-            counter1 = Counter(smoteData_y)
-            for k, v in counter1.items():
-                per = v / len(smoteData_y) * 100
-                self.listWidget_2.addItem('Class=%d, n=%d (%.3f%%)' % (k, v, per))
+                data[:, i] = le.fit_transform(data[:, i])
+        data_X, data_y = data[:, :selectIndex[0]], data[:, selectIndex[0]]
+        data_y = LabelEncoder().fit_transform(data_y)
+        label = np.unique(np.array(data_y))
+
+        if len(label) <= 2:
+            smote = SMOTE(sampling_strategy=float(SmoteTree.LineEdit.text()),
+                          k_neighbors=int(SmoteTree.LineEdit2.text()), random_state=int(SmoteTree.LineEdit3.text()))
+        else:
+            smote = SMOTE(k_neighbors=int(SmoteTree.LineEdit2.text()), random_state=int(SmoteTree.LineEdit3.text()))
+        global smoteData_X
+        global smoteData_y
+        smoteData_X, smoteData_y = smote.fit_resample(data_X, data_y)
+        smoteData_y = LabelEncoder().fit_transform(smoteData_y)
+        function.SmoteInfo(self, fileData.dfs[fileIndex])
+        self.listWidget.addItem('  \n{}'.format(pd.get_dummies(data_y).sum()))
+        self.listWidget_2.addItem('  \n{}'.format(pd.get_dummies(smoteData_y).sum()))
+        self.listWidget.setVisible(True)
+        self.pushButton.setVisible(True)
+        self.name_2.setVisible(True)
+        self.listWidget_2.setVisible(True)
+        preprocessing.Button.setVisible(True)
+        self.listWidget.addItem("")
+        self.listWidget_2.addItem("")
+        global counter
+        counter = Counter(data_y)
+        for k, v in counter.items():
+            per = v / len(data_y) * 100
+            self.listWidget.addItem('Class=%d, n=%d (%.3f%%)' % (k, v, per))
+        global counter1
+        counter1 = Counter(smoteData_y)
+        for k, v in counter1.items():
+            per = v / len(smoteData_y) * 100
+            self.listWidget_2.addItem('Class=%d, n=%d (%.3f%%)' % (k, v, per))

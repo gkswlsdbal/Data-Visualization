@@ -55,7 +55,7 @@ class OptionWindow(QDialog):
 
         ax2 = self.fig.add_subplot(spec[1])
         df_missing = preprocessing_Data.processingDfs.isna().sum()
-        df_missing.plot.bar(rot=0, ax=ax2)
+        df_missing.plot.bar(color='gray', rot=0, ax=ax2)
         plt.title("결측치 제거 Bar", fontsize=12)
         plt.xticks(rotation=90,fontsize=8)
         plt.yticks(fontsize=8)

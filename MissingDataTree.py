@@ -162,16 +162,27 @@ def indexChanged(_str, index):
         LineEdit.setDisabled(False)
         checkBox.setDisabled(True)
         btn1.setDisabled(False)
+        if preprocessing_Data.checkFlag:
+            checkBox.toggle()
+        preprocessing_Data.checkFlag = False
+
     elif preprocessing_Data.comboBoxIndex == 1:
         LineEdit.setText("0")
         LineEdit.setDisabled(True)
         checkBox.setDisabled(False)
         btn1.setDisabled(False)
+        if preprocessing_Data.checkFlag:
+            checkBox.toggle()
+        preprocessing_Data.checkFlag = False
+
     elif preprocessing_Data.comboBoxIndex == 2:
         LineEdit.setText("0")
         LineEdit.setDisabled(True)
         checkBox.setDisabled(False)
         btn1.setDisabled(False)
+        if preprocessing_Data.checkFlag:
+            checkBox.toggle()
+        preprocessing_Data.checkFlag = False
 
     elif preprocessing_Data.comboBoxIndex == 4:
         Label4.setText("Threshold Value")
@@ -181,6 +192,10 @@ def indexChanged(_str, index):
         LineEdit.setDisabled(False)
         checkBox.setDisabled(True)
         btn1.setDisabled(True)
+        if preprocessing_Data.checkFlag:
+            checkBox.toggle()
+        preprocessing_Data.checkFlag = False
+
     elif preprocessing_Data.comboBoxIndex == 5:
         Label4.setText("Threshold Value")
         Label2.setText('\n Selected columns:\n\n All columns\n')
@@ -189,9 +204,19 @@ def indexChanged(_str, index):
         LineEdit.setDisabled(False)
         checkBox.setDisabled(True)
         btn1.setDisabled(True)
+        if preprocessing_Data.checkFlag:
+            checkBox.toggle()
+        preprocessing_Data.checkFlag = False
+
 
     else:
         LineEdit.clear()
+        LineEdit.setDisabled(True)
+        checkBox.setDisabled(False)
+        btn1.setDisabled(False)
+        if preprocessing_Data.checkFlag:
+            checkBox.toggle()
+        preprocessing_Data.checkFlag = False
         LineEdit.setDisabled(True)
 
 

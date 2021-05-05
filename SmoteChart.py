@@ -47,7 +47,7 @@ class OptionWindow(QDialog):
         axes4 = self.fig.add_subplot(spec[1])
         pyplot.bar(preprocessing_function.counter1.keys(), preprocessing_function.counter1.values())
         plt.title("SMOTE 후", fontsize=12)
-        plt.xticks(rotation=90, fontsize=8)
+        plt.xticks(fontsize=8)
         plt.yticks(fontsize=8)
         plt.subplots_adjust(left=0.1, bottom=0.16, top=0.9, wspace=0.35)
         self.canvas.draw()
@@ -67,7 +67,7 @@ class OptionWindow(QDialog):
                         c=preprocessing_function.data_y, edgecolors='black', cmap='Blues_r',alpha=0.7)
         else:
             plt.scatter(preprocessing_function.data_X[:, 0], preprocessing_function.data_X[:, 1],
-                        c=preprocessing_function.data_y, edgecolors='black', cmap=plt.cm.get_cmap('prism',  preprocessing_Data.SmoteDfs[ preprocessing_Data.selectCell].nunique()),
+                        c=preprocessing_function.data_y, edgecolors='black', cmap=plt.cm.get_cmap('Blues',  preprocessing_Data.SmoteDfs[ preprocessing_Data.selectCell].nunique()),
                         alpha=0.7)
 
         cb = plt.colorbar(label='class')
@@ -83,7 +83,7 @@ class OptionWindow(QDialog):
                         c=preprocessing_function.smoteData_y, edgecolors='black', cmap='Blues_r',alpha=0.7)
         else:
             plt.scatter(preprocessing_function.smoteData_X[:, 0], preprocessing_function.smoteData_X[:, 1],
-                        c=preprocessing_function.smoteData_y, edgecolors='black', cmap=plt.cm.get_cmap('prism',  preprocessing_Data.SmoteDfs[ preprocessing_Data.selectCell].nunique()),
+                        c=preprocessing_function.smoteData_y, edgecolors='black', cmap=plt.cm.get_cmap('Blues',  preprocessing_Data.SmoteDfs[ preprocessing_Data.selectCell].nunique()),
                         alpha=0.7)
 
         cb = plt.colorbar(label='class')
@@ -93,7 +93,7 @@ class OptionWindow(QDialog):
         plt.yticks(fontsize=8)
 
 
-        plt.subplots_adjust(left=0.1, bottom=0.16, top=0.9, wspace=0.35)
+        plt.subplots_adjust(left=0.05, bottom=0.16, top=0.9, wspace=0.3)
 
         self.canvas.draw()
 
