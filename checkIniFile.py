@@ -133,8 +133,8 @@ def writeIni(self, par, bg, size, font, tool_pos, tool_style,
 def writeIniLast(self):
     config = configparser.ConfigParser()
     config.read('setting.ini')
-    config['STYLE']['width'] = str(self.frameGeometry().width())
-    config['STYLE']['height'] = str(self.frameGeometry().height())
+    config['STYLE']['width'] = str(self.frameGeometry().width()-2)
+    config['STYLE']['height'] = str(self.frameGeometry().height()-46)
     config['STYLE']['pos_x'] = str(self.x())
     config['STYLE']['pos_y'] = str(self.y())
     with open('setting.ini', 'w') as configfile:
