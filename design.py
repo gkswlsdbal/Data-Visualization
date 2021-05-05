@@ -293,14 +293,14 @@ def setMainStyle(self, color1, color4, font_family, font_size):
                                         QComboBox {background-color: white;"""
                                      """color: black;}
                               QComboBox::item {background: white; color: black}
-                              QComboBox::item:selected {background: %s; color: white}
-                              """ % (color4.name()))
-    self.secSortCombo.setStyleSheet("""
-                                    QComboBox {background-color: white;"""
-                                    """ color: black;}
-                                QComboBox::item {background: white; color: black}
-                                QComboBox::item:selected {background: %s; color: white}
-                                """ % (color4.name()))
+                              QComboBox::item:selected {background: %s; color: black}
+                              """ % (color1.name()))
+#     self.secSortCombo.setStyleSheet("""
+#                                     QComboBox {background-color: white;"""
+#                                     """ color: black;}
+#                                 QComboBox::item {background: white; color: black}
+#                                 QComboBox::item:selected {background: %s; color: white}
+#                                 """ % (color4.name()))
     self.notshowBtn.setStyleSheet("background-color: white;")
     self.showBtn.setStyleSheet("background-color: white;")
     self.secColListLeftTitle.setStyleSheet(f"background-color: {color4.name()};")
