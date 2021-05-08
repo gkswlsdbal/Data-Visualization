@@ -39,6 +39,14 @@ def fileCheck(self, file):
             fileData.excelList.append(site[-1])
         elif ".csv" in site[-1]:
             fileData.csvList.append(site[-1])
+        else:  ##추가
+            QMessageBox.critical(self, 'Error',
+                                "xlsx 혹은 csv 파일만 올려주시기 바랍니다", QMessageBox.Ok)
+            fileData.fileLinks.pop()
+            self.FileList.takeItem(self.FileList.count()-1)
+            fileData.fileName.pop()
+            return
+        
         ft.draw(self, file)
 
 
