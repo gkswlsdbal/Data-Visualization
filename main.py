@@ -53,7 +53,10 @@ class WindowClass(QMainWindow, form_class):
         plt.rc('font', family=font_name)
 
         self.fig_sec = plt.figure(2)
-        self.fig_sec.set_size_inches(7.8, 3.5)
+        
+        ##변경
+        self.fig_sec.set_size_inches(7.8, 8)
+        ##
         self.fig_sec.subplots_adjust(left=0.125,
                                      bottom=0.1,
                                      right=0.9,
@@ -61,7 +64,11 @@ class WindowClass(QMainWindow, form_class):
                                      wspace=0.2,
                                      hspace=0.35)
         self.canvas_sec = FigureCanvas(self.fig_sec)
-        self.secGraphLayout.addWidget(self.canvas_sec)
+        ##변경
+        self.scroll = QScrollArea()
+        self.scroll.setWidget(self.canvas_sec)
+        self.secGraphLayout.addWidget(self.scroll)
+        ##
 
         self.secChartCombo.currentIndexChanged.connect(self.secChartComboChanged)
         self.showBtn.clicked.connect(self.secShowBtn)
