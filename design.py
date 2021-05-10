@@ -40,7 +40,7 @@ def selectJoinColor(self, bg, font_family, font_size):
     self.cellName2.setStyleSheet(f"background-color: rgb(255, 255, 255);")
 
 
-def selectFAbsorColor(self, bg, font_family, font_size):
+def setFAbsorColor(self, bg, font_family, font_size):
     c = Color()
     if bg == 'White':
         c.setWhite()
@@ -49,16 +49,12 @@ def selectFAbsorColor(self, bg, font_family, font_size):
     elif bg == 'Green':
         c.setGreen()
 
-    setFAbsorStyle(self, c.bg_color, font_family, font_size)
-
-
-def setFAbsorStyle(self, bg_color, font_family, font_size):
-    self.widget.setStyleSheet(f"background-color: {bg_color.name()};"
+    self.widget.setStyleSheet(f"background-color: {c.bg_color.name()};"
                               f"font: {font_size}pt '{font_family}';")
     self.FileList.setStyleSheet(f"background-color: white;")
     self.abList.setStyleSheet(f"background-color: white;")
     self.abList2.setStyleSheet(f"background-color: white;")
-    self.bottomWidget.setStyleSheet(f"background-color: {bg_color.name()};"
+    self.bottomWidget.setStyleSheet(f"background-color: {c.bg_color.name()};"
                                     f"color: white;")
     self.buttonBox.setStyleSheet("background-color: white;")
 
