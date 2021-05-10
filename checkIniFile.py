@@ -1,6 +1,5 @@
 import configparser
 import design as ds
-from PyQt5.QtGui import *
 
 
 # 프로그램이 시작했을 때 처음 한번만 사용합니다.
@@ -102,6 +101,7 @@ def chckInitFst(self):
                        config['STYLE']['table_row_color'],
                        config['STYLE']['table_colored_row'])
 
+
 def writeIni(self, par, bg, size, font, tool_pos, tool_style,
              table_grid, table_header_color, table_row_color, table_colored_row):
     config = configparser.ConfigParser()
@@ -127,14 +127,15 @@ def writeIni(self, par, bg, size, font, tool_pos, tool_style,
                        config['STYLE']['table_header_color'],
                        config['STYLE']['table_row_color'],
                        config['STYLE']['table_colored_row'])
-    ds.selectSettStyle(self, config['STYLE']['theme'],
+    ds.setSettStyle(self, config['STYLE']['theme'],
                        config['STYLE']['font_family'], config['STYLE']['font_size'])
+
 
 def writeIniLast(self):
     config = configparser.ConfigParser()
     config.read('setting.ini')
-    config['STYLE']['width'] = str(self.frameGeometry().width()-2)
-    config['STYLE']['height'] = str(self.frameGeometry().height()-46)
+    config['STYLE']['width'] = str(self.frameGeometry().width() - 2)
+    config['STYLE']['height'] = str(self.frameGeometry().height() - 46)
     config['STYLE']['pos_x'] = str(self.x())
     config['STYLE']['pos_y'] = str(self.y())
     with open('setting.ini', 'w') as configfile:
@@ -145,11 +146,8 @@ def writeIniLast(self):
 def chckIniSett(self):
     config = configparser.ConfigParser()
     config.read('setting.ini')
-    ds.selectSettStyle(self, config['STYLE']['theme'],
+    ds.setSettStyle(self, config['STYLE']['theme'],
                        config['STYLE']['font_family'], config['STYLE']['font_size'])
-    # ds.setSett(config['STYLE']['tool_pos'], config['STYLE']['tool_style'],
-    #            config['STYLE']['table_grid'], config['STYLE']['table_header_color'],
-    #            config['STYLE']['table_row_color'], config['STYLE']['table_colored_row'])
 
 
 # file absorptoin 창이 뜰 때 한번만 사용합니다.
@@ -157,7 +155,8 @@ def chckIniFAbsor(self):
     config = configparser.ConfigParser()
     config.read('setting.ini')
     ds.setFAbsorColor(self, config['STYLE']['theme'],
-                         config['STYLE']['font_family'], config['STYLE']['font_size'])
+                      config['STYLE']['font_family'], config['STYLE']['font_size'])
+
 
 # cell absorptoin 창이 뜰 때 한번만 사용합니다.
 def chckIniCAbsor(self):
@@ -166,9 +165,10 @@ def chckIniCAbsor(self):
     ds.setCAbsorColor(self, config['STYLE']['theme'],
                          config['STYLE']['font_family'], config['STYLE']['font_size'])
 
+
 # join 창이 뜰 때 한번만 사용합니다.
 def chckIniJoin(self):
     config = configparser.ConfigParser()
     config.read('setting.ini')
-    ds.selectJoinColor(self, config['STYLE']['theme'],
-                         config['STYLE']['font_family'], config['STYLE']['font_size'])
+    ds.setJoinColor(self, config['STYLE']['theme'],
+                       config['STYLE']['font_family'], config['STYLE']['font_size'])
