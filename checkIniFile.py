@@ -163,7 +163,7 @@ def chckIniFAbsor(self):
 def chckIniCAbsor(self):
     config = configparser.ConfigParser()
     config.read('setting.ini')
-    ds.selectCAbsorColor(self, config['STYLE']['theme'],
+    ds.setCAbsorColor(self, config['STYLE']['theme'],
                          config['STYLE']['font_family'], config['STYLE']['font_size'])
 
 # join 창이 뜰 때 한번만 사용합니다.
