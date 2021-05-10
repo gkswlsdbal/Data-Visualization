@@ -156,7 +156,7 @@ def chckIniSett(self):
 def chckIniFAbsor(self):
     config = configparser.ConfigParser()
     config.read('setting.ini')
-    ds.selectFAbsorColor(self, config['STYLE']['theme'],
+    ds.setFAbsorColor(self, config['STYLE']['theme'],
                          config['STYLE']['font_family'], config['STYLE']['font_size'])
 
 # cell absorptoin 창이 뜰 때 한번만 사용합니다.
