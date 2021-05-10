@@ -23,7 +23,7 @@ class Color:
         self.separate_color = QColor(142, 174, 109)
 
 
-def selectJoinColor(self, bg, font_family, font_size):
+def setJoinColor(self, bg, font_family, font_size):
     c = Color()
     if bg == 'White':
         c.setWhite()
@@ -59,7 +59,7 @@ def setFAbsorColor(self, bg, font_family, font_size):
     self.buttonBox.setStyleSheet("background-color: white;")
 
 
-def selectCAbsorColor(self, bg, font_family, font_size):
+def setCAbsorColor(self, bg, font_family, font_size):
     c = Color()
     if bg == 'White':
         c.setWhite()
@@ -68,33 +68,29 @@ def selectCAbsorColor(self, bg, font_family, font_size):
     elif bg == 'Green':
         c.setGreen()
 
-    setCAbsorStyle(self, c.bg_color, c.label_color, font_family, font_size)
-
-
-def setCAbsorStyle(self, bg_color, label_color, font_family, font_size):
-    self.setStyleSheet(f"background-color: {bg_color.name()};"
+    self.setStyleSheet(f"background-color: {c.bg_color.name()};"
                        f"font: {font_size}pt '{font_family}';")
     self.comboBox.setStyleSheet("""QComboBox {background-color: white;}
                                    QComboBox::item {background-color: white;}
                                    QComboBox::item:selected
                                    {background-color: %s; color: black;}"""
-                                % (bg_color.name()))
+                                % (c.bg_color.name()))
     self.listWidget.setStyleSheet("background-color: white;"
                                   "color: black;")
     self.slctListWidget.setStyleSheet("background-color: white;"
                                       "color: black;")
     self.colLabel.setAlignment(Qt.AlignCenter)
     self.colLabel.setStyleSheet("border: 1px solid lightgray;"
-                                f"background-color: {label_color.name()};")
+                                f"background-color: {c.label_color.name()};")
     self.slctColLabel.setAlignment(Qt.AlignCenter)
     self.slctColLabel.setStyleSheet("border: 1px solid lightgray;"
-                                    f"background-color: {label_color.name()};")
-    self.topWidget.setStyleSheet(f"border: 1px solid {label_color.name};")
+                                    f"background-color: {c.label_color.name()};")
+    self.topWidget.setStyleSheet(f"border: 1px solid {c.label_color.name};")
     self.buttonBox.setStyleSheet("background-color: white;")
 
 
 ###setting UI###
-def selectSettStyle(self, bg, font_family, font_size):
+def setSettStyle(self, bg, font_family, font_size):
     c = Color()
     if bg == 'White':
         c.setWhite()
@@ -103,20 +99,8 @@ def selectSettStyle(self, bg, font_family, font_size):
     elif bg == 'Green':
         c.setGreen()
 
-    setSettStyle(self, c.bg_color, c.separate_color, font_size)
-    self.fontCombo.setCurrentFont(QFont(font_family))
-    self.sizeCombo.setCurrentText(font_size)
-
-
-# 1: 배경, 2: 폰트색, 3: 확인취소버튼 분리줄 색
-def setSettStyle(self, bg_color, separate_color, font_size):
-    import configparser
-    config = configparser.ConfigParser()
-    config.read('setting.ini')
-
     self.setStyleSheet(f"font: {font_size}pt;"
                        f"color: black;")
-
     self.optionTreeWid.setStyleSheet("""QTreeWidget {
                                             background-color: white;
                                             border: 0px;
@@ -125,9 +109,9 @@ def setSettStyle(self, bg_color, separate_color, font_size):
                                         QTreeWidget::item:selected {
                                             background-color: %s;
                                             color: black; }
-                                     """ % (bg_color.name()))
-    self.topWidget.setStyleSheet(f"background-color: {bg_color.name()};"
-                                 f"border: 2px solid {separate_color.name()};"
+                                     """ % (c.bg_color.name()))
+    self.topWidget.setStyleSheet(f"background-color: {c.bg_color.name()};"
+                                 f"border: 2px solid {c.separate_color.name()};"
                                  "border-top-color: transparent;"
                                  "border-left-color: transparent;"
                                  "border-right-color: transparent;")
@@ -146,7 +130,7 @@ def setSettStyle(self, bg_color, separate_color, font_size):
                                  """)
     self.toolPosGroup.setStyleSheet(f"border: 2px solid white;")
     self.toolStyGroup.setStyleSheet(f"border: 2px solid white;")
-    self.bottomWidget.setStyleSheet(f"background-color: {bg_color.name()};")
+    self.bottomWidget.setStyleSheet(f"background-color: {c.bg_color.name()};")
     self.bgcLabel.setStyleSheet("border: transparent;")
     self.sizeLabel.setStyleSheet("border: transparent;")
     self.fontLabel.setStyleSheet("border: transparent;")
@@ -167,6 +151,8 @@ def setSettStyle(self, bg_color, separate_color, font_size):
     self.stackWidget.setStyleSheet("border: transparent;")
     self.buttonBox.setStyleSheet("background-color: white;")
 
+    self.fontCombo.setCurrentFont(QFont(font_family))
+    self.sizeCombo.setCurrentText(font_size)
 
 ###Main UI###
 def selectMainStyle(self, bg, font_family, font_size, tool_pos, tool_style,
