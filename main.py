@@ -67,6 +67,7 @@ class WindowClass(QMainWindow, form_class):
         ##변경
         self.scroll = QScrollArea()
         self.scroll.setWidget(self.canvas_sec)
+        self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.secGraphLayout.addWidget(self.scroll)
         ##
 
