@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
+from matplotlib import colors
 
 import checkIniFile as ini
 
@@ -24,14 +25,16 @@ class SettingDialog(QDialog):
         setUI = 'Setting.ui'
         loadUi(setUI, self)
 
+        ##변경
         import configparser
         config = configparser.ConfigParser()
         config.read('setting.ini')
 
         # style화면
         self.bgcLabel = QLabel('Color Theme:')
-        # self.bgcLabel.setFixedSize(150, 30)
+        self.bgcLabel.setFixedSize(150, 30)
         self.bgcCombo = QComboBox()
+        self.bgcCombo.addItem('Black')
         self.bgcCombo.addItem('White')
         self.bgcCombo.addItem('Blue')
         self.bgcCombo.addItem('Green')
