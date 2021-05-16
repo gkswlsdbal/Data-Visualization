@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1415</width>
+    <height>830</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QGridLayout" name="mainLayout">
+   <item row="0" column="0">
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <widget class="QTreeWidget" name="fileTreeWidget">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <attribute name="headerVisible">
+       <bool>false</bool>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>1</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QWidget" name="verticalLayoutWidget">
+      <layout class="QGridLayout" name="midLayout" rowstretch="0" rowminimumheight="0">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QSplitter" name="midSplitter">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="handleWidth">
+          <number>9</number>
+         </property>
+         <widget class="QWidget" name="formLayoutWidget">
+          <layout class="QFormLayout" name="colRowLabelLayout">
+           <property name="formAlignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+           <property name="horizontalSpacing">
+            <number>10</number>
+           </property>
+           <property name="verticalSpacing">
+            <number>7</number>
+           </property>
+           <property name="leftMargin">
+            <number>10</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QLabel" name="colLabel">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>28</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>열</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QListWidget" name="colList">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="dragEnabled">
+              <bool>true</bool>
+             </property>
+             <property name="dragDropMode">
+              <enum>QAbstractItemView::DragDrop</enum>
+             </property>
+             <property name="defaultDropAction">
+              <enum>Qt::MoveAction</enum>
+             </property>
+             <property name="flow">
+              <enum>QListView::LeftToRight</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QListWidget" name="rowList">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="dragEnabled">
+              <bool>true</bool>
+             </property>
+             <property name="dragDropMode">
+              <enum>QAbstractItemView::DragDrop</enum>
+             </property>
+             <property name="defaultDropAction">
+              <enum>Qt::MoveAction</enum>
+             </property>
+             <property name="flow">
+              <enum>QListView::LeftToRight</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="rowLabel">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>28</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>행</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="chartWidget" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <layout class="QGridLayout" name="chartLayout">
+           <property name="leftMargin">
+            <number>13</number>
+           </property>
+           <property name="topMargin">
+            <number>13</number>
+           </property>
+           <property name="horizontalSpacing">
+            <number>13</number>
+           </property>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="gridLayoutWidget">
+      <layout class="QGridLayout" name="rightLayout">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="allClearBtn">
+         <property name="text">
+          <string>All clear</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="saveBtn">
+         <property name="text">
+          <string>Save</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QToolBox" name="toolBox">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="chartBox">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>236</width>
+            <height>646</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>chart</string>
+          </attribute>
+          <layout class="QFormLayout" name="formLayout_2">
+           <item row="1" column="0" colspan="2">
+            <widget class="QComboBox" name="valueCombo">
+             <item>
+              <property name="text">
+               <string>합계</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>평균</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>최대</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>최소</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="0" column="0" colspan="2">
+            <widget class="QComboBox" name="shapeCombo">
+             <item>
+              <property name="text">
+               <string>가로막대 그래프</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>세로막대 그래프</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>꺽은선 그래프</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>원형 그래프</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>거품형 그래프</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>분산형 그래프</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="2" column="0" colspan="2">
+            <widget class="QGroupBox" name="legendGroup">
+             <property name="title">
+              <string>범례</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+             <layout class="QFormLayout" name="formLayout">
+              <item row="0" column="0">
+               <widget class="QRadioButton" name="legendUpper">
+                <property name="text">
+                 <string>위쪽</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QRadioButton" name="legendLower">
+                <property name="text">
+                 <string>아래쪽</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QRadioButton" name="legendLeft">
+                <property name="text">
+                 <string>왼쪽</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QRadioButton" name="legendRight">
+                <property name="text">
+                 <string>오른쪽</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QRadioButton" name="legendUpperR">
+                <property name="text">
+                 <string>오른쪽 위</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="predictBox">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>236</width>
+            <height>646</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>predict</string>
+          </attribute>
+          <layout class="QFormLayout" name="formLayout_3">
+           <property name="verticalSpacing">
+            <number>25</number>
+           </property>
+           <item row="2" column="0">
+            <layout class="QFormLayout" name="valLayout">
+             <property name="horizontalSpacing">
+              <number>14</number>
+             </property>
+             <property name="verticalSpacing">
+              <number>15</number>
+             </property>
+             <item row="3" column="0">
+              <widget class="QLabel" name="precision">
+               <property name="text">
+                <string>정밀도:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="accracy">
+               <property name="text">
+                <string>정확도:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLabel" name="scoreValLabel">
+               <property name="text">
+                <string>score</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLabel" name="precisionValLabel">
+               <property name="text">
+                <string>precision</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLabel" name="recallValLabel">
+               <property name="text">
+                <string>recall</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QLabel" name="accuracyValLabel">
+               <property name="text">
+                <string>accracy</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="recall">
+               <property name="text">
+                <string>재현도:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="f1score">
+               <property name="text">
+                <string>f1-score:</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="1" column="0">
+            <widget class="QRadioButton" name="knnRadio">
+             <property name="text">
+              <string>k-최근접 이웃</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QRadioButton" name="rogisticRadio">
+             <property name="text">
+              <string>로지트식 회귀</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -12,6 +12,7 @@ import function
 import preprocessing
 import ColumnChart_function as ccf
 import checkIniFile
+import chartPrediction
 
 
 form_class = uic.loadUiType('ProjectUI.ui')[0]
@@ -54,22 +55,18 @@ class WindowClass(QMainWindow, form_class):
 
         self.fig_sec = plt.figure(2)
         
-        ##변경
-        self.fig_sec.set_size_inches(7.8, 8)
-        ##
+        self.fig_sec.set_size_inches(8, 8)
         self.fig_sec.subplots_adjust(left=0.125,
                                      bottom=0.1,
                                      right=0.9,
                                      top=0.9,
-                                     wspace=0.2,
+                                     wspace=0.25,
                                      hspace=0.35)
         self.canvas_sec = FigureCanvas(self.fig_sec)
-        ##변경
         self.scroll = QScrollArea()
         self.scroll.setWidget(self.canvas_sec)
         self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.secGraphLayout.addWidget(self.scroll)
-        ##
 
         self.secChartCombo.currentIndexChanged.connect(self.secChartComboChanged)
         self.showBtn.clicked.connect(self.secShowBtn)
@@ -115,7 +112,13 @@ class WindowClass(QMainWindow, form_class):
         preprocessAction.setStatusTip('preprocessing')
         preprocessAction.triggered.connect(self.preprocessAction)
 
+        chartAction = QAction(QIcon('img/chartPop.png'), 'Chart', self)
+        chartAction.setStatusTip('Chart')
+        chartAction.triggered.connect(self.chartAction)
+
+
         self.toolbar = self.addToolBar('toolBar')
+        self.toolbar.addAction(chartAction)
         self.toolbar.addAction(saveAction)
         self.toolbar.addAction(preprocessAction)
         self.toolbar.addAction(fAbsorAction)
@@ -129,6 +132,14 @@ class WindowClass(QMainWindow, form_class):
         checkIniFile.chckInitFst(self)
 
     def closeEvent(self, event):
+        # # 창이 닫힐때 진짜 닫을 껀지 물어봅니다.
+        # reply = QMessageBox.question(self, 'Message',"종료하시겠습니까?",
+        #                                        QMessageBox.Yes | QMessageBox.No,)
+        # if reply == QMessageBox.Yes:
+        #     event.accept()
+        # else:
+        #     event.ignore()
+
         checkIniFile.writeIniLast(self)
 
     def contextMenu(self):
@@ -145,6 +156,9 @@ class WindowClass(QMainWindow, form_class):
 
         contextMenu.exec_(QCursor().pos())
 
+    def chartAction(self):
+        chartPrediction.ChartDialog(self)
+
     def eventFilter(self, object, event):
         if object is self:
             ev.eventFilter(self, object, event)
@@ -154,7 +168,6 @@ class WindowClass(QMainWindow, form_class):
         ev.btnClick(self)
 
     def fileClick(self):
-
         self.cellFlag = False
         self.fig.clear()
         self.canvas.draw()
@@ -176,7 +189,6 @@ class WindowClass(QMainWindow, form_class):
     def newSaves(self):
         ev.newSave(self)
 
-    # 추가
     def UISetting(self):
         ev.openSettingWindow(self)
         self.actionSetting.setEnabled(False)
@@ -208,15 +220,6 @@ class WindowClass(QMainWindow, form_class):
 
     def move_cursor(self, event):
         chart_function.move_cursor(self, event)
-
-    # 창이 닫힐때 진짜 닫을 껀지 물어봅니다.
-    # def closeEvent(self, event):
-    #     reply = QtWidgets.QMessageBox.question(self, 'Message',"종료하시겠습니까?",
-    #                                        QMessageBox.Yes | QMessageBox.No,)
-    #     if reply == QMessageBox.Yes:
-    #         event.accept()
-    #     else:
-    #         event.ignore()
 
     def secChartComboChanged(self):
         ccf.secChartComboChanged(self)
