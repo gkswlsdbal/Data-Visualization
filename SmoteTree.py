@@ -4,8 +4,7 @@ import SelectColumns
 import preprocessing_Data
 
 
-
-# 중복 행 제거
+# 불균형한 결과값 처리
 def function_4(self):
     preprocessing_Data.process = 4
     self.treeWidget_2.clear()
@@ -133,7 +132,6 @@ def function_4(self):
         "margin-right: 15px;")
     itemChild9 = QTreeWidgetItem(itemTop1)
     self.treeWidget_2.setItemWidget(itemChild9, 0, LineEdit3)
-
 
 def btnClick(self):
     SelectColumns.OptionWindow(self)

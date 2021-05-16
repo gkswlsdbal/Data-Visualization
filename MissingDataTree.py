@@ -208,7 +208,6 @@ def indexChanged(_str, index):
             checkBox.toggle()
         preprocessing_Data.checkFlag = False
 
-
     else:
         LineEdit.clear()
         LineEdit.setDisabled(True)

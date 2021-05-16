@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1500</width>
-    <height>750</height>
+    <width>1442</width>
+    <height>751</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -80,7 +80,7 @@ border-bottom-color: rgb(182, 182, 182);</string>
     <rect>
      <x>250</x>
      <y>90</y>
-     <width>1201</width>
+     <width>1161</width>
      <height>621</height>
     </rect>
    </property>
@@ -439,8 +439,8 @@ border-color:rgb(255,255,255);
    </property>
    <property name="geometry">
     <rect>
-     <x>1440</x>
-     <y>700</y>
+     <x>1380</x>
+     <y>710</y>
      <width>61</width>
      <height>48</height>
     </rect>
@@ -477,7 +477,7 @@ border-color:rgb(255,255,255);
    </property>
    <property name="geometry">
     <rect>
-     <x>1440</x>
+     <x>1370</x>
      <y>710</y>
      <width>61</width>
      <height>41</height>

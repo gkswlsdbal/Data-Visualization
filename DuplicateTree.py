@@ -1,15 +1,6 @@
-from PyQt5.QtCore import QSize
-from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import *
-from PyQt5 import uic
-
 import SelectColumns
-import data, fileData
-import design
-import MissingDataTree
 import preprocessing_Data
-import processChart
-import process_event
 
 
 # 중복 행 제거

@@ -2,6 +2,8 @@ from PyQt5 import uic, QtGui
 from matplotlib import style, gridspec
 from matplotlib.backends.backend_template import FigureCanvas
 import missingno as msno
+
+import DuplicatePR
 import fileData
 import preprocessing_Data
 from PyQt5.QtWidgets import *
@@ -33,7 +35,7 @@ class OptionWindow(QDialog):
         plt.style.use('fivethirtyeight')
         plt.rc('font', family='Malgun Gothic')
         plt.rc('axes', unicode_minus=False)
-        self.fig = plt.figure(2)
+        self.fig = plt.figure(2,figsize=(15,8))
         self.canvas = FigureCanvas(self.fig)
         self.gridLayout.addWidget(self.canvas)
         self.show()
@@ -54,7 +56,10 @@ class OptionWindow(QDialog):
         plt.yticks(fontsize=8)
 
         ax2 = self.fig.add_subplot(spec[1])
-        df_missing = preprocessing_Data.processingDfs.isna().sum()
+        if preprocessing_Data.completeFlag:
+            df_missing = preprocessing_Data.completeDfs.isna().sum()
+        else:
+            df_missing = preprocessing_Data.processingDfs.isna().sum()
         df_missing.plot.bar(color='gray', rot=0, ax=ax2)
         plt.title("결측치 제거 Bar", fontsize=12)
         plt.xticks(rotation=90,fontsize=8)
@@ -75,7 +80,10 @@ class OptionWindow(QDialog):
         plt.xticks(rotation=45)
         plt.xlabel("결측치 Matrix")
         ax3 = self.fig.add_subplot(spec[1])
-        msno.matrix(preprocessing_Data.processingDfs, fontsize=8, ax=ax3)
+        if preprocessing_Data.completeFlag:
+            msno.matrix(preprocessing_Data.completeDfs, fontsize=8, ax=ax3)
+        else:
+            msno.matrix(preprocessing_Data.processingDfs, fontsize=8, ax=ax3)
         plt.xticks(rotation=45)
         plt.xlabel("결측치 제거 Matrix")
         plt.subplots_adjust(left=0.04, bottom=0.2, right=0.9,top=0.7, wspace=0.3)
@@ -108,7 +116,10 @@ class OptionWindow(QDialog):
         plt.xticks(rotation=45)
         plt.xlabel("결측치 dendrogram")
         ax3 = self.fig.add_subplot(spec[1])
-        msno.dendrogram(preprocessing_Data.processingDfs, fontsize=8, ax=ax3)
+        if preprocessing_Data.completeFlag:
+            msno.dendrogram(preprocessing_Data.completeDfs, fontsize=8, ax=ax3)
+        else:
+            msno.dendrogram(preprocessing_Data.processingDfs, fontsize=8, ax=ax3)
         plt.xticks(rotation=45)
         plt.xlabel("결측치 제거 dendrogram")
         plt.subplots_adjust(left=0.04,bottom=0.2,top=0.7, wspace=0.2)
@@ -120,7 +131,10 @@ class OptionWindow(QDialog):
         spec = gridspec.GridSpec(ncols=1, nrows=1,
                                  )
         ax3 = self.fig.add_subplot(spec[0])
-        msno.heatmap(preprocessing_Data.processingDfs, fontsize=8, ax=ax3)
+        if preprocessing_Data.completeFlag:
+            msno.heatmap(preprocessing_Data.completeDfs, fontsize=8, ax=ax3)
+        else:
+            msno.heatmap(preprocessing_Data.processingDfs, fontsize=8, ax=ax3)
         plt.xticks(rotation=90, fontsize=6)
         plt.yticks(fontsize=8)
         plt.title("결측치 제거 HeatMap", fontsize=15)

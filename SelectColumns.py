@@ -1,12 +1,14 @@
 from PyQt5 import uic
-from qtpy.QtCore import Qt
 
+import ClipTree
+import NormalizeTree
 import SmoteTree
 import fileData
 import preprocessing_Data
 from PyQt5.QtWidgets import *
 import MissingDataTree
 import DuplicateTree
+
 
 form_class1 = uic.loadUiType('SelectColumnsUI.ui')[0]
 
@@ -21,17 +23,20 @@ class OptionWindow(QDialog):
         uic.loadUi(option_ui, self)
         self.listWidget.clear()
         self.listWidget_2.clear()
-        if preprocessing_Data.completeFlag:
-            fileIndex = preprocessing_Data.completeName.index(preprocessing_Data.filename)
-        else:
-            fileIndex = fileData.fileName.index(preprocessing_Data.filename)
+        global col
+        col = 0
         global count
         count = 0
-        global col
-        col = len(fileData.dfs[fileIndex].columns)
-        title = list(fileData.dfs[fileIndex].columns)
-        for i in range(0, col):
-            self.listWidget.addItem(str(title[i]))
+        if preprocessing_Data.NormalFlag:
+            col = len(preprocessing_Data.processCell)
+            for i in range(0, col):
+                self.listWidget.addItem(preprocessing_Data.processCell[i])
+        else:
+            fileIndex = fileData.fileName.index(preprocessing_Data.filename)
+            col = len(fileData.dfs[fileIndex].columns)
+            title = list(fileData.dfs[fileIndex].columns)
+            for i in range(0, col):
+                self.listWidget.addItem(str(title[i]))
         self.label_4.setText("  %i columns available" % col)
         self.pushButton.clicked.connect(self.btnClick1)
         self.pushButton_2.clicked.connect(self.btnClick2)
@@ -54,7 +59,7 @@ class OptionWindow(QDialog):
 
     def btnClick2(self):
         if self.Flag:
-            item = self.listWidget_2.takeItem(self.listWidget.currentRow())
+            item = self.listWidget_2.takeItem(self.listWidget_2.currentRow())
             self.listWidget.addItem(item)
             global col
             col += 1
@@ -69,13 +74,17 @@ class OptionWindow(QDialog):
         item = ""
         for i in range(0, len(self.listWidget_2)):
             preprocessing_Data.selectCell.append(self.listWidget_2.item(i).text())
-            item += self.listWidget_2.item(i).text()+"\n "
+            item += self.listWidget_2.item(i).text()+" "
         if preprocessing_Data.process == 1:
             MissingDataTree.Label2.setText(' Selected columns:\n '+item+'\n')
         elif preprocessing_Data.process == 2:
             DuplicateTree.Label2.setText(' Selected columns:\n ' + item + '\n')
+        elif preprocessing_Data.process == 3:
+            ClipTree.Label6.setText(' Selected columns:\n ' + item + '\n')
         elif preprocessing_Data.process == 4:
             SmoteTree.Label2.setText(' Selected columns:\n ' + item + '\n')
+        elif preprocessing_Data.process == 5:
+            NormalizeTree.Label2.setText(' Selected columns:\n ' + item + '\n')
 
         self.close()
 

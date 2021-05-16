@@ -5,7 +5,7 @@ from PIL.ImageQt import rgb
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor
-from PyQt5.QtWidgets import QListWidgetItem, QLabel
+from PyQt5.QtWidgets import QListWidgetItem, QLabel, QListWidget
 
 import data, fileData
 import numpy as np
@@ -155,6 +155,8 @@ def tableChange(self):
 
 
 def fileInfo(self, dfs, index):
+    self.listWidget.scrollToTop()
+    self.listWidget_2.scrollToTop()
     self.listWidget.clear()
     self.listWidget.addItem("")
     Label = QLabel(' rows         columns')
@@ -207,6 +209,8 @@ def fileInfo(self, dfs, index):
 
 
 def processInfo(self, dfs):
+    self.listWidget.scrollToTop()
+    self.listWidget_2.scrollToTop()
     self.listWidget_2.clear()
     self.listWidget_2.addItem("")
     Label = QLabel(' rows         columns')
@@ -261,7 +265,9 @@ def processInfo(self, dfs):
         self.listWidget_2.addItem(str("Missing: ") + str(countEmptyRow(coltable)))
 
 
-def SmoteInfo(self, dfs):
+def SmoteInfo(self, dfs, dfs2):
+    self.listWidget.scrollToTop()
+    self.listWidget_2.scrollToTop()
     self.listWidget.clear()
     self.listWidget.addItem("")
     Label = QLabel(' rows         columns')
@@ -290,7 +296,7 @@ def SmoteInfo(self, dfs):
     Label.setFont(QtGui.QFont("맑은 고딕", 12))
     item1 = QListWidgetItem(self.listWidget_2)
     self.listWidget_2.setItemWidget(item1, Label)
-    Label2 = QLabel(" " + str(len(dfs)) + "              " + str(len(dfs.columns)))
+    Label2 = QLabel(" " + str(len(dfs2)) + "              " + str(len(dfs2.columns)))
     Label2.setFont(QtGui.QFont("맑은 고딕", 12))
     Label.setFont(QtGui.QFont("맑은 고딕", 12))
     item2 = QListWidgetItem(self.listWidget_2)
@@ -309,3 +315,5 @@ def compare(self):
                 self.listWidget_2.item(i).setBackground(QColor('#BBD1E8'))
         else:
             self.listWidget_2.item(i).setBackground(QColor('#BBD1E8'))
+
+

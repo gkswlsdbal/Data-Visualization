@@ -23,117 +23,111 @@ def MissingData(self):
     if preprocessing_Data.comboBoxIndex == 0 or preprocessing_Data.comboBoxIndex == "0":
         if preprocessing_Data.selectCell:
             try:
-                processingDfs2 = fileData.dfs[fileIndex]
-                processingDfs = fileData.dfs[fileIndex][preprocessing_Data.selectCell].fillna(
+                processingDfs2 = preprocessing_Data.completeDfs
+                processingDfs = preprocessing_Data.completeDfs[preprocessing_Data.selectCell].fillna(
                     float(preprocessing_Data.cleanValue))
             except:
-                processingDfs2 = fileData.dfs[fileIndex]
-                processingDfs = fileData.dfs[fileIndex][preprocessing_Data.selectCell].fillna(
+                processingDfs2 = preprocessing_Data.completeDfs
+                processingDfs = preprocessing_Data.completeDfs[preprocessing_Data.selectCell].fillna(
                     preprocessing_Data.cleanValue)
 
             preprocessing_Data.processingDfs = processingDfs2.combine_first(processingDfs)
-            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
+            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(preprocessing_Data.completeDfs)]
         else:
 
-            preprocessing_Data.processingDfs = fileData.dfs[fileIndex].fillna(float(preprocessing_Data.cleanValue))
+            preprocessing_Data.processingDfs = preprocessing_Data.completeDfs.fillna(float(preprocessing_Data.cleanValue))
 
     # 평균값처리
     if preprocessing_Data.comboBoxIndex == 1:
 
         if preprocessing_Data.selectCell:
             if preprocessing_Data.checkFlag:
-                processingDfs = fileData.dfs[fileIndex][preprocessing_Data.selectCell].fillna(
-                    round(fileData.dfs[fileIndex].mean(),1))
+                processingDfs = preprocessing_Data.completeDfs[preprocessing_Data.selectCell].fillna(
+                    round(preprocessing_Data.completeDfs.mean(),1))
                 imputer = SimpleImputer(strategy="most_frequent")
-                processingDfs2 = pd.DataFrame(imputer.fit_transform(fileData.dfs[fileIndex]),
-                                              columns=fileData.dfs[fileIndex].columns)
+                processingDfs2 = pd.DataFrame(imputer.fit_transform(preprocessing_Data.completeDfs),
+                                              columns=preprocessing_Data.completeDfs.columns)
                 # 덮어 쓰기
                 preprocessing_Data.processingDfs = processingDfs2.combine_first(processingDfs)
-                preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
+                preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(preprocessing_Data.completeDfs)]
             else:
-                processingDfs = fileData.dfs[fileIndex][preprocessing_Data.selectCell].fillna(
-                    round(fileData.dfs[fileIndex].mean(),1))
-                processingDfs2 = fileData.dfs[fileIndex]
+                processingDfs = preprocessing_Data.completeDfs[preprocessing_Data.selectCell].fillna(
+                    round(preprocessing_Data.completeDfs.mean(),1))
+                processingDfs2 = preprocessing_Data.completeDfs
                 preprocessing_Data.processingDfs = processingDfs2.combine_first(processingDfs)
-                preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
+                preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(preprocessing_Data.completeDfs)]
         else:
             if preprocessing_Data.checkFlag:
-                processingDfs = fileData.dfs[fileIndex].fillna(round(fileData.dfs[fileIndex].mean(),1))
+                processingDfs = preprocessing_Data.completeDfs.fillna(round(preprocessing_Data.completeDfs.mean(),1))
                 imputer = SimpleImputer(strategy="most_frequent")
-                processingDfs2 = pd.DataFrame(imputer.fit_transform(fileData.dfs[fileIndex]),
-                                              columns=fileData.dfs[fileIndex].columns)
+                processingDfs2 = pd.DataFrame(imputer.fit_transform(preprocessing_Data.completeDfs),
+                                              columns=preprocessing_Data.completeDfs.columns)
                 # 덮어 쓰기
                 preprocessing_Data.processingDfs = processingDfs.combine_first(processingDfs2)
-                preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
+                preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(preprocessing_Data.completeDfs)]
             else:
-                preprocessing_Data.processingDfs = fileData.dfs[fileIndex].fillna(round(fileData.dfs[fileIndex].mean(),1))
+                preprocessing_Data.processingDfs = preprocessing_Data.completeDfs.fillna(round(preprocessing_Data.completeDfs.mean(),1))
 
     # 중앙값처리
     if preprocessing_Data.comboBoxIndex == 2:
         if preprocessing_Data.selectCell:
             if preprocessing_Data.checkFlag:
-                processingDfs = fileData.dfs[fileIndex][preprocessing_Data.selectCell].fillna(
-                    fileData.dfs[fileIndex].median())
+                processingDfs = preprocessing_Data.completeDfs[preprocessing_Data.selectCell].fillna(
+                    preprocessing_Data.completeDfs.median())
                 imputer = SimpleImputer(strategy="most_frequent")
-                processingDfs2 = pd.DataFrame(imputer.fit_transform(fileData.dfs[fileIndex]),
-                                              columns=fileData.dfs[fileIndex].columns)
+                processingDfs2 = pd.DataFrame(imputer.fit_transform(preprocessing_Data.completeDfs),
+                                              columns=preprocessing_Data.completeDfs.columns)
                 # 덮어 쓰기
                 preprocessing_Data.processingDfs = processingDfs2.combine_first(processingDfs)
-                preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
+                preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(preprocessing_Data.completeDfs)]
             else:
-                processingDfs = fileData.dfs[fileIndex][preprocessing_Data.selectCell].fillna(
-                    fileData.dfs[fileIndex].median())
-                processingDfs2 = fileData.dfs[fileIndex]
+                processingDfs = preprocessing_Data.completeDfs[preprocessing_Data.selectCell].fillna(
+                    preprocessing_Data.completeDfs.median())
+                processingDfs2 = preprocessing_Data.completeDfs
                 preprocessing_Data.processingDfs = processingDfs2.combine_first(processingDfs)
-                preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
+                preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(preprocessing_Data.completeDfs)]
         else:
             if preprocessing_Data.checkFlag:
-                processingDfs = fileData.dfs[fileIndex].fillna(fileData.dfs[fileIndex].median())
+                processingDfs = preprocessing_Data.completeDfs.fillna(preprocessing_Data.completeDfs.median())
                 imputer = SimpleImputer(strategy="most_frequent")
-                processingDfs2 = pd.DataFrame(imputer.fit_transform(fileData.dfs[fileIndex]),
-                                              columns=fileData.dfs[fileIndex].columns)
+                processingDfs2 = pd.DataFrame(imputer.fit_transform(preprocessing_Data.completeDfs),
+                                              columns=preprocessing_Data.completeDfs.columns)
                 # 덮어 쓰기
                 preprocessing_Data.processingDfs = processingDfs.combine_first(processingDfs2)
-                preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
+                preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(preprocessing_Data.completeDfs)]
             else:
-                preprocessing_Data.processingDfs = fileData.dfs[fileIndex].fillna(fileData.dfs[fileIndex].median())
+                preprocessing_Data.processingDfs = preprocessing_Data.completeDfs.fillna(preprocessing_Data.completeDfs.median())
 
     # 최빈값 처리
     if preprocessing_Data.comboBoxIndex == 3:
         if preprocessing_Data.selectCell:
             imputer = SimpleImputer(strategy="most_frequent")
-            processingDfs = pd.DataFrame(imputer.fit_transform(fileData.dfs[fileIndex][preprocessing_Data.selectCell]),
-                                         columns=fileData.dfs[fileIndex][preprocessing_Data.selectCell].columns)
-            preprocessing_Data.processingDfs = fileData.dfs[fileIndex].combine_first(processingDfs)
-            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
+            processingDfs = pd.DataFrame(imputer.fit_transform(preprocessing_Data.completeDfs[preprocessing_Data.selectCell]),
+                                         columns=preprocessing_Data.completeDfs[preprocessing_Data.selectCell].columns)
+            preprocessing_Data.processingDfs = preprocessing_Data.completeDfs.combine_first(processingDfs)
+            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(preprocessing_Data.completeDfs)]
         else:
             imputer = SimpleImputer(strategy="most_frequent")
-            preprocessing_Data.processingDfs = pd.DataFrame(imputer.fit_transform(fileData.dfs[fileIndex]),
-                                                            columns=fileData.dfs[fileIndex].columns)
+            preprocessing_Data.processingDfs = pd.DataFrame(imputer.fit_transform(preprocessing_Data.completeDfs),
+                                                            columns=preprocessing_Data.completeDfs.columns)
 
     # 행처리
     if preprocessing_Data.comboBoxIndex == 4:
-        preprocessing_Data.processingDfs = fileData.dfs[fileIndex].dropna(thresh=int(preprocessing_Data.cleanValue))
+        preprocessing_Data.processingDfs = preprocessing_Data.completeDfs.dropna(thresh=int(preprocessing_Data.cleanValue))
 
     # 열처리
     if preprocessing_Data.comboBoxIndex == 5:
-        preprocessing_Data.processingDfs = fileData.dfs[fileIndex].dropna(axis=1,
+        preprocessing_Data.processingDfs = preprocessing_Data.completeDfs.dropna(axis=1,
                                                                           thresh=int(preprocessing_Data.cleanValue))
 
     if self.process not in self.name_2.text():
         if self.process not in " ":
             self.process2 = " " + self.process + " "
             self.name_2.setText(self.process2)
-
-    if preprocessing_Data.itemCount == 1:
-        preprocessing_Data.completeFlag = False
-    else:
-        preprocessing_Data.completeFlag = True
-    if preprocessing_Data.completeFlag:
-        pass
-    else:
-        preprocessing_Data.completeDfs = preprocessing_Data.processingDfs.copy()
+    preprocessing_Data.completeDfs = preprocessing_Data.processingDfs.copy()
     preprocessing_Data.processCell.clear()
+
+
     col = len(preprocessing_Data.processingDfs.columns)
     title = list(preprocessing_Data.processingDfs.columns)
     for i in list(range(0, col)):
@@ -149,7 +143,6 @@ def MissingData(self):
     if "Missing" not in preprocessing_Data.label:
         preprocessing_Data.label += " Missing "
         self.label_2.setText(preprocessing_Data.label)
-    preprocessing_Data.applyFlag = False
 
 
 # 중복 행 제거
@@ -160,10 +153,10 @@ def DuplicateData(self):
     initial = False
     if preprocessing_Data.selectCell:
         initial = True
-        dfs = fileData.dfs[fileIndex].copy()
+        dfs = preprocessing_Data.completeDfs.copy()
         for i in preprocessing_Data.selectCell:
 
-            if fileData.dfs[fileIndex][i].dtypes == object:
+            if preprocessing_Data.completeDfs[i].dtypes == object:
                 text = i + "_String"
                 dropCell.append(text)
                 checkCell.append(text)
@@ -189,28 +182,21 @@ def DuplicateData(self):
         self.pushButton.setVisible(True)
         self.name_2.setVisible(True)
         self.listWidget_2.setVisible(True)
-        if preprocessing_Data.itemCount == 1:
-            preprocessing_Data.completeFlag = False
-        else:
-            preprocessing_Data.completeFlag = True
-        if preprocessing_Data.completeFlag:
-            pass
-        else:
-            preprocessing_Data.completeDfs = preprocessing_Data.processingDfs.copy()
+        preprocessing_Data.completeDfs = preprocessing_Data.processingDfs.copy()
         preprocessing_Data.processCell.clear()
+        preprocessing_Data.completeFlag = True
         if "Duplicate" not in preprocessing_Data.label:
             preprocessing_Data.label += " Duplicate "
             self.label_2.setText(preprocessing_Data.label)
-        preprocessing_Data.applyFlag = False
+
     else:
         pass
-
 
 # 이상치 제거
 def ClipData(self):
     fileIndex = fileData.fileName.index(preprocessing_Data.filename)
     global NumberDfs
-    preprocessing_Data.processingDfs = fileData.dfs[fileIndex].copy()
+    preprocessing_Data.processingDfs = preprocessing_Data.completeDfs.copy()
     dfs = preprocessing_Data.processingDfs.copy()
     preprocessing_Data.processCell.clear()
     col = len(fileData.dfs[fileIndex].columns)
@@ -464,16 +450,10 @@ def ClipData(self):
         if self.process not in " ":
             self.process2 = " " + self.process + " "
             self.name_2.setText(self.process2)
-    if preprocessing_Data.itemCount == 1:
-        preprocessing_Data.completeFlag = False
-    else:
-        preprocessing_Data.completeFlag = True
 
-    if preprocessing_Data.completeFlag:
-        pass
-    else:
-        preprocessing_Data.completeDfs = preprocessing_Data.processingDfs.copy()
+    preprocessing_Data.completeDfs = preprocessing_Data.processingDfs.copy()
     preprocessing_Data.processCell.clear()
+    preprocessing_Data.completeFlag = True
     col = len(preprocessing_Data.processingDfs.columns)
     title = list(preprocessing_Data.processingDfs.columns)
     for i in list(range(0, col)):
@@ -486,19 +466,20 @@ def ClipData(self):
     self.name_2.setVisible(True)
     preprocessing.Button.setVisible(True)
     self.listWidget_2.setVisible(True)
-    if "Clip" not in preprocessing_Data.label:
-        preprocessing_Data.label += " Clip "
+    if "Normalize" not in preprocessing_Data.label:
+        preprocessing_Data.label += " Normalize "
         self.label_2.setText(preprocessing_Data.label)
-    preprocessing_Data.applyFlag = False
+
 
 # 불균형한 결과값 처리
 def SmoteData(self):
     fileIndex = fileData.fileName.index(preprocessing_Data.filename)
-    preprocessing_Data.processingDfs = fileData.dfs[fileIndex].copy()
-    data = fileData.dfs[fileIndex].values
+    dfs = preprocessing_Data.completeDfs.copy()
+    preprocessing_Data.processingDfs = preprocessing_Data.completeDfs.copy()
+    data = preprocessing_Data.completeDfs.values
     preprocessing_Data.processCell.clear()
-    col = len(fileData.dfs[fileIndex].columns)
-    title = list(fileData.dfs[fileIndex].columns)
+    col = len(preprocessing_Data.completeDfs.columns)
+    title = list(preprocessing_Data.completeDfs.columns)
     for i in list(range(0, col)):
         preprocessing_Data.processCell.append(str(title[i]))
 
@@ -525,7 +506,6 @@ def SmoteData(self):
         data_X, data_y = data[:, :selectIndex[0]], data[:, selectIndex[0]]
         if selectIndex[0] <= 1:
             data_X, data_y = data[:, selectIndex[0]:-1], data[:, selectIndex[0]]
-
         le2 = LabelEncoder()
         le2.fit(data_y)
         data_y = le2.transform(data_y)
@@ -533,13 +513,13 @@ def SmoteData(self):
 
         if len(label) <= 2:
             global counter
-            counter = Counter(data_y)
+            counter3 = Counter(data_y)
             global classLable1
             global classLable2
             classLable1 = 0
             classLable2 = 0
             count = 0
-            for k, v in counter.items():
+            for k, v in counter3.items():
                 if count == 0:
                     classLable1 = v
                 elif count == 1:
@@ -569,20 +549,14 @@ def SmoteData(self):
         preprocessing_Data.processingDfs = preprocessing_Data.processingDfs.combine_first(df)
         preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
         preprocessing_Data.SmoteDfs = preprocessing_Data.processingDfs.copy()
-        if preprocessing_Data.itemCount == 1:
-            preprocessing_Data.completeFlag = False
-        else:
-            preprocessing_Data.completeFlag = True
-        if preprocessing_Data.completeFlag:
-            pass
-        else:
-            preprocessing_Data.completeDfs = preprocessing_Data.processingDfs.copy()
+        preprocessing_Data.completeDfs = preprocessing_Data.processingDfs.copy()
         preprocessing_Data.processCell.clear()
+        preprocessing_Data.completeFlag = True
         if self.process not in self.name_2.text():
             if self.process not in " ":
                 self.process2 = " " + self.process + " "
                 self.name_2.setText(self.process2)
-        function.SmoteInfo(self, fileData.dfs[fileIndex], preprocessing_Data.processingDfs)
+        function.SmoteInfo(self, dfs, preprocessing_Data.completeDfs)
         self.listWidget.addItem('  \n{}'.format(pd.get_dummies(data_y).sum()))
         self.listWidget_2.addItem('  \n{}'.format(pd.get_dummies(smoteData_y).sum()))
         self.listWidget.setVisible(True)
@@ -606,17 +580,16 @@ def SmoteData(self):
         for k, v in counter1.items():
             per = v / len(smoteData_y) * 100
             self.listWidget_2.addItem('Class=%d, n=%d (%.3f%%)' % (k, v, per))
-        preprocessing_Data.applyFlag = False
 
 
 # 특성 표준화
 def NormalizeData(self):
     fileIndex = fileData.fileName.index(preprocessing_Data.filename)
     global NumberDfs
-    preprocessing_Data.processingDfs = fileData.dfs[fileIndex]
+    preprocessing_Data.processingDfs = preprocessing_Data.completeDfs
     preprocessing_Data.processCell.clear()
-    col = len(fileData.dfs[fileIndex].columns)
-    title = list(fileData.dfs[fileIndex].columns)
+    col = len(preprocessing_Data.completeDfs.columns)
+    title = list(preprocessing_Data.completeDfs.columns)
 
     # ZScore (StandardScaler)
     if preprocessing_Data.comboBoxIndex == 0 or preprocessing_Data.comboBoxIndex == "0":
@@ -625,7 +598,7 @@ def NormalizeData(self):
             scaler = scaler.fit_transform(preprocessing_Data.processingDfs[preprocessing_Data.selectCell])
             NumberDfs = pd.DataFrame(data=scaler, columns=preprocessing_Data.selectCell)
             preprocessing_Data.processingDfs = NumberDfs.combine_first(preprocessing_Data.processingDfs)
-            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
+            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(preprocessing_Data.completeDfs)]
 
         else:
             for i in list(range(0, col)):
@@ -637,7 +610,7 @@ def NormalizeData(self):
             scaler = scaler.fit_transform(preprocessing_Data.processingDfs[preprocessing_Data.processCell])
             NumberDfs = pd.DataFrame(data=scaler, columns=preprocessing_Data.processCell)
             preprocessing_Data.processingDfs = NumberDfs.combine_first(preprocessing_Data.processingDfs)
-            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
+            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(preprocessing_Data.completeDfs)]
 
     # MinMax
     if preprocessing_Data.comboBoxIndex == 1:
@@ -646,7 +619,7 @@ def NormalizeData(self):
             scaler = scaler.fit_transform(preprocessing_Data.processingDfs[preprocessing_Data.selectCell])
             NumberDfs = pd.DataFrame(data=scaler, columns=preprocessing_Data.selectCell)
             preprocessing_Data.processingDfs = NumberDfs.combine_first(preprocessing_Data.processingDfs)
-            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
+            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(preprocessing_Data.completeDfs)]
 
         else:
             for i in list(range(0, col)):
@@ -658,7 +631,7 @@ def NormalizeData(self):
             scaler = scaler.fit_transform(preprocessing_Data.processingDfs[preprocessing_Data.processCell])
             NumberDfs = pd.DataFrame(data=scaler, columns=preprocessing_Data.processCell)
             preprocessing_Data.processingDfs = NumberDfs.combine_first(preprocessing_Data.processingDfs)
-            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
+            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(preprocessing_Data.completeDfs)]
 
     # RobustScaler
     if preprocessing_Data.comboBoxIndex == 2:
@@ -667,7 +640,7 @@ def NormalizeData(self):
             scaler = scaler.fit_transform(preprocessing_Data.processingDfs[preprocessing_Data.selectCell])
             NumberDfs = pd.DataFrame(data=scaler, columns=preprocessing_Data.selectCell)
             preprocessing_Data.processingDfs = NumberDfs.combine_first(preprocessing_Data.processingDfs)
-            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
+            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(preprocessing_Data.completeDfs)]
 
         else:
             for i in list(range(0, col)):
@@ -679,15 +652,15 @@ def NormalizeData(self):
             scaler = scaler.fit_transform(preprocessing_Data.processingDfs[preprocessing_Data.processCell])
             NumberDfs = pd.DataFrame(data=scaler, columns=preprocessing_Data.processCell)
             preprocessing_Data.processingDfs = NumberDfs.combine_first(preprocessing_Data.processingDfs)
-            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
+            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(preprocessing_Data.completeDfs)]
 
     # Logistic
     if preprocessing_Data.comboBoxIndex == 3:
         if preprocessing_Data.selectCell:
-            scaler = 1 / (1 / +np.exp(-preprocessing_Data.processingDfs[preprocessing_Data.selectCell]))
+            scaler = 1/(1/+np.exp(-preprocessing_Data.processingDfs[preprocessing_Data.selectCell]))
             NumberDfs = pd.DataFrame(data=scaler, columns=preprocessing_Data.selectCell)
             preprocessing_Data.processingDfs = NumberDfs.combine_first(preprocessing_Data.processingDfs)
-            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
+            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(preprocessing_Data.completeDfs)]
 
         else:
             for i in list(range(0, col)):
@@ -695,20 +668,19 @@ def NormalizeData(self):
                         preprocessing_Data.processingDfs[str(title[i])].dtype == "float64" or \
                         preprocessing_Data.processingDfs[str(title[i])].dtype == "int64":
                     preprocessing_Data.processCell.append(str(title[i]))
-            scaler = 1 / (1 / +np.exp(-preprocessing_Data.processingDfs[preprocessing_Data.processCell]))
+            scaler = 1/(1/+np.exp(-preprocessing_Data.processingDfs[preprocessing_Data.processCell]))
             NumberDfs = pd.DataFrame(data=scaler, columns=preprocessing_Data.processCell)
             preprocessing_Data.processingDfs = NumberDfs.combine_first(preprocessing_Data.processingDfs)
-            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
+            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(preprocessing_Data.completeDfs)]
 
     # LogNormal
     if preprocessing_Data.comboBoxIndex == 4:
         if preprocessing_Data.selectCell:
-            preprocessing_Data.processingDfs[preprocessing_Data.selectCell] = preprocessing_Data.processingDfs[
-                preprocessing_Data.selectCell].astype(float)
+            preprocessing_Data.processingDfs[preprocessing_Data.selectCell] = preprocessing_Data.processingDfs[preprocessing_Data.selectCell].astype(float)
             scaler = np.log1p(preprocessing_Data.processingDfs[preprocessing_Data.selectCell])
             NumberDfs = pd.DataFrame(data=scaler, columns=preprocessing_Data.selectCell)
             preprocessing_Data.processingDfs = NumberDfs.combine_first(preprocessing_Data.processingDfs)
-            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
+            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(preprocessing_Data.completeDfs)]
 
         else:
             for i in list(range(0, col)):
@@ -719,7 +691,7 @@ def NormalizeData(self):
             scaler = np.log1p(preprocessing_Data.processingDfs[preprocessing_Data.processCell])
             NumberDfs = pd.DataFrame(data=scaler, columns=preprocessing_Data.processCell)
             preprocessing_Data.processingDfs = NumberDfs.combine_first(preprocessing_Data.processingDfs)
-            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
+            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(preprocessing_Data.completeDfs)]
 
     # Tanh
     if preprocessing_Data.comboBoxIndex == 5:
@@ -727,7 +699,7 @@ def NormalizeData(self):
             scaler = np.tanh(preprocessing_Data.processingDfs[preprocessing_Data.selectCell])
             NumberDfs = pd.DataFrame(data=scaler, columns=preprocessing_Data.selectCell)
             preprocessing_Data.processingDfs = NumberDfs.combine_first(preprocessing_Data.processingDfs)
-            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
+            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(preprocessing_Data.completeDfs)]
 
         else:
             for i in list(range(0, col)):
@@ -738,22 +710,16 @@ def NormalizeData(self):
             scaler = np.tanh(preprocessing_Data.processingDfs[preprocessing_Data.processCell])
             NumberDfs = pd.DataFrame(data=scaler, columns=preprocessing_Data.processCell)
             preprocessing_Data.processingDfs = NumberDfs.combine_first(preprocessing_Data.processingDfs)
-            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
+            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(preprocessing_Data.completeDfs)]
 
     if self.process not in self.name_2.text():
         if self.process not in " ":
             self.process2 = " " + self.process + " "
             self.name_2.setText(self.process2)
-    if preprocessing_Data.itemCount == 1:
-        preprocessing_Data.completeFlag = False
-    else:
-        preprocessing_Data.completeFlag = True
 
-    if preprocessing_Data.completeFlag:
-        pass
-    else:
-        preprocessing_Data.completeDfs = preprocessing_Data.processingDfs.copy()
+    preprocessing_Data.completeDfs = preprocessing_Data.processingDfs.copy()
     preprocessing_Data.processCell.clear()
+    preprocessing_Data.completeFlag = True
     col = len(preprocessing_Data.processingDfs.columns)
     title = list(preprocessing_Data.processingDfs.columns)
     for i in list(range(0, col)):
@@ -769,7 +735,7 @@ def NormalizeData(self):
     if "Normalize" not in preprocessing_Data.label:
         preprocessing_Data.label += " Normalize "
         self.label_2.setText(preprocessing_Data.label)
-    preprocessing_Data.applyFlag = False
+
 
 def clipValue(target, dfs, index, mt):
 
@@ -782,5 +748,7 @@ def clipValue(target, dfs, index, mt):
             target.iloc[i] = round(dfs[preprocessing_Data.selectCell].median(), 1)
 
     return target
+
+
 
 

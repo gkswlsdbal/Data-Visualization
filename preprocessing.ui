@@ -196,25 +196,6 @@ background-color: rgb(255, 255, 255);</string>
         <string notr="true">background-color: rgb(240, 240, 240);</string>
        </property>
       </widget>
-      <widget class="QDialogButtonBox" name="buttonBox">
-       <property name="geometry">
-        <rect>
-         <x>730</x>
-         <y>520</y>
-         <width>211</width>
-         <height>23</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);</string>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="standardButtons">
-        <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-       </property>
-      </widget>
       <widget class="QLabel" name="label">
        <property name="geometry">
         <rect>
@@ -284,6 +265,12 @@ color: rgb(92, 92, 92);</string>
        </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="sizeAdjustPolicy">
+        <enum>QAbstractScrollArea::AdjustIgnored</enum>
+       </property>
+       <property name="autoScroll">
+        <bool>true</bool>
        </property>
        <property name="editTriggers">
         <set>QAbstractItemView::NoEditTriggers</set>
@@ -379,44 +366,86 @@ color: rgb(122, 122, 122);</string>
         <string/>
        </property>
       </widget>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="geometry">
+        <rect>
+         <x>780</x>
+         <y>520</y>
+         <width>81</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>확인</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>510</y>
+         <width>691</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Agency FB</family>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(240, 240, 240);
+color: rgb(92,92,92);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_3">
+       <property name="geometry">
+        <rect>
+         <x>870</x>
+         <y>520</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>적용</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_4">
+       <property name="geometry">
+        <rect>
+         <x>830</x>
+         <y>520</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>저장</string>
+       </property>
+      </widget>
+      <zorder>listView</zorder>
+      <zorder>label_2</zorder>
+      <zorder>treeWidget_2</zorder>
+      <zorder>treeWidget</zorder>
+      <zorder>label</zorder>
+      <zorder>name</zorder>
+      <zorder>listWidget</zorder>
+      <zorder>listWidget_2</zorder>
+      <zorder>pushButton</zorder>
+      <zorder>name_2</zorder>
+      <zorder>pushButton_2</zorder>
+      <zorder>pushButton_3</zorder>
+      <zorder>pushButton_4</zorder>
      </widget>
     </widget>
    </item>
   </layout>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>Dialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>Dialog</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

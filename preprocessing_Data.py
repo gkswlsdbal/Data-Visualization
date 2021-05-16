@@ -32,7 +32,7 @@ keep = "first"
 # 아이템 카운트
 itemCount = 0
 
-# 데이터 전처리한 데이터프레임 저장
+# 데이터 전처리한 데이터프레임
 completeDfs = []
 
 # 데이터 전처리한 파일 이름 저장
@@ -41,5 +41,25 @@ completeName = []
 # 전처리한 파일인지 아닌지 플래그
 completeFlag = False
 
-# SMOTE 데이터프레임
 SmoteDfs = []
+
+# Normalize 사용
+NormalFlag = False
+
+# 현재 진행한 데이터 전처리
+label = ""
+
+# 데이터 전처리 파일들 저장
+preprocessingDfs = []
+
+# 전처리플래그
+applyFlag = False
+
+# 상수인지 백분율인지 확인
+threshold = 0
+
+# 이상치제거 인덱스
+clipIndex = 0
+
+# 이상치처리 인덱스
+clipValue = 0

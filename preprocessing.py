@@ -1,9 +1,13 @@
 from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import *
-from PyQt5 import uic
+from PyQt5 import uic, QtGui
 
+import ClipChart
+import ClipTree
 import DuplicateTree
+import NormalizeChart
+import NormalizeTree
 import SmoteChart
 import SmoteTree
 import data, fileData
@@ -31,7 +35,10 @@ class OptionWindow(QDialog):
         self.listWidget.setVisible(False)
         self.pushButton.setVisible(False)
         self.listWidget_2.setVisible(False)
-        self.buttonBox.button(QDialogButtonBox.Apply).clicked.connect(self.apply)
+        self.pushButton_3.clicked.connect(self.apply)
+        self.pushButton_2.clicked.connect(self.Okay)
+        self.pushButton_4.setVisible(False)
+        self.pushButton_4.clicked.connect(self.Save)
         self.name.setStyleSheet(
             "padding-top: 10px;"
             "margin-bottom: 5px;"
@@ -107,38 +114,51 @@ class OptionWindow(QDialog):
 
     # 누락값 처리
     def function_1(self):
+        preprocessing_Data.comboBox = ""
+        preprocessing_Data.comboBoxIndex = "0"
+        preprocessing_Data.NormalFlag = False
+        preprocessing_Data.applyFlag = True
+        if preprocessing_Data.itemCount >= 1:
+            preprocessing_Data.completeFlag = True
         self.treeWidget_2.setVisible(True)
         MissingDataTree.function_1(self)
 
     # 중복 행 제거
     def function_2(self):
         self.treeWidget_2.setVisible(True)
+        preprocessing_Data.NormalFlag = False
+        preprocessing_Data.applyFlag = True
+        if preprocessing_Data.itemCount >= 1:
+            preprocessing_Data.completeFlag = True
         DuplicateTree.function_2(self)
 
-    # 불균형한 결과값 처리
+    # 아웃라이어 제거
     def function_3(self):
-        self.treeWidget_2.clear()
-        self.listWidget.setVisible(False)
-        self.pushButton.setVisible(False)
-        self.listWidget_2.setVisible(False)
-        itemTop1 = QTreeWidgetItem(self.treeWidget_2)
-        itemTop1.setText(0, "Saved Datasets")
-        itemTop1.setIcon(0, QIcon('img/Datasets.png'))
-
-    # 표준화
+        self.treeWidget_2.setVisible(True)
+        preprocessing_Data.NormalFlag = False
+        preprocessing_Data.applyFlag = True
+        if preprocessing_Data.itemCount >= 1:
+            preprocessing_Data.completeFlag = True
+        ClipTree.function_3(self)
+    # 불균형한 결과값 처리
     def function_4(self):
         self.treeWidget_2.setVisible(True)
+        preprocessing_Data.NormalFlag = False
+        preprocessing_Data.applyFlag = True
+        if preprocessing_Data.itemCount >= 1:
+            preprocessing_Data.completeFlag = True
         SmoteTree.function_4(self)
 
-    # 아웃라이어 제거
+    # 특성 표준화
     def function_5(self):
-        self.treeWidget_2.clear()
-        self.listWidget.setVisible(False)
-        self.pushButton.setVisible(False)
-        self.listWidget_2.setVisible(False)
-        itemTop1 = QTreeWidgetItem(self.treeWidget_2)
-        itemTop1.setText(0, "Saved Datasets")
-        itemTop1.setIcon(0, QIcon('img/Datasets.png'))
+        preprocessing_Data.comboBox = ""
+        preprocessing_Data.comboBoxIndex = "0"
+        preprocessing_Data.NormalFlag = False
+        preprocessing_Data.applyFlag = True
+        if preprocessing_Data.itemCount >= 1:
+            preprocessing_Data.completeFlag = True
+        self.treeWidget_2.setVisible(True)
+        NormalizeTree.function_5(self)
 
     def itemClick(self, item):
         process_event.click(self, item)
@@ -149,5 +169,30 @@ class OptionWindow(QDialog):
     def btnClick(self):
         if preprocessing_Data.process == 1:
             processChart.OptionWindow(self)
+        elif preprocessing_Data.process == 3:
+            ClipChart.OptionWindow(self)
         elif preprocessing_Data.process == 4:
             SmoteChart.OptionWindow(self)
+        elif preprocessing_Data.process == 5:
+            NormalizeChart.OptionWindow(self)
+
+    def Okay(self):
+        process_event.Okay(self)
+
+    def Save(self):
+        process_event.Save(self)
+
+    def closeEvent(self, a0: QtGui.QCloseEvent):
+        preprocessing_Data.preprocessingDfs = []
+        preprocessing_Data.completeName = []
+        preprocessing_Data.completeDfs = []
+        preprocessing_Data.itemCount = 0
+        preprocessing_Data.applyFlag = False
+        preprocessing_Data.clipIndex = 0
+        preprocessing_Data.clipValue = 0
+        preprocessing_Data.threshold = 0
+        preprocessing_Data.label = ""
+        preprocessing_Data.completeFlag = False
+        preprocessing_Data.SmoteDfs = []
+        preprocessing_Data.NormalFlag = False
+        preprocessing_Data.processingDfs = []
