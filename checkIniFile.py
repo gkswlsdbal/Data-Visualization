@@ -9,7 +9,7 @@ def chckInitFst(self):
 
     if not 'STYLE' in config:
         config['STYLE'] = {
-            'theme': 'white',
+            'theme': 'White',
             'font_family': '맑은 고딕',
             'font_size': '10',
             'width': str(self.frameGeometry().width()),
@@ -27,7 +27,7 @@ def chckInitFst(self):
             config.write(configfile)
 
     if not 'theme' in config['STYLE']:
-        config['STYLE']['theme'] = 'white'
+        config['STYLE']['theme'] = 'White'
         with open('setting.ini', 'w') as configfile:
             config.write(configfile)
 
