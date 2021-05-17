@@ -48,6 +48,7 @@ class WindowClass(QMainWindow, form_class):
         self.fig.set_size_inches(7.8, 3.5)
         self.canvas = FigureCanvas(self.fig)
         self.graphLayout.addWidget(self.canvas)
+        self.tabLeftSplitter.setStretchFactor(0, 1)
         self.cid = self.canvas.mpl_connect('motion_notify_event', self.move_cursor)
         path = '/Windows/Fonts/gulim.ttc'
         font_name = fm.FontProperties(fname=path, size=50).get_name()
