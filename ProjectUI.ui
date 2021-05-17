@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1667</width>
-    <height>744</height>
+    <height>787</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -45,14 +45,8 @@
     <string notr="true"/>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <property name="bottomMargin">
-     <number>0</number>
-    </property>
     <item row="0" column="0">
-     <widget class="QSplitter" name="splitter">
-      <property name="contextMenuPolicy">
-       <enum>Qt::DefaultContextMenu</enum>
-      </property>
+     <widget class="QSplitter" name="splitter_2">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -172,7 +166,7 @@
         <enum>Qt::ElideNone</enum>
        </property>
        <property name="tabsClosable">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <property name="movable">
         <bool>true</bool>
@@ -186,7 +180,7 @@
         </attribute>
         <layout class="QGridLayout" name="gridLayout_2">
          <item row="0" column="0">
-          <widget class="QSplitter" name="splitter_2">
+          <widget class="QSplitter" name="tabLeftSplitter">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -221,36 +215,37 @@
               </widget>
              </item>
              <item row="0" column="0">
-              <layout class="QHBoxLayout" name="leftTopLayout">
-               <item>
+              <widget class="QSplitter" name="splitter">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <widget class="QWidget" name="layoutWidget">
                 <layout class="QVBoxLayout" name="graphLayout"/>
-               </item>
-               <item>
-                <widget class="QListWidget" name="colInfoListWidget">
-                 <property name="font">
-                  <font>
-                   <family>맑은 고딕</family>
-                   <pointsize>10</pointsize>
-                   <weight>50</weight>
-                   <italic>false</italic>
-                   <bold>false</bold>
-                  </font>
-                 </property>
-                 <property name="contextMenuPolicy">
-                  <enum>Qt::DefaultContextMenu</enum>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true"/>
-                 </property>
-                 <property name="editTriggers">
-                  <set>QAbstractItemView::NoEditTriggers</set>
-                 </property>
-                 <property name="selectionMode">
-                  <enum>QAbstractItemView::NoSelection</enum>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+               </widget>
+               <widget class="QListWidget" name="colInfoListWidget">
+                <property name="font">
+                 <font>
+                  <family>맑은 고딕</family>
+                  <pointsize>10</pointsize>
+                  <weight>50</weight>
+                  <italic>false</italic>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="contextMenuPolicy">
+                 <enum>Qt::DefaultContextMenu</enum>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="editTriggers">
+                 <set>QAbstractItemView::NoEditTriggers</set>
+                </property>
+                <property name="selectionMode">
+                 <enum>QAbstractItemView::NoSelection</enum>
+                </property>
+               </widget>
+              </widget>
              </item>
             </layout>
            </widget>
