@@ -108,7 +108,7 @@ def cellInfo(self):
 # 데이터프레임변수 열의 타입이 실수인지 확인합니다.
 def isNumber(coltable, title):
     try:
-        coltable = coltable.astype({title: 'int'})
+        coltable = coltable.astype({title: 'int64'})
         return True
     except ValueError:
         try:
