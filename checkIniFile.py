@@ -12,11 +12,11 @@ def chckInitFst(self):
             'theme': 'White',
             'font_family': '맑은 고딕',
             'font_size': '10',
-            'width': str(self.frameGeometry().width()),
-            'height': str(self.frameGeometry().height()),
-            'pos_x': str(self.x()),
-            'pos_y': str(self.y()),
-            'tool_pos': 'top',
+            'width': str(self.size().width()),
+            'height': str(self.size().height()),
+            'pos_x': str(self.pos().x()),
+            'pos_y': str(self.pos().y()),
+            'tool_pos': '2',
             'tool_style': 'icon',
             'table_grid': 'true',
             'table_header_color': '#ffff00',
@@ -42,27 +42,27 @@ def chckInitFst(self):
             config.write(configfile)
 
     if not 'width' in config['STYLE']:
-        config['STYLE']['width'] = str(self.frameGeometry().width())
+        config['STYLE']['width'] = str(self.size().width())
         with open('setting.ini', 'w') as configfile:
             config.write(configfile)
 
     if not 'height' in config['STYLE']:
-        config['STYLE']['height'] = str(self.frameGeometry().height())
+        config['STYLE']['height'] = str(self.size().height())
         with open('setting.ini', 'w') as configfile:
             config.write(configfile)
 
     if not 'pos_x' in config['STYLE']:
-        config['STYLE']['pos_x'] = str(self.x())
+        config['STYLE']['pos_x'] = str(self.pos().x())
         with open('setting.ini', 'w') as configfile:
             config.write(configfile)
 
     if not 'pos_y' in config['STYLE']:
-        config['STYLE']['pos_y'] = str(self.y())
+        config['STYLE']['pos_y'] = str(self.pos().y())
         with open('setting.ini', 'w') as configfile:
             config.write(configfile)
 
     if not 'tool_pos' in config['STYLE']:
-        config['STYLE']['tool_pos'] = 'top'
+        config['STYLE']['tool_pos'] = '2'
         with open('setting.ini', 'w') as configfile:
             config.write(configfile)
 
@@ -134,20 +134,41 @@ def writeIni(self, par, bg, size, font, tool_pos, tool_style,
 def writeIniLast(self):
     config = configparser.ConfigParser()
     config.read('setting.ini')
-    config['STYLE']['width'] = str(self.frameGeometry().width() - 2)
-    config['STYLE']['height'] = str(self.frameGeometry().height() - 46)
-    config['STYLE']['pos_x'] = str(self.x())
-    config['STYLE']['pos_y'] = str(self.y())
+    config['STYLE']['width'] = str(self.size().width())
+    config['STYLE']['height'] = str(self.size().height())
+    config['STYLE']['pos_x'] = str(self.pos().x())
+    config['STYLE']['pos_y'] = str(self.pos().y())
     with open('setting.ini', 'w') as configfile:
         config.write(configfile)
 
+def chgToolBarBorder(self):
+    config = configparser.ConfigParser()
+    config.read('setting.ini')
+    config['STYLE']['tool_pos'] = str(self.toolBarArea(self.toolbar))
+    with open('setting.ini', 'w') as configfile:
+        config.write(configfile)
+
+    c = ds.Color()
+    if config['STYLE']['theme'] == 'White':
+        c.setWhite()
+    elif config['STYLE']['theme'] == 'Blue':
+        c.setBlue()
+    elif config['STYLE']['theme'] == 'Green':
+        c.setGreen()
+
+    if self.toolbar.isFloating():
+        ds.setToolBarBorder(self, '0', c.separate_color,
+                            config['STYLE']['font_family'], config['STYLE']['font_size'])
+    else:
+        ds.setToolBarBorder(self, config['STYLE']['tool_pos'], c.separate_color,
+                            config['STYLE']['font_family'], config['STYLE']['font_size'])
 
 # setting이 뜰 때 한번만 사용합니다.
 def chckIniSett(self):
     config = configparser.ConfigParser()
     config.read('setting.ini')
     ds.setSettStyle(self, config['STYLE']['theme'],
-                       config['STYLE']['font_family'], config['STYLE']['font_size'])
+                    config['STYLE']['font_family'], config['STYLE']['font_size'])
 
 
 # file absorptoin 창이 뜰 때 한번만 사용합니다.
