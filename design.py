@@ -1,7 +1,6 @@
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 
-
 class Color:
     def setWhite(self):
         self.bg_color = QColor(240, 240, 240)
@@ -165,46 +164,47 @@ def selectMainStyle(self, bg, font_family, font_size, tool_pos, tool_style,
     elif bg == 'Green':
         c.setGreen()
 
-    setMainStyle(self, c.bg_color, c.label_color,
-                 font_family, font_size)
-    setToolBarStyle(self, tool_pos, tool_style, c.separate_color)
-    setTableStyle(self, table_grid, table_header_color,
-                  table_row_color, table_colored_row)
+    setMainStyle(self, c.bg_color, c.label_color, font_family, font_size)
+    setToolBarIcon(self, tool_style)
+    setToolBarBorder(self, tool_pos, c.separate_color, font_family, font_size)
+    setTableStyle(self, table_grid, table_header_color, table_row_color, table_colored_row)
 
-def setToolBarStyle(self, pos, style, color):
-    if pos == 'top':
-        self.addToolBar(Qt.TopToolBarArea, self.toolbar)
-        self.toolbar.setStyleSheet("QToolBar {"
-                                   "background-color: white;"
-                                   "border:2px solid %s;"
-                                   "border-top-color:transparent;"
-                                   "border-left-color:transparent;"
-                                   "border-right-color:transparent;}" % (color.name()))
-    elif pos == 'left':
-        self.addToolBar(Qt.LeftToolBarArea, self.toolbar)
-        self.toolbar.setStyleSheet("QToolBar {"
-                                   "background-color: white;"
-                                   "border:2px solid %s;"
-                                   "border-top-color:transparent;"
-                                   "border-left-color:transparent;"
-                                   "border-bottom-color:transparent;}" % (color.name()))
-    elif pos == 'right':
-        self.addToolBar(Qt.RightToolBarArea, self.toolbar)
-        self.toolbar.setStyleSheet("QToolBar {"
-                                   "background-color: white;"
-                                   "border:2px solid %s;"
-                                   "border-top-color:transparent;"
-                                   "border-right-color:transparent;"
-                                   "border-bottom-color:transparent;}" % (color.name()))
-    elif pos == 'bottom':
-        self.addToolBar(Qt.BottomToolBarArea, self.toolbar)
-        self.toolbar.setStyleSheet("QToolBar {"
-                                   "background-color: white;"
-                                   "border:2px solid %s;"
-                                   "border-bottom-color:transparent;"
-                                   "border-left-color:transparent;"
-                                   "border-right-color:transparent;}" % (color.name()))
 
+def setMainStyle(self, bg_color, label_color, font_family, font_size):
+    self.widget.setStyleSheet(f"background-color: {bg_color.name()};"
+                              f"color: black;"
+                              f"font: {font_size}pt {font_family};")
+    self.statusBar().setStyleSheet("QStatusBar {background-color: %s}" % (bg_color.name()))
+    self.viewLabel.setStyleSheet("font: 10pt;")
+
+    self.insertButton.setStyleSheet(f"background-color: {label_color.name()};")
+
+    self.tab_1.setStyleSheet(f"""background-color: {bg_color.name()};
+                                     border-color: {bg_color.name()}""")
+    self.tab_2.setStyleSheet(f"""background-color: {bg_color.name()};
+                                     border-color: {bg_color.name()}""")
+
+    self.colInfoListWidget.setStyleSheet(f"background-color: white;")
+    self.cellList.setStyleSheet(f"background-color: white;")
+    self.FileList.setStyleSheet(f"background-color: white;")
+    self.tableWidget.setStyleSheet(f"background-color: white;")
+
+    self.secChartCombo.setStyleSheet("""
+                                        QComboBox {background-color: white;}
+                                        QComboBox::item {background: white;}
+                                      QComboBox::item:selected {background: %s;}
+                                     """ % (bg_color.name()))
+    self.notshowBtn.setStyleSheet("background-color: white;")
+    self.showBtn.setStyleSheet("background-color: white;")
+    self.secColListLeftTitle.setStyleSheet(f"background-color: {label_color.name()};")
+    self.secColListLeftTitle.setAlignment(Qt.AlignCenter)
+    self.secColListRightTitle.setAlignment(Qt.AlignCenter)
+    self.secColListRightTitle.setStyleSheet(f"background-color: {label_color.name()};")
+    self.showingColList.setStyleSheet("QListWidget {background-color: white;}")
+    self.unshowingColList.setStyleSheet("QListWidget {background-color: white;}")
+
+
+def setToolBarIcon(self, style):
     if style == 'icon':
         self.toolbar.setToolButtonStyle(Qt.ToolButtonIconOnly)
     elif style == 'text':
@@ -213,6 +213,59 @@ def setToolBarStyle(self, pos, style, color):
         self.toolbar.setToolButtonStyle(Qt.ToolButtonTextBesideIcon)
     elif style == 'textUnderIcon':
         self.toolbar.setToolButtonStyle(Qt.ToolButtonTextUnderIcon)
+
+def setToolBarBorder(self, pos, color, font_family, font_size):
+    if pos == '0': # flotting
+        self.toolbar.setStyleSheet("QToolBar {"
+                                   "background-color: white;"
+                                   f"border:2px solid {color.name()};""}"
+                                   "QToolButton {"
+                                   f"font: {font_size}pt {font_family};"
+                                   "}")
+    elif pos == '1': # left
+        self.addToolBar(Qt.LeftToolBarArea, self.toolbar)
+        self.toolbar.setStyleSheet("QToolBar {"
+                                   "background-color: white;"
+                                   f"border:2px solid {color.name()};"
+                                   "border-top-color:transparent;"
+                                   "border-left-color:transparent;"
+                                   "border-bottom-color:transparent;}"
+                                   "QToolButton {"
+                                   f"font: {font_size}pt {font_family};"
+                                   "}")
+    elif pos == '2': # right
+        self.addToolBar(Qt.RightToolBarArea, self.toolbar)
+        self.toolbar.setStyleSheet("QToolBar {"
+                                   "background-color: white;"
+                                   f"border:2px solid {color.name()};"
+                                   "border-top-color:transparent;"
+                                   "border-right-color:transparent;"
+                                   "border-bottom-color:transparent;}"
+                                   "QToolButton {"
+                                   f"font: {font_size}pt {font_family};"
+                                   "}")
+    elif pos == '4': # top
+        self.addToolBar(Qt.TopToolBarArea, self.toolbar)
+        self.toolbar.setStyleSheet("QToolBar {"
+                                   "background-color: white;"
+                                   f"border: 2px solid {color.name()};"
+                                   "border-top-color:transparent;"
+                                   "border-left-color:transparent;"
+                                   "border-right-color:transparent;}"
+                                   "QToolButton {"
+                                   f"font: {font_size}pt {font_family};"
+                                   "}")
+    elif pos == '8': # down
+        self.addToolBar(Qt.BottomToolBarArea, self.toolbar)
+        self.toolbar.setStyleSheet("QToolBar {"
+                                   "background-color: white;"
+                                   f"border:2px solid {color.name()};"
+                                   "border-bottom-color:transparent;"
+                                   "border-left-color:transparent;"
+                                   "border-right-color:transparent;}"
+                                   "QToolButton {"
+                                   f"font: {font_size}pt {font_family};"
+                                   "}")
 
 
 def setTableStyle(self, table_grid, table_header_color, table_row_color, table_colored_row):
@@ -249,39 +302,6 @@ def setTableStyle(self, table_grid, table_header_color, table_row_color, table_c
     self.tableWidget.horizontalHeader().setStyleSheet("QHeaderView::section"
                                                       "{background-color:%s;}"
                                                       % (table_header_color.name()))
-
-
-def setMainStyle(self, bg_color, label_color, font_family, font_size):
-    self.widget.setStyleSheet(f"background-color: {bg_color.name()};"
-                              f"color: black;"
-                              f"font: {font_size}pt {font_family};")
-    self.viewLabel.setStyleSheet("font: 10pt; color: black;")
-
-    self.insertButton.setStyleSheet(f"background-color: {label_color.name()};")
-
-    self.tab_1.setStyleSheet(f"""background-color: {bg_color.name()};
-                                     border-color: {bg_color.name()}""")
-    self.tab_2.setStyleSheet(f"""background-color: {bg_color.name()};
-                                     border-color: {bg_color.name()}""")
-
-    self.colInfoListWidget.setStyleSheet(f"background-color: white;")
-    self.cellList.setStyleSheet(f"background-color: white;")
-    self.FileList.setStyleSheet(f"background-color: white;")
-    self.tableWidget.setStyleSheet(f"background-color: white;")
-
-    self.secChartCombo.setStyleSheet("""
-                                        QComboBox {background-color: white;}
-                                        QComboBox::item {background: white;}
-                                      QComboBox::item:selected {background: %s;}
-                                     """ % (bg_color.name()))
-    self.notshowBtn.setStyleSheet("background-color: white;")
-    self.showBtn.setStyleSheet("background-color: white;")
-    self.secColListLeftTitle.setStyleSheet(f"background-color: {label_color.name()};")
-    self.secColListLeftTitle.setAlignment(Qt.AlignCenter)
-    self.secColListRightTitle.setAlignment(Qt.AlignCenter)
-    self.secColListRightTitle.setStyleSheet(f"background-color: {label_color.name()};")
-    self.showingColList.setStyleSheet("QListWidget {background-color: white;}")
-    self.unshowingColList.setStyleSheet("QListWidget {background-color: white;}")
 
 
 def setProcess(self):
