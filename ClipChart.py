@@ -31,7 +31,7 @@ class OptionWindow(QDialog):
         fileIndex = fileData.fileName.index(preprocessing_Data.filename)
         axs = self.fig.add_subplot(1, 2, 1)
         if preprocessing_Data.completeFlag:
-            sns.boxplot(data=preprocessing_Data.completeDfs[preprocessing_Data.selectCell], ax=axs)
+            sns.boxplot(data=preprocessing_Data.saveDfs[preprocessing_Data.selectCell], ax=axs)
         else:
             sns.boxplot(data=fileData.dfs[fileIndex][preprocessing_Data.selectCell], ax=axs)
         plt.title("이상치 제거 전",  fontsize=14)

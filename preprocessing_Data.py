@@ -63,3 +63,6 @@ clipIndex = 0
 
 # 이상치처리 인덱스
 clipValue = 0
+
+# 저장 데이터프레임
+saveDfs = []

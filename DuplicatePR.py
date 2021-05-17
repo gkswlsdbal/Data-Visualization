@@ -197,6 +197,7 @@ def ClipData(self):
     fileIndex = fileData.fileName.index(preprocessing_Data.filename)
     global NumberDfs
     preprocessing_Data.processingDfs = preprocessing_Data.completeDfs.copy()
+    preprocessing_Data.saveDfs = preprocessing_Data.completeDfs.copy()
     dfs = preprocessing_Data.processingDfs.copy()
     preprocessing_Data.processCell.clear()
     col = len(fileData.dfs[fileIndex].columns)
@@ -466,8 +467,8 @@ def ClipData(self):
     self.name_2.setVisible(True)
     preprocessing.Button.setVisible(True)
     self.listWidget_2.setVisible(True)
-    if "Normalize" not in preprocessing_Data.label:
-        preprocessing_Data.label += " Normalize "
+    if "Clip" not in preprocessing_Data.label:
+        preprocessing_Data.label += " Clip "
         self.label_2.setText(preprocessing_Data.label)
 
 
