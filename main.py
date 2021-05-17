@@ -125,12 +125,16 @@ class WindowClass(QMainWindow, form_class):
         self.toolbar.addAction(cAbsorAction)
         self.toolbar.addAction(self.settAction)
         self.toolbar.addAction(exitAction)
+        self.toolbar.topLevelChanged.connect(self.changeBorder)
 
         self.chckIniFile()
 
     def chckIniFile(self):
         checkIniFile.chckInitFst(self)
 
+    def changeBorder(self):
+        checkIniFile.chgToolBarBorder(self)
+        
     def closeEvent(self, event):
         # # 창이 닫힐때 진짜 닫을 껀지 물어봅니다.
         # reply = QMessageBox.question(self, 'Message',"종료하시겠습니까?",
