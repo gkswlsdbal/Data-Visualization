@@ -2,7 +2,6 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-
 import checkIniFile as ini
 
 par = 0  # 메인 창이 들어갑니다.
@@ -13,10 +12,10 @@ coloredRow = 0  # 색이 입혀지는 행입니다.
 headColor = 0  # 테이블 헤더 색입니다.
 rowColor = 0  # 테이블 열 색입니다.
 
-
 class SettingDialog(QDialog):
 
     def __init__(self, parent):
+
         global par
         par = parent
 
@@ -140,13 +139,13 @@ class SettingDialog(QDialog):
         self.toolPosBottom = QRadioButton('Down')
         self.toolPosBottom.clicked.connect(self.toolPosChg)
 
-        if config['STYLE']['tool_pos'] == 'top':
-            self.toolPosUp.setChecked(True)
-        elif config['STYLE']['tool_pos'] == 'left':
+        if config['STYLE']['tool_pos'] == '1':
             self.toolPosLeft.setChecked(True)
-        elif config['STYLE']['tool_pos'] == 'right':
+        elif config['STYLE']['tool_pos'] == '2':
             self.toolPosRight.setChecked(True)
-        elif config['STYLE']['tool_pos'] == 'bottom':
+        elif config['STYLE']['tool_pos'] == '4':
+            self.toolPosUp.setChecked(True)
+        elif config['STYLE']['tool_pos'] == '8':
             self.toolPosBottom.setChecked(True)
         global toolPosition
         toolPosition = config['STYLE']['tool_pos']
@@ -198,10 +197,9 @@ class SettingDialog(QDialog):
         self.stackWidget.insertWidget(2, self.toolWid)
         self.stackWidget.setCurrentIndex(0)
 
-        self.optionTreeWid.setCurrentItem(self.optionTreeWid.topLevelItem(0))
-        self.optionTreeWid.setStyleSheet("border: 0px;")
-        self.optionTreeWid.setSelectionMode(QAbstractItemView.SingleSelection)
-        self.optionTreeWid.clicked.connect(self.display)
+        self.optionListWid.setCurrentItem(self.optionListWid.setCurrentRow(0))
+        self.optionListWid.setStyleSheet("border: 0px;")
+        self.optionListWid.clicked.connect(self.display)
         ini.chckIniSett(self)
         ##
 
@@ -245,14 +243,14 @@ class SettingDialog(QDialog):
 
     def toolPosChg(self):
         global toolPosition
-        if self.toolPosUp.isChecked():
-            toolPosition = 'top'
-        elif self.toolPosLeft.isChecked():
-            toolPosition = 'left'
+        if self.toolPosLeft.isChecked():
+            toolPosition = '1'
         elif self.toolPosRight.isChecked():
-            toolPosition = 'right'
+            toolPosition = '2'
+        elif self.toolPosUp.isChecked():
+            toolPosition = '4'
         elif self.toolPosBottom.isChecked():
-            toolPosition = 'bottom'
+            toolPosition = '8'
 
 
     def gridChg(self):
