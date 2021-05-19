@@ -1,6 +1,7 @@
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 
+
 class Color:
     def setWhite(self):
         self.bg_color = QColor(240, 240, 240)
@@ -100,15 +101,21 @@ def setSettStyle(self, bg, font_family, font_size):
 
     self.setStyleSheet(f"font: {font_size}pt;"
                        f"color: black;")
-    self.optionTreeWid.setStyleSheet("""QTreeWidget {
+    self.optionListWid.setStyleSheet("""QListWidget {
                                             background-color: white;
                                             border: 0px;
                                             color: black;
-                                            }
-                                        QTreeWidget::item:selected {
+                                        }
+                                        QListWidget::item:selected {
                                             background-color: %s;
-                                            color: black; }
-                                     """ % (c.bg_color.name()))
+                                            border-color: %s;
+                                            color: black;
+                                        }
+                                        QListWidget::item:hover {
+                                            border: 1px solid rgb(245, 245, 245);
+                                            background-color: rgb(245, 245, 245);
+                                        }
+                                     """ % (c.bg_color.name(), c.bg_color.name()))
     self.topWidget.setStyleSheet(f"background-color: {c.bg_color.name()};"
                                  f"border: 2px solid {c.separate_color.name()};"
                                  "border-top-color: transparent;"
@@ -153,9 +160,9 @@ def setSettStyle(self, bg, font_family, font_size):
     self.fontCombo.setCurrentFont(QFont(font_family))
     self.sizeCombo.setCurrentText(font_size)
 
+
 ###Main UI###
-def selectMainStyle(self, bg, font_family, font_size, tool_pos, tool_style,
-                    table_grid, table_header_color, table_row_color, table_colored_row):
+def selectMainStyle(self, bg, font_family, font_size):
     c = Color()
     if bg == 'White':
         c.setWhite()
@@ -164,42 +171,46 @@ def selectMainStyle(self, bg, font_family, font_size, tool_pos, tool_style,
     elif bg == 'Green':
         c.setGreen()
 
-    setMainStyle(self, c.bg_color, c.label_color, font_family, font_size)
-    setToolBarIcon(self, tool_style)
-    setToolBarBorder(self, tool_pos, c.separate_color, font_family, font_size)
-    setTableStyle(self, table_grid, table_header_color, table_row_color, table_colored_row)
-
-
-def setMainStyle(self, bg_color, label_color, font_family, font_size):
-    self.widget.setStyleSheet(f"background-color: {bg_color.name()};"
+    self.widget.setStyleSheet(f"background-color: {c.bg_color.name()};"
                               f"color: black;"
                               f"font: {font_size}pt {font_family};")
-    self.statusBar().setStyleSheet("QStatusBar {background-color: %s}" % (bg_color.name()))
+    self.statusBar().setStyleSheet("QStatusBar {background-color: %s}" % (c.bg_color.name()))
     self.viewLabel.setStyleSheet("font: 10pt;")
 
-    self.insertButton.setStyleSheet(f"background-color: {label_color.name()};")
+    self.insertButton.setStyleSheet(f"background-color: {c.label_color.name()};")
 
-    self.tab_1.setStyleSheet(f"""background-color: {bg_color.name()};
-                                     border-color: {bg_color.name()}""")
-    self.tab_2.setStyleSheet(f"""background-color: {bg_color.name()};
-                                     border-color: {bg_color.name()}""")
+    self.tab_1.setStyleSheet(f"""background-color: {c.bg_color.name()};
+                                     border-color: {c.bg_color.name()}""")
+    self.tab_2.setStyleSheet(f"""background-color: {c.bg_color.name()};
+                                     border-color: {c.bg_color.name()}""")
 
-    self.colInfoListWidget.setStyleSheet(f"background-color: white;")
-    self.cellList.setStyleSheet(f"background-color: white;")
+    self.fstLeftWidget.setStyleSheet(f"border: 2px solid rgb(150, 150, 150);")
+    self.colInfoListWidget.setStyleSheet(f"background-color: white;"
+                                         f"border: 2px solid rgb(208, 206, 205);"
+                                         "border-bottom-color: transparent;"
+                                         "border-right-color: transparent;"
+                                         "border-top-color: transparent;")
+    self.tableWidget.setStyleSheet(f"background-color: white;"
+                                   f"border: 2px solid rgb(208, 206, 205);"
+                                   "border-bottom-color: transparent;"
+                                   "border-right-color: transparent;"
+                                   "border-left-color: transparent;")
+    self.chartColSplitter.setStyleSheet("border: transparent;")
+    self.cellList.setStyleSheet(f"background-color: white;"
+                                f"border: 1px solid rgb(208, 206, 205)")
     self.FileList.setStyleSheet(f"background-color: white;")
-    self.tableWidget.setStyleSheet(f"background-color: white;")
 
     self.secChartCombo.setStyleSheet("""
                                         QComboBox {background-color: white;}
                                         QComboBox::item {background: white;}
                                       QComboBox::item:selected {background: %s;}
-                                     """ % (bg_color.name()))
+                                     """ % (c.bg_color.name()))
     self.notshowBtn.setStyleSheet("background-color: white;")
     self.showBtn.setStyleSheet("background-color: white;")
-    self.secColListLeftTitle.setStyleSheet(f"background-color: {label_color.name()};")
+    self.secColListLeftTitle.setStyleSheet(f"background-color: {c.label_color.name()};")
     self.secColListLeftTitle.setAlignment(Qt.AlignCenter)
     self.secColListRightTitle.setAlignment(Qt.AlignCenter)
-    self.secColListRightTitle.setStyleSheet(f"background-color: {label_color.name()};")
+    self.secColListRightTitle.setStyleSheet(f"background-color: {c.label_color.name()};")
     self.showingColList.setStyleSheet("QListWidget {background-color: white;}")
     self.unshowingColList.setStyleSheet("QListWidget {background-color: white;}")
 
@@ -214,52 +225,61 @@ def setToolBarIcon(self, style):
     elif style == 'textUnderIcon':
         self.toolbar.setToolButtonStyle(Qt.ToolButtonTextUnderIcon)
 
-def setToolBarBorder(self, pos, color, font_family, font_size):
-    if pos == '0': # flotting
+
+def setToolBarBorder(self, pos, bg, font_family, font_size):
+    c = Color()
+    if bg == 'White':
+        c.setWhite()
+    elif bg == 'Blue':
+        c.setBlue()
+    elif bg == 'Green':
+        c.setGreen()
+
+    if pos == '0':  # flotting
         self.toolbar.setStyleSheet("QToolBar {"
                                    "background-color: white;"
-                                   f"border:2px solid {color.name()};""}"
+                                   f"border:2px solid {c.separate_color.name()};""}"
                                    "QToolButton {"
                                    f"font: {font_size}pt {font_family};"
                                    "}")
-    elif pos == '1': # left
+    elif pos == '1':  # left
         self.addToolBar(Qt.LeftToolBarArea, self.toolbar)
         self.toolbar.setStyleSheet("QToolBar {"
                                    "background-color: white;"
-                                   f"border:2px solid {color.name()};"
+                                   f"border:2px solid {c.separate_color.name()};"
                                    "border-top-color:transparent;"
                                    "border-left-color:transparent;"
                                    "border-bottom-color:transparent;}"
                                    "QToolButton {"
                                    f"font: {font_size}pt {font_family};"
                                    "}")
-    elif pos == '2': # right
+    elif pos == '2':  # right
         self.addToolBar(Qt.RightToolBarArea, self.toolbar)
         self.toolbar.setStyleSheet("QToolBar {"
                                    "background-color: white;"
-                                   f"border:2px solid {color.name()};"
+                                   f"border:2px solid {c.separate_color.name()};"
                                    "border-top-color:transparent;"
                                    "border-right-color:transparent;"
                                    "border-bottom-color:transparent;}"
                                    "QToolButton {"
                                    f"font: {font_size}pt {font_family};"
                                    "}")
-    elif pos == '4': # top
+    elif pos == '4':  # top
         self.addToolBar(Qt.TopToolBarArea, self.toolbar)
         self.toolbar.setStyleSheet("QToolBar {"
                                    "background-color: white;"
-                                   f"border: 2px solid {color.name()};"
+                                   f"border: 2px solid {c.separate_color.name()};"
                                    "border-top-color:transparent;"
                                    "border-left-color:transparent;"
                                    "border-right-color:transparent;}"
                                    "QToolButton {"
                                    f"font: {font_size}pt {font_family};"
                                    "}")
-    elif pos == '8': # down
+    elif pos == '8':  # down
         self.addToolBar(Qt.BottomToolBarArea, self.toolbar)
         self.toolbar.setStyleSheet("QToolBar {"
                                    "background-color: white;"
-                                   f"border:2px solid {color.name()};"
+                                   f"border:2px solid {c.separate_color.name()};"
                                    "border-bottom-color:transparent;"
                                    "border-left-color:transparent;"
                                    "border-right-color:transparent;}"
