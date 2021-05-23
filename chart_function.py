@@ -27,7 +27,6 @@ def cellClick(self):
                 self.ele.append(aa)
                 self.y.append(1)
         self.x = np.arange(1, len(self.y) + 1, 1)
-
     self.ax = self.fig.add_subplot(111)
     if data.graphType == 0:
         self.barGraphBtn.toggle()
@@ -132,7 +131,6 @@ def line_update_annot(ind, self):
 def pie_move_cursor(self, event):
     for pie in self.pies[0]:
         cont, ind = pie.contains(event)
-        print(ind)
         if cont:
             pie_update_annot(pie, self)
             self.annot.set_visible(True)

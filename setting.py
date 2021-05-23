@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
+
 import checkIniFile as ini
 
 par = 0  # 메인 창이 들어갑니다.
@@ -12,10 +13,10 @@ coloredRow = 0  # 색이 입혀지는 행입니다.
 headColor = 0  # 테이블 헤더 색입니다.
 rowColor = 0  # 테이블 열 색입니다.
 
+
 class SettingDialog(QDialog):
 
     def __init__(self, parent):
-
         global par
         par = parent
 
@@ -139,13 +140,13 @@ class SettingDialog(QDialog):
         self.toolPosBottom = QRadioButton('Down')
         self.toolPosBottom.clicked.connect(self.toolPosChg)
 
-        if config['STYLE']['tool_pos'] == '1':
-            self.toolPosLeft.setChecked(True)
-        elif config['STYLE']['tool_pos'] == '2':
-            self.toolPosRight.setChecked(True)
-        elif config['STYLE']['tool_pos'] == '4':
+        if config['STYLE']['tool_pos'] == 'top':
             self.toolPosUp.setChecked(True)
-        elif config['STYLE']['tool_pos'] == '8':
+        elif config['STYLE']['tool_pos'] == 'left':
+            self.toolPosLeft.setChecked(True)
+        elif config['STYLE']['tool_pos'] == 'right':
+            self.toolPosRight.setChecked(True)
+        elif config['STYLE']['tool_pos'] == 'bottom':
             self.toolPosBottom.setChecked(True)
         global toolPosition
         toolPosition = config['STYLE']['tool_pos']
@@ -197,9 +198,10 @@ class SettingDialog(QDialog):
         self.stackWidget.insertWidget(2, self.toolWid)
         self.stackWidget.setCurrentIndex(0)
 
-        self.optionListWid.setCurrentItem(self.optionListWid.setCurrentRow(0))
-        self.optionListWid.setStyleSheet("border: 0px;")
-        self.optionListWid.clicked.connect(self.display)
+        self.optionTreeWid.setCurrentItem(self.optionTreeWid.topLevelItem(0))
+        self.optionTreeWid.setStyleSheet("border: 0px;")
+        self.optionTreeWid.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.optionTreeWid.clicked.connect(self.display)
         ini.chckIniSett(self)
         ##
 
@@ -243,14 +245,14 @@ class SettingDialog(QDialog):
 
     def toolPosChg(self):
         global toolPosition
-        if self.toolPosLeft.isChecked():
-            toolPosition = '1'
+        if self.toolPosUp.isChecked():
+            toolPosition = 'top'
+        elif self.toolPosLeft.isChecked():
+            toolPosition = 'left'
         elif self.toolPosRight.isChecked():
-            toolPosition = '2'
-        elif self.toolPosUp.isChecked():
-            toolPosition = '4'
+            toolPosition = 'right'
         elif self.toolPosBottom.isChecked():
-            toolPosition = '8'
+            toolPosition = 'bottom'
 
 
     def gridChg(self):

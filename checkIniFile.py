@@ -93,16 +93,15 @@ def chckInitFst(self):
 
     self.resize(int(config['STYLE']['width']), int(config['STYLE']['height']))
     self.move(int(config['STYLE']['pos_x']), int(config['STYLE']['pos_y']))
-
     ds.selectMainStyle(self, config['STYLE']['theme'],
-                       config['STYLE']['font_family'], config['STYLE']['font_size'])
-    ds.setToolBarIcon(self, config['STYLE']['tool_style'])
-    chgToolBarBorder(self)
-    ds.setTableStyle(self, config['STYLE']['table_grid'], config['STYLE']['table_header_color'],
-                     config['STYLE']['table_row_color'], config['STYLE']['table_colored_row'])
+                       config['STYLE']['font_family'], config['STYLE']['font_size'],
+                       config['STYLE']['tool_pos'], config['STYLE']['tool_style'],
+                       config['STYLE']['table_grid'],
+                       config['STYLE']['table_header_color'],
+                       config['STYLE']['table_row_color'],
+                       config['STYLE']['table_colored_row'])
 
 
-#setting에서 사용하는 함수 입니다. par가 main Window입니다.
 def writeIni(self, par, bg, size, font, tool_pos, tool_style,
              table_grid, table_header_color, table_row_color, table_colored_row):
     config = configparser.ConfigParser()
@@ -122,13 +121,14 @@ def writeIni(self, par, bg, size, font, tool_pos, tool_style,
         config.write(configfile)
 
     ds.selectMainStyle(par, config['STYLE']['theme'],
-                       config['STYLE']['font_family'], config['STYLE']['font_size'])
-    ds.setToolBarIcon(par, config['STYLE']['tool_style'])
-    chgToolBarBorder(par)
-    ds.setTableStyle(par, config['STYLE']['table_grid'], config['STYLE']['table_header_color'],
-                     config['STYLE']['table_row_color'], config['STYLE']['table_colored_row'])
+                       config['STYLE']['font_family'], config['STYLE']['font_size'],
+                       config['STYLE']['tool_pos'], config['STYLE']['tool_style'],
+                       config['STYLE']['table_grid'],
+                       config['STYLE']['table_header_color'],
+                       config['STYLE']['table_row_color'],
+                       config['STYLE']['table_colored_row'])
     ds.setSettStyle(self, config['STYLE']['theme'],
-                    config['STYLE']['font_family'], config['STYLE']['font_size'])
+                       config['STYLE']['font_family'], config['STYLE']['font_size'])
 
 
 def writeIniLast(self):
@@ -148,11 +148,19 @@ def chgToolBarBorder(self):
     with open('setting.ini', 'w') as configfile:
         config.write(configfile)
 
+    c = ds.Color()
+    if config['STYLE']['theme'] == 'White':
+        c.setWhite()
+    elif config['STYLE']['theme'] == 'Blue':
+        c.setBlue()
+    elif config['STYLE']['theme'] == 'Green':
+        c.setGreen()
+
     if self.toolbar.isFloating():
-        ds.setToolBarBorder(self, '0', config['STYLE']['theme'],
+        ds.setToolBarBorder(self, '0', c.separate_color,
                             config['STYLE']['font_family'], config['STYLE']['font_size'])
     else:
-        ds.setToolBarBorder(self, config['STYLE']['tool_pos'], config['STYLE']['theme'],
+        ds.setToolBarBorder(self, config['STYLE']['tool_pos'], c.separate_color,
                             config['STYLE']['font_family'], config['STYLE']['font_size'])
 
 # setting이 뜰 때 한번만 사용합니다.
@@ -185,5 +193,3 @@ def chckIniJoin(self):
     config.read('setting.ini')
     ds.setJoinColor(self, config['STYLE']['theme'],
                        config['STYLE']['font_family'], config['STYLE']['font_size'])
-
-

@@ -1,6 +1,8 @@
 # noinspection PyUnresolvedReferences
 import os.path
 import sys
+import pandas as pd
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import *
 import function as ft
 from PyQt5 import QtWidgets, QtCore
@@ -33,7 +35,9 @@ def fileCheck(self, file):
     else:
         fileData.fileLinks.append(file)
         site = file.split("/")
-        self.FileList.addItem(site[-1])
+        icon = QIcon('img/arrowww.png')
+        icon_item = QListWidgetItem(icon, site[-1])
+        self.FileList.addItem(icon_item)
         fileData.fileName.append(site[-1])
         if ".xlsx" in site[-1]:
             fileData.excelList.append(site[-1])
@@ -48,6 +52,12 @@ def fileCheck(self, file):
             return
         
         ft.draw(self, file)
+        path, ext = os.path.splitext(file)
+        if ext == ".xlsx":
+            df = pd.read_excel(file)
+        elif ext == ".csv":
+            df = pd.read_csv(file)
+        fileData.dfs.append(df)
 
 
 # 파일 드레그앤 드랍

@@ -4,7 +4,7 @@ import pandas as pd
 from PIL.ImageQt import rgb
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QColor
+from PyQt5.QtGui import QColor, QIcon
 from PyQt5.QtWidgets import QListWidgetItem, QLabel, QListWidget
 
 import data, fileData
@@ -21,7 +21,7 @@ def draw(self, fl):
         df = pd.read_excel(fl)
     elif ext == ".csv":
         df = pd.read_csv(fl)
-    fileData.dfs.append(df)
+
     data.tableDf = df
 
     # 리스트로 변환후 파일이름 가져오기
@@ -42,7 +42,15 @@ def draw(self, fl):
         header = QtWidgets.QTableWidgetItem(title[i])
         header.setBackground(Qt.yellow)
         table.setHorizontalHeaderItem(i, header)
-        self.cellList.addItem(str(title[i]))
+        if str(type(df[title[i]][0])) == "<class 'str'>":
+            icon = QIcon('img/파이.png')
+            icon_item = QListWidgetItem(icon, str(title[i]))
+            self.cellList.addItem(icon_item)
+        else:
+            icon = QIcon('img/막대2.png')
+            icon_item = QListWidgetItem(icon, str(title[i]))
+            self.cellList.addItem(icon_item)
+
         line.append(str(title[i]))
     data.dfsCell.append(line)
 

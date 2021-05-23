@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
-from PyQt5 import uic
+from PyQt5 import uic, QtCore
 import chart_function
 import main_event as ev
 import matplotlib.pyplot as plt
@@ -29,6 +29,8 @@ class WindowClass(QMainWindow, form_class):
         self.insertButton.clicked.connect(self.btnClick)
         self.installEventFilter(self)
         self.setAcceptDrops(True)
+        self.setWindowIcon(QIcon('img/Dash.png'))
+        self.setWindowTitle("Dash")
         self.FileList.itemDoubleClicked.connect(self.fileClick)
         self.actionCellAbsorption.triggered.connect(self.actionCells)
         self.actionFileAbsorption.triggered.connect(self.actionFiles)
@@ -43,12 +45,13 @@ class WindowClass(QMainWindow, form_class):
         self.scatterChartBtn.clicked.connect(self.scatterChartBtnClick)
         self.actionExit.triggered.connect(self.exitAction)
         self.tabWidget.resize(200, 300)
+        self.tabWidget.currentChanged.connect(self.tabChange)
 
         self.fig = plt.figure(1)
         self.fig.set_size_inches(7.8, 3.5)
         self.canvas = FigureCanvas(self.fig)
         self.graphLayout.addWidget(self.canvas)
-        self.tabLeftSplitter.setStretchFactor(0, 1)
+        self.tabOneSplitter.setStretchFactor(0, 1)
         self.cid = self.canvas.mpl_connect('motion_notify_event', self.move_cursor)
         path = '/Windows/Fonts/gulim.ttc'
         font_name = fm.FontProperties(fname=path, size=50).get_name()
@@ -64,6 +67,7 @@ class WindowClass(QMainWindow, form_class):
                                      wspace=0.25,
                                      hspace=0.35)
         self.canvas_sec = FigureCanvas(self.fig_sec)
+        self.fig.set_facecolor(QColor(244, 244, 244).name())
         self.scroll = QScrollArea()
         self.scroll.setWidget(self.canvas_sec)
         self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -78,20 +82,23 @@ class WindowClass(QMainWindow, form_class):
         self.actionSetting.triggered.connect(self.UISetting)
         self.secColListLeftTitle.setAlignment(Qt.AlignCenter)
         self.secColListRightTitle.setAlignment(Qt.AlignCenter)
-        self.menuBar().setStyleSheet("""
-                                        QMenuBar::item:pressed {background: rgb(90, 120, 215);}
-                                        QMenu::item:selected {background: rgb(90, 120, 215);}
-                                        QMenuBar {border: 1px solid;
-                                                  border-bottom-color: %s;
-                                                  border-top-color: transparent;
-                                                  border-left-color: transparent;
-                                                  border-right-color: transparent;
-                                                  }
-                                     """ % (QColor(221, 221, 221).name()))
 
         saveAction = QAction(QIcon('img/save.png'), 'Save', self)
         saveAction.setStatusTip('Save')
         saveAction.triggered.connect(self.contextMenu)
+
+        a = QLabel("")
+        a.setStyleSheet("padding-left:5px;")
+        b = QLabel("")
+        b.setStyleSheet("padding-left:5px;")
+        c = QLabel("")
+        c.setStyleSheet("padding-left:5px;")
+        d = QLabel("")
+        d.setStyleSheet("padding-left:5px;")
+        e = QLabel("")
+        e.setStyleSheet("padding-left:5px;")
+        f = QLabel("")
+        f.setStyleSheet("padding-left:5px;")
 
         fAbsorAction = QAction(QIcon('img/diffrence.png'), 'File absorption', self)
         fAbsorAction.setStatusTip('File absorption')
@@ -101,9 +108,9 @@ class WindowClass(QMainWindow, form_class):
         cAbsorAction.setStatusTip('Cell absorption')
         cAbsorAction.triggered.connect(self.actionCells)
 
-        self.settAction = QAction(QIcon('img/setting.png'), 'Setting', self)
-        self.settAction.setStatusTip('Setting')
-        self.settAction.triggered.connect(self.UISetting)
+        #self.settAction = QAction(QIcon('img/setting.png'), 'Setting', self)
+        #self.settAction.setStatusTip('Setting')
+        #self.settAction.triggered.connect(self.UISetting)
 
         exitAction = QAction(QIcon('img/exit.png'), 'Exit', self)
         exitAction.setStatusTip('Exit')
@@ -117,18 +124,51 @@ class WindowClass(QMainWindow, form_class):
         chartAction.setStatusTip('Chart')
         chartAction.triggered.connect(self.chartAction)
 
+        image = QPushButton(QIcon('img/Dash2.png'),'',self)
+        image.setStyleSheet('margin-left:1070px;'" border-style: solid;"
+            "border-width: 1px;"
+            "border-color: rgb(68,68,68);")
 
+        Label = QLabel(" Dash")
+        Label.setStyleSheet('font: 87 14pt "Arial Black"; color:white;')
         self.toolbar = self.addToolBar('toolBar')
+        self.toolbar.addWidget(a)
         self.toolbar.addAction(chartAction)
+        self.toolbar.addWidget(b)
         self.toolbar.addAction(saveAction)
+        self.toolbar.addWidget(c)
         self.toolbar.addAction(preprocessAction)
+        self.toolbar.addWidget(d)
         self.toolbar.addAction(fAbsorAction)
+        self.toolbar.addWidget(e)
         self.toolbar.addAction(cAbsorAction)
-        self.toolbar.addAction(self.settAction)
+        self.toolbar.addWidget(f)
+        #self.toolbar.addAction(self.settAction)
         self.toolbar.addAction(exitAction)
-        self.toolbar.topLevelChanged.connect(self.changeBorder)
+        self.toolbar.addWidget(image)
+        self.toolbar.addWidget(Label)
+        self.toolbar.setMovable(False)
 
-        self.chckIniFile()
+        self.tableWidget.horizontalHeader().setStyleSheet("QHeaderView::section{"
+                                                          "font: 800 12pt '맑은 고딕';"
+                                                          "background-color:rgb(241,241,241);""}")
+        self.tableWidget.verticalHeader().setStyleSheet("QHeaderView::section{"
+                                                          "font: 800 12pt '맑은 고딕';"
+                                                          "margin-left:18px;"
+                                                          "background-color:rgb(241,241,241);""}")
+        self.tableWidget.verticalHeader().setMinimumWidth(45)
+        #self.toolbar.setStyleSheet("QToolBar {background-color: white;}")
+
+        #self.chckIniFile()
+
+    def tabChange(self, index):
+        if index == 0:
+            self.tableWidget.resize(750,300)
+            self.tableWidget.setVisible(True)
+        else:
+            self.tableWidget.resize(0,0)
+            self.tableWidget.setVisible(False)
+
 
     def chckIniFile(self):
         checkIniFile.chckInitFst(self)
@@ -246,7 +286,6 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setStyle(QStyleFactory.create('Fusion'))
     myWindow = WindowClass()
-
     # 프로그램 화면을 보여주는 코드
     myWindow.show()
     app.exec_()
