@@ -12,9 +12,16 @@ def cellClick(self):
     self.x = []
     mod = False
     try:
+        if data.graphType == 2:
+            raise
         for i in range(0, row):
             aa = table.item(i, self.cellList.currentRow()).text()
-            self.y.append(float(aa))
+            if aa == '':
+                aa = 0
+            try:
+                self.y.append(int(aa))
+            except:
+                self.y.append(float(aa))
             self.x = np.arange(1, row + 1, 1)
     except:
         mod = True
@@ -48,10 +55,12 @@ def cellClick(self):
             self.pies = self.ax.pie(self.y, labels=self.y, autopct='%0.1f%%')
     elif data.graphType == 3:
         self.scatterChartBtn.toggle()
-        self.scat = self.ax.scatter(self.x, self.y)
-        if mod:
-            self.ax.set_xticks(self.x)
-            self.ax.set_xticklabels(self.ele)
+        self.ax.boxplot(self.y)
+        # self.scat = self.ax.scatter(self.x, self.y)
+        # if mod:
+        #     self.ax.set_xticks(self.x)
+        #     self.ax.set_xticklabels(self.ele)
+
     self.ax.set_title(self.cellList.currentItem().text())
     self.annot = self.ax.annotate("", xy=(0, 0), xytext=(20, 20), textcoords="offset points",
                         bbox=dict(boxstyle="round", fc="w"),
@@ -85,7 +94,8 @@ def move_cursor(self, event):
             #pie_move_cursor(self, event)
             pass
         elif data.graphType == 3:
-            scat_move_cursor(self, event)
+            #scat_move_cursor(self, event)
+            pass
         return
     if vis:
         self.annot.set_visible(False)
