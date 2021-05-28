@@ -138,7 +138,8 @@ def function_1(self):
 
 
 def btnCheck(self):
-    SelectColumns.OptionWindow(self)
+    if not 'Preprocessing_' in preprocessing_Data.filename:
+        SelectColumns.OptionWindow(self)
 
 
 def EditChange():

@@ -192,18 +192,19 @@ def function_3(self):
 
 
 def btnCheck(self):
-    fileIndex = fileData.fileName.index(preprocessing_Data.filename)
-    preprocessing_Data.processingDfs = fileData.dfs[fileIndex]
-    preprocessing_Data.processCell.clear()
-    col = len(fileData.dfs[fileIndex].columns)
-    title = list(fileData.dfs[fileIndex].columns)
-    for i in list(range(0, col)):
-        if preprocessing_Data.processingDfs[str(title[i])].dtype == "int32" or \
-                preprocessing_Data.processingDfs[str(title[i])].dtype == "float64" or \
-                preprocessing_Data.processingDfs[str(title[i])].dtype == "int64":
-            preprocessing_Data.processCell.append(str(title[i]))
-    preprocessing_Data.NormalFlag = True
-    SelectColumns.OptionWindow(self)
+    if not 'Preprocessing_' in preprocessing_Data.filename:
+        fileIndex = fileData.fileName.index(preprocessing_Data.filename)
+        preprocessing_Data.processingDfs = fileData.dfs[fileIndex]
+        preprocessing_Data.processCell.clear()
+        col = len(fileData.dfs[fileIndex].columns)
+        title = list(fileData.dfs[fileIndex].columns)
+        for i in list(range(0, col)):
+            if preprocessing_Data.processingDfs[str(title[i])].dtype == "int32" or \
+                    preprocessing_Data.processingDfs[str(title[i])].dtype == "float64" or \
+                    preprocessing_Data.processingDfs[str(title[i])].dtype == "int64":
+                preprocessing_Data.processCell.append(str(title[i]))
+        preprocessing_Data.NormalFlag = True
+        SelectColumns.OptionWindow(self)
 
 
 def indexChanged2(index):

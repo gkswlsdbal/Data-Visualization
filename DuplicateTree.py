@@ -75,7 +75,8 @@ def function_2(self):
 
 
 def btnClick(self):
-    SelectColumns.OptionWindow(self)
+    if not 'Preprocessing_' in preprocessing_Data.filename:
+        SelectColumns.OptionWindow(self)
 
 
 def check():

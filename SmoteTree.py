@@ -134,6 +134,7 @@ def function_4(self):
     self.treeWidget_2.setItemWidget(itemChild9, 0, LineEdit3)
 
 def btnClick(self):
-    SelectColumns.OptionWindow(self)
+    if not 'Preprocessing_' in preprocessing_Data.filename:
+        SelectColumns.OptionWindow(self)
 
 

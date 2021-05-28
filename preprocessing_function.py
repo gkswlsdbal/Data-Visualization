@@ -1,4 +1,10 @@
+import logging
+import sys
+import traceback
 from collections import Counter
+
+from PyQt5.QtWidgets import QMessageBox
+from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.preprocessing import LabelEncoder
 
 import ClipTree
@@ -11,9 +17,7 @@ import pandas as pd
 import preprocessing
 from imblearn.over_sampling import SMOTE
 import SmoteTree
-from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.preprocessing import RobustScaler
+from sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler
 
 
 # 결측치 처리 함수
@@ -561,52 +565,73 @@ def SmoteData(self):
                           k_neighbors=int(SmoteTree.LineEdit2.text()), random_state=int(SmoteTree.LineEdit3.text()))
         else:
             smote = SMOTE(k_neighbors=int(SmoteTree.LineEdit2.text()), random_state=int(SmoteTree.LineEdit3.text()))
-        global smoteData_X
-        global smoteData_y
-        smoteData_X, smoteData_y = smote.fit_resample(data_X, data_y)
-        y = le2.inverse_transform(smoteData_y)
-        df = pd.DataFrame(data=y, columns=preprocessing_Data.selectCell)
-        preprocessing_Data.processingDfs = preprocessing_Data.processingDfs.combine_first(df)
-        preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
-        preprocessing_Data.SmoteDfs = preprocessing_Data.processingDfs.copy()
-        if preprocessing_Data.itemCount == 1:
-            preprocessing_Data.completeFlag = False
-        else:
-            preprocessing_Data.completeFlag = True
-        if preprocessing_Data.completeFlag:
-            pass
-        else:
-            preprocessing_Data.completeDfs = preprocessing_Data.processingDfs.copy()
-        preprocessing_Data.processCell.clear()
-        if self.process not in self.name_2.text():
-            if self.process not in " ":
-                self.process2 = " " + self.process + " "
-                self.name_2.setText(self.process2)
-        function.SmoteInfo(self, fileData.dfs[fileIndex], preprocessing_Data.processingDfs)
-        self.listWidget.addItem('  \n{}'.format(pd.get_dummies(data_y).sum()))
-        self.listWidget_2.addItem('  \n{}'.format(pd.get_dummies(smoteData_y).sum()))
-        self.listWidget.setVisible(True)
-        self.pushButton.setVisible(True)
-        self.name_2.setVisible(True)
-        self.listWidget_2.setVisible(True)
-        preprocessing.Button.setVisible(True)
-        self.listWidget.addItem("")
-        self.listWidget_2.addItem("")
-        if "SMOTE" not in preprocessing_Data.label:
-            preprocessing_Data.label += " SMOTE "
-            self.label_2.setText(preprocessing_Data.label)
 
-        counter = Counter(data_y)
-        for k, v in counter.items():
-            per = v / len(data_y) * 100
-            self.listWidget.addItem('Class=%d, n=%d (%.3f%%)' % (k, v, per))
+        try:
+            global smoteData_X
+            global smoteData_y
+            try:
+                smoteData_X, smoteData_y = smote.fit_resample(data_X, data_y)
+            except ValueError:
+                pass
+                # vectorizer = CountVectorizer()
+                # vectorizer.fit(data_X.astype(str))
+                # data_x2 = vectorizer.transform(data_X)
+                # data_x2 = data_x2.toarray()
+                # data_x2 = pd.DataFrame(data_x2)
+                #
+                # vectorizer.fit(data_y)
+                # data_y2 = vectorizer.transform(data_y)
+                # data_y2 = data_y2.toarray()
+                # data_y2 = pd.DataFrame(data_y2)
+                # smoteData_X, smoteData_y = smote.fit_resample(data_x2, data_y2)
 
-        global counter1
-        counter1 = Counter(smoteData_y)
-        for k, v in counter1.items():
-            per = v / len(smoteData_y) * 100
-            self.listWidget_2.addItem('Class=%d, n=%d (%.3f%%)' % (k, v, per))
-        preprocessing_Data.applyFlag = False
+            y = le2.inverse_transform(smoteData_y)
+            df = pd.DataFrame(data=y, columns=preprocessing_Data.selectCell)
+            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs.combine_first(df)
+            preprocessing_Data.processingDfs = preprocessing_Data.processingDfs[list(fileData.dfs[fileIndex])]
+            preprocessing_Data.SmoteDfs = preprocessing_Data.processingDfs.copy()
+            if preprocessing_Data.itemCount == 1:
+                preprocessing_Data.completeFlag = False
+            else:
+                preprocessing_Data.completeFlag = True
+            if preprocessing_Data.completeFlag:
+                pass
+            else:
+                preprocessing_Data.completeDfs = preprocessing_Data.processingDfs.copy()
+            preprocessing_Data.processCell.clear()
+            if self.process not in self.name_2.text():
+                if self.process not in " ":
+                    self.process2 = " " + self.process + " "
+                    self.name_2.setText(self.process2)
+            function.SmoteInfo(self, fileData.dfs[fileIndex], preprocessing_Data.processingDfs)
+            self.listWidget.addItem('  \n{}'.format(pd.get_dummies(data_y).sum()))
+            self.listWidget_2.addItem('  \n{}'.format(pd.get_dummies(smoteData_y).sum()))
+            self.listWidget.setVisible(True)
+            self.pushButton.setVisible(True)
+            self.name_2.setVisible(True)
+            self.listWidget_2.setVisible(True)
+            preprocessing.Button.setVisible(True)
+            self.listWidget.addItem("")
+            self.listWidget_2.addItem("")
+            if "SMOTE" not in preprocessing_Data.label:
+                preprocessing_Data.label += " SMOTE "
+                self.label_2.setText(preprocessing_Data.label)
+
+            counter = Counter(data_y)
+            for k, v in counter.items():
+                per = v / len(data_y) * 100
+                self.listWidget.addItem('Class=%d, n=%d (%.3f%%)' % (k, v, per))
+
+            global counter1
+            counter1 = Counter(smoteData_y)
+            for k, v in counter1.items():
+                per = v / len(smoteData_y) * 100
+                self.listWidget_2.addItem('Class=%d, n=%d (%.3f%%)' % (k, v, per))
+            preprocessing_Data.applyFlag = False
+        except Exception as e:
+            logging.error(traceback.format_exc())
+            QMessageBox.information(None, "error", str(e))
+
 
 
 # 특성 표준화

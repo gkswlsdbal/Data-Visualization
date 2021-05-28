@@ -5,7 +5,7 @@ from PIL.ImageQt import rgb
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QIcon
-from PyQt5.QtWidgets import QListWidgetItem, QLabel, QListWidget
+from PyQt5.QtWidgets import QListWidgetItem, QLabel, QListWidget, QMessageBox
 
 import data, fileData
 import numpy as np
@@ -50,7 +50,7 @@ def draw(self, fl):
             icon = QIcon('img/막대2.png')
             icon_item = QListWidgetItem(icon, str(title[i]))
             self.cellList.addItem(icon_item)
-        self.unshowingColList.addItem(str(title[i]))
+
         line.append(str(title[i]))
     data.dfsCell.append(line)
 
@@ -118,9 +118,9 @@ def isNumber(coltable, title):
     try:
         coltable = coltable.astype({title: 'int64'})
         return True
-    except ValueError:
+    except (ValueError, OverflowError):
         try:
-            coltable = coltable.astype({title: 'float'})
+            coltable = coltable.astype({title: 'float64'})
             return True
         except ValueError:
             return False

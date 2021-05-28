@@ -1,6 +1,6 @@
 import os.path
 
-from PyQt5.QtWidgets import QTreeWidgetItem, QFileDialog
+from PyQt5.QtWidgets import QTreeWidgetItem, QFileDialog, QMessageBox
 import DuplicatePR
 import MissingDataTree, preprocessing_Data
 import fileData
@@ -58,7 +58,13 @@ def click(self, item):
                 file = item.text(0).split("Preprocessing_"+str(i+1))
         fileIndex = fileData.fileName.index(file[-1])
         processIndex = preprocessing_Data.completeName.index(preprocessing_Data.filename)
-        col = len(preprocessing_Data.preprocessingDfs[processIndex].columns)
+        try:
+            col = len(preprocessing_Data.preprocessingDfs[processIndex].columns)
+
+        except AttributeError:
+            QMessageBox.information(self, 'error',
+                                    '"list" object has no attribute "columns"')
+            
         title = list(preprocessing_Data.preprocessingDfs[processIndex].columns)
         for i in list(range(0, col)):
             preprocessing_Data.processCell.append(str(title[i]))
