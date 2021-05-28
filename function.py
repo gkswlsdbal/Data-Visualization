@@ -1,5 +1,7 @@
 # noinspection PyUnresolvedReferences
 import os.path
+
+import chardet
 import pandas as pd
 from PIL.ImageQt import rgb
 from PyQt5 import QtWidgets, QtGui, QtCore
@@ -17,15 +19,18 @@ import preprocessing_Data
 
 def draw(self, fl):
     path, ext = os.path.splitext(fl)
+    rawdata = open(fl,'rb').read()
+    result = chardet.detect(rawdata)
+    charenc = result['encoding']
     if ext == ".xlsx":
         df = pd.read_excel(fl)
     elif ext == ".csv":
-        df = pd.read_csv(fl)
-
+        df = pd.read_csv(fl,encoding=charenc,error_bad_lines=False)
     data.tableDf = df
 
     # 리스트로 변환후 파일이름 가져오기
     table = self.tableWidget
+    self.tableWidget.scrollToTop()
     table.setSortingEnabled(True)
 
     # 표의 크기를 지정
@@ -50,7 +55,6 @@ def draw(self, fl):
             icon = QIcon('img/막대2.png')
             icon_item = QListWidgetItem(icon, str(title[i]))
             self.cellList.addItem(icon_item)
-
         line.append(str(title[i]))
     data.dfsCell.append(line)
 

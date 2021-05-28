@@ -1,6 +1,8 @@
 # noinspection PyUnresolvedReferences
 import os.path
 import sys
+
+import chardet
 import pandas as pd
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import *
@@ -53,10 +55,13 @@ def fileCheck(self, file):
         
         ft.draw(self, file)
         path, ext = os.path.splitext(file)
+        rawdata = open(file, 'rb').read()
+        result = chardet.detect(rawdata)
+        charenc = result['encoding']
         if ext == ".xlsx":
             df = pd.read_excel(file)
         elif ext == ".csv":
-            df = pd.read_csv(file)
+            df = pd.read_csv(file,encoding=charenc,error_bad_lines=False)
         fileData.dfs.append(df)
 
 
@@ -91,9 +96,9 @@ def FileSave(self):
             ft.tableChange(self)
         if fileData.fileName[self.fileCount] in fileData.fileLinks[self.fileCount]:
             if ext == ".xlsx":
-                fileData.dfs[self.fileCount].to_excel(fileData.fileLinks[self.fileCount], index=None)
+                fileData.dfs[self.fileCount].to_excel(fileData.fileLinks[self.fileCount], index=None,encoding='utf-8-sig')
             elif ext == ".csv":
-                fileData.dfs[self.fileCount].to_csv(fileData.fileLinks[self.fileCount], index=None)
+                fileData.dfs[self.fileCount].to_csv(fileData.fileLinks[self.fileCount], index=None,encoding='utf-8-sig')
         else:
             newSave(self)
     except:
@@ -111,12 +116,13 @@ def newSave(self):
                 ft.tableChange(self)
             path, ext = os.path.splitext(newFile[0])
             if ext == ".xlsx":
-                fileData.dfs[self.fileCount].to_excel(path + ext, index=None)
+                fileData.dfs[self.fileCount].to_excel(path + ext, index=None,encoding='utf-8-sig')
             elif ext == ".csv":
-                fileData.dfs[self.fileCount].to_csv(path + ext, index=None)
+                fileData.dfs[self.fileCount].to_csv(path + ext, index=None,encoding='utf-8-sig')
     except:
         QMessageBox.critical(self, 'Error',
                              "저장 가능한 파일이 없습니다!", QMessageBox.Ok)
+
 
 # 프로그램 종료
 def exitAction(self):

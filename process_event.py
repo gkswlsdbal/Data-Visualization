@@ -64,7 +64,7 @@ def click(self, item):
         except AttributeError:
             QMessageBox.information(self, 'error',
                                     '"list" object has no attribute "columns"')
-            
+
         title = list(preprocessing_Data.preprocessingDfs[processIndex].columns)
         for i in list(range(0, col)):
             preprocessing_Data.processCell.append(str(title[i]))
@@ -96,16 +96,21 @@ def apply(self):
 
     if preprocessing_Data.process == 1:
         if preprocessing_Data.applyFlag:
+
+            preprocessing_Data.okayFlag = True
             preprocessing_Data.itemCount += 1
         else:
             pass
         if preprocessing_Data.completeFlag:
+
             DuplicatePR.MissingData(self)
         else:
+
             preprocessing_function.MissingData(self)
 
     if preprocessing_Data.process == 2:
         if preprocessing_Data.applyFlag:
+            preprocessing_Data.okayFlag = True
             preprocessing_Data.itemCount += 1
         else:
             pass
@@ -116,6 +121,7 @@ def apply(self):
 
     if preprocessing_Data.process == 3:
         if preprocessing_Data.applyFlag:
+            preprocessing_Data.okayFlag = True
             preprocessing_Data.itemCount += 1
         else:
             pass
@@ -126,6 +132,7 @@ def apply(self):
 
     if preprocessing_Data.process == 4:
         if preprocessing_Data.applyFlag:
+            preprocessing_Data.okayFlag = True
             preprocessing_Data.itemCount += 1
         else:
             pass
@@ -136,6 +143,7 @@ def apply(self):
 
     if preprocessing_Data.process == 5:
         if preprocessing_Data.applyFlag:
+            preprocessing_Data.okayFlag = True
             preprocessing_Data.itemCount += 1
         else:
             pass
@@ -148,10 +156,12 @@ def apply(self):
 
 def Okay(self):
 
-    itemChild1 = QTreeWidgetItem(preprocessing.itemTop3)
-    itemChild1.setText(0, "Preprocessing_" + str(len(preprocessing_Data.preprocessingDfs) + 1) + preprocessing_Data.filename)
-    preprocessing_Data.completeName.append("Preprocessing_" + str(len(preprocessing_Data.preprocessingDfs) + 1) + preprocessing_Data.filename)
-    preprocessing_Data.preprocessingDfs.append(preprocessing_Data.completeDfs)
+    if preprocessing_Data.okayFlag:
+        itemChild1 = QTreeWidgetItem(preprocessing.itemTop3)
+        itemChild1.setText(0, "Preprocessing_" + str(len(preprocessing_Data.preprocessingDfs) + 1) + preprocessing_Data.filename)
+        preprocessing_Data.completeName.append("Preprocessing_" + str(len(preprocessing_Data.preprocessingDfs) + 1) + preprocessing_Data.filename)
+        preprocessing_Data.preprocessingDfs.append(preprocessing_Data.completeDfs)
+        preprocessing_Data.okayFlag = False
 
 def Save(self):
     processIndex = preprocessing_Data.completeName.index(preprocessing_Data.filename)
@@ -160,7 +170,7 @@ def Save(self):
     if newFile[0]:
         path, ext = os.path.splitext(newFile[0])
         if ext == ".xlsx":
-            preprocessing_Data.preprocessingDfs[processIndex].to_excel(path + ext, index=None)
+            preprocessing_Data.preprocessingDfs[processIndex].to_excel(path + ext, index=None, encoding='utf-8-sig')
         elif ext == ".csv":
-            preprocessing_Data.preprocessingDfs[processIndex].to_csv(path + ext, index=None)
+            preprocessing_Data.preprocessingDfs[processIndex].to_csv(path + ext, index=None, encoding='utf-8-sig')
 

@@ -18,3 +18,6 @@ excelList = []
 
 # csv 파일 이름 저장
 csvList = []
+
+# encoidng 저장
+encoding = ''

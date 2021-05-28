@@ -196,3 +196,4 @@ class OptionWindow(QDialog):
         preprocessing_Data.SmoteDfs = []
         preprocessing_Data.NormalFlag = False
         preprocessing_Data.processingDfs = []
+        preprocessing_Data.okayFlag = False

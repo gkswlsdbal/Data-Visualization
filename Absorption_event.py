@@ -1,6 +1,7 @@
 # noinspection PyUnresolvedReferences
 import os.path
 import pandas as pd
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import *
 import pandas
 
@@ -107,6 +108,7 @@ def outerBtnClick(self):
         QMessageBox.information(self, 'No Same Column',
                                 '두 파일 사이에 겹치는 열이 없어 합집합을 사용할 수 없습니다.')
 
+
 def leftBtnClick(self):
     left_outer = pd.merge(fileData.dfs[self.slctFileRows[1]], fileData.dfs[self.slctFileRows[2]],
                           how='left',
@@ -136,10 +138,12 @@ def AbsorptionSave(self, dataFrame):
 
         newlineSite = newline.split("/")
         if ext == ".xlsx":
-            fileData.dfs[-1].to_excel(path + ext, index=None)
+            fileData.dfs[-1].to_excel(path + ext, index=None,encoding='utf-8-sig')
         elif ext == ".csv":
-            fileData.dfs[-1].to_csv(path + ext, index=None)
+            fileData.dfs[-1].to_csv(path + ext, index=None,encoding='utf-8-sig')
         if newlineSite[-1] not in fileData.fileName:
-            self.myParent.FileList.addItem(newlineSite[-1])
+            icon = QIcon('img/arrowww.png')
+            icon_item = QListWidgetItem(icon, newlineSite[-1])
+            self.myParent.FileList.addItem(icon_item)
         fileData.fileName.append(newlineSite[-1])
         self.myParent.repaint()

@@ -66,3 +66,6 @@ clipValue = 0
 
 # 저장 데이터프레임
 saveDfs = []
+
+# 확인플레그
+okayFlag = False

@@ -60,11 +60,12 @@ def cellClick(self):
         # if mod:
         #     self.ax.set_xticks(self.x)
         #     self.ax.set_xticklabels(self.ele)
+
     try:
         self.ax.set_title(self.cellList.currentItem().text())
         self.annot = self.ax.annotate("", xy=(0, 0), xytext=(20, 20), textcoords="offset points",
-                            bbox=dict(boxstyle="round", fc="w"),
-                            arrowprops=dict(arrowstyle="->"))
+                                      bbox=dict(boxstyle="round", fc="w"),
+                                      arrowprops=dict(arrowstyle="->"))
         self.annot.set_visible(False)
         self.canvas.draw()
         data.graphOn = True

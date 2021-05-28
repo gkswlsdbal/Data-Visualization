@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5 import uic, QtCore
 import chart_function
+import fileData
 import main_event as ev
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
@@ -99,6 +100,8 @@ class WindowClass(QMainWindow, form_class):
         e.setStyleSheet("padding-left:5px;")
         f = QLabel("")
         f.setStyleSheet("padding-left:5px;")
+        g = QLabel("")
+        g.setStyleSheet("padding-left:5px;")
 
         fAbsorAction = QAction(QIcon('img/diffrence.png'), 'File absorption', self)
         fAbsorAction.setStatusTip('File absorption')
