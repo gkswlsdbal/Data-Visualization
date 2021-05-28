@@ -99,10 +99,13 @@ def innerBtnClick(self):
 
 
 def outerBtnClick(self):
-    outer = pd.merge(fileData.dfs[self.slctFileRows[1]], fileData.dfs[self.slctFileRows[2]], how='outer')
-    AbsorptionSave(self, outer)
-    self.close()
-
+    try:
+        outer = pd.merge(fileData.dfs[self.slctFileRows[1]], fileData.dfs[self.slctFileRows[2]], how='outer')
+        AbsorptionSave(self, outer)
+        self.close()
+    except pandas.errors.MergeError:
+        QMessageBox.information(self, 'No Same Column',
+                                '두 파일 사이에 겹치는 열이 없어 합집합을 사용할 수 없습니다.')
 
 def leftBtnClick(self):
     left_outer = pd.merge(fileData.dfs[self.slctFileRows[1]], fileData.dfs[self.slctFileRows[2]],
