@@ -569,21 +569,7 @@ def SmoteData(self):
         try:
             global smoteData_X
             global smoteData_y
-            try:
-                smoteData_X, smoteData_y = smote.fit_resample(data_X, data_y)
-            except ValueError:
-                pass
-                # vectorizer = CountVectorizer()
-                # vectorizer.fit(data_X.astype(str))
-                # data_x2 = vectorizer.transform(data_X)
-                # data_x2 = data_x2.toarray()
-                # data_x2 = pd.DataFrame(data_x2)
-                #
-                # vectorizer.fit(data_y)
-                # data_y2 = vectorizer.transform(data_y)
-                # data_y2 = data_y2.toarray()
-                # data_y2 = pd.DataFrame(data_y2)
-                # smoteData_X, smoteData_y = smote.fit_resample(data_x2, data_y2)
+            smoteData_X, smoteData_y = smote.fit_resample(data_X, data_y)
 
             y = le2.inverse_transform(smoteData_y)
             df = pd.DataFrame(data=y, columns=preprocessing_Data.selectCell)
