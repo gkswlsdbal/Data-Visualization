@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1582</width>
+    <width>1465</width>
     <height>883</height>
    </rect>
   </property>
@@ -340,7 +340,7 @@ font: 75 13pt &quot;함초롬바탕&quot;;
                      </property>
                      <property name="icon">
                       <iconset>
-                       <normaloff>img/boxGraph2.png</normaloff>img/boxGraph2.png</iconset>
+                       <normaloff>img/산포도.png</normaloff>img/산포도.png</iconset>
                      </property>
                      <property name="iconSize">
                       <size>
@@ -461,11 +461,9 @@ font: 75 13pt &quot;함초롬바탕&quot;;
                    <enum>Qt::DefaultContextMenu</enum>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">QListWidget {
-	padding-top : 10px;
-	padding-left : 10px;
-	padding-bottom : 10px;
-}</string>
+                   <string notr="true">padding-top : 10px;
+padding-left : 10px;
+padding-bottom : 10px;</string>
                   </property>
                   <property name="lineWidth">
                    <number>1</number>
@@ -507,6 +505,29 @@ font: 75 13pt &quot;함초롬바탕&quot;;
                <number>12</number>
               </property>
               <item>
+               <widget class="QComboBox" name="secSortCombo">
+                <property name="font">
+                 <font>
+                  <family>맑은 고딕</family>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(0, 0, 0);</string>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Missing value - Ascending</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Missing value - Descending</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
                <widget class="QComboBox" name="secChartCombo">
                 <property name="font">
                  <font>
@@ -518,7 +539,7 @@ font: 75 13pt &quot;함초롬바탕&quot;;
                  </font>
                 </property>
                 <property name="styleSheet">
-                 <string notr="true"/>
+                 <string notr="true">color: rgb(0, 0, 0);</string>
                 </property>
                 <item>
                  <property name="text">
@@ -533,29 +554,6 @@ font: 75 13pt &quot;함초롬바탕&quot;;
                 <item>
                  <property name="text">
                   <string>Missing value</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item>
-               <widget class="QComboBox" name="secSortCombo">
-                <property name="font">
-                 <font>
-                  <family>맑은 고딕</family>
-                  <pointsize>10</pointsize>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true"/>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>Missing value - Ascending</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Missing value - Descending</string>
                  </property>
                 </item>
                </widget>

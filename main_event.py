@@ -85,31 +85,38 @@ def eventFilter(self, object, event):
 
 # 파일 저장
 def FileSave(self):
-    path, ext = os.path.splitext(fileData.fileLinks[self.fileCount])
-    if self.cellFlag:
-        ft.tableChange(self)
-    if fileData.fileName[self.fileCount] in fileData.fileLinks[self.fileCount]:
-        if ext == ".xlsx":
-            fileData.dfs[self.fileCount].to_excel(fileData.fileLinks[self.fileCount], index=None)
-        elif ext == ".csv":
-            fileData.dfs[self.fileCount].to_csv(fileData.fileLinks[self.fileCount], index=None)
-    else:
-        newSave(self)
+    try:
+        path, ext = os.path.splitext(fileData.fileLinks[self.fileCount])
+        if self.cellFlag:
+            ft.tableChange(self)
+        if fileData.fileName[self.fileCount] in fileData.fileLinks[self.fileCount]:
+            if ext == ".xlsx":
+                fileData.dfs[self.fileCount].to_excel(fileData.fileLinks[self.fileCount], index=None)
+            elif ext == ".csv":
+                fileData.dfs[self.fileCount].to_csv(fileData.fileLinks[self.fileCount], index=None)
+        else:
+            newSave(self)
+    except:
+        QMessageBox.critical(self, 'Error',
+                             "저장 가능한 파일이 없습니다!", QMessageBox.Ok)
 
 
 # 다른이름으로 저장
 def newSave(self):
-    newFile = QFileDialog.getSaveFileName(self, self.tr("Save Data files"), "./",
-                                          self.tr('All File(*);; Csv File(*.csv);; Data File(*.xlsx)'))
-    if newFile[0]:
-        if self.cellFlag:
-            ft.tableChange(self)
-        path, ext = os.path.splitext(newFile[0])
-        if ext == ".xlsx":
-            fileData.dfs[self.fileCount].to_excel(path + ext, index=None)
-        elif ext == ".csv":
-            fileData.dfs[self.fileCount].to_csv(path + ext, index=None)
-
+    try:
+        newFile = QFileDialog.getSaveFileName(self, self.tr("Save Data files"), "./",
+                                              self.tr('All File(*);; Csv File(*.csv);; Data File(*.xlsx)'))
+        if newFile[0]:
+            if self.cellFlag:
+                ft.tableChange(self)
+            path, ext = os.path.splitext(newFile[0])
+            if ext == ".xlsx":
+                fileData.dfs[self.fileCount].to_excel(path + ext, index=None)
+            elif ext == ".csv":
+                fileData.dfs[self.fileCount].to_csv(path + ext, index=None)
+    except:
+        QMessageBox.critical(self, 'Error',
+                             "저장 가능한 파일이 없습니다!", QMessageBox.Ok)
 
 # 프로그램 종료
 def exitAction(self):
