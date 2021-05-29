@@ -55,6 +55,7 @@ def draw(self, fl):
             icon = QIcon('img/막대2.png')
             icon_item = QListWidgetItem(icon, str(title[i]))
             self.cellList.addItem(icon_item)
+        self.unshowingColList.addItem(str(title[i]))
         line.append(str(title[i]))
     data.dfsCell.append(line)
 
