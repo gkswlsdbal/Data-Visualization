@@ -1,4 +1,4 @@
-
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import data
 import numpy as np
 import math
@@ -89,7 +89,10 @@ def secGraphColOnly(self):
                 aa_sec = table.item(i, p).text()
                 if aa_sec == '':
                     aa_sec = 0
-                self.y_sec.append(float(aa_sec))
+                try:
+                    self.y_sec.append(int(aa_sec))
+                except:
+                    self.y_sec.append(float(aa_sec))
                 self.x_sec = np.arange(1, row + 1, 1)
         except:
             self.y_sec = []
@@ -160,7 +163,10 @@ def secGraphColNMissingValue(self):
                 aa_sec = table.item(i, p).text()
                 if aa_sec == '':
                     aa_sec = 0
-                self.y_sec.append(float(aa_sec))
+                try:
+                    self.y_sec.append(int(aa_sec))
+                except:
+                    self.y_sec.append(float(aa_sec))
                 self.x_sec = np.arange(1, row + 1, 1)
         except:
             self.y_sec = []
