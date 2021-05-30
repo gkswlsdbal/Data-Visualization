@@ -178,7 +178,6 @@ def barGraphBtnClick(self):
     if data.graphOn:
         cellClick(self)
 
-
 # 꺽은선 그래프 버튼
 def lineGraphBtnClick(self):
     resetGraphType(self)
