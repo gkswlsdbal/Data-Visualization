@@ -128,7 +128,7 @@ class WindowClass(QMainWindow, form_class):
         chartAction.triggered.connect(self.chartAction)
 
         image = QPushButton(QIcon('img/Dash2.png'),'',self)
-        image.setStyleSheet('margin-left:1070px;'" border-style: solid;"
+        image.setStyleSheet('margin-left:1150px;'" border-style: solid;"
             "border-width: 1px;"
             "border-color: rgb(68,68,68);")
 

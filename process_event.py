@@ -105,8 +105,10 @@ def apply(self):
 
             DuplicatePR.MissingData(self)
         else:
-
-            preprocessing_function.MissingData(self)
+            try:
+                preprocessing_function.MissingData(self)
+            except:
+                pass
 
     if preprocessing_Data.process == 2:
         if preprocessing_Data.applyFlag:
@@ -117,7 +119,10 @@ def apply(self):
         if preprocessing_Data.completeFlag:
             DuplicatePR.DuplicateData(self)
         else:
-            preprocessing_function.DuplicateData(self)
+            try:
+                preprocessing_function.DuplicateData(self)
+            except:
+                pass
 
     if preprocessing_Data.process == 3:
         if preprocessing_Data.applyFlag:
@@ -128,7 +133,10 @@ def apply(self):
         if preprocessing_Data.completeFlag:
             DuplicatePR.ClipData(self)
         else:
-            preprocessing_function.ClipData(self)
+            try:
+                preprocessing_function.ClipData(self)
+            except:
+                pass
 
     if preprocessing_Data.process == 4:
         if preprocessing_Data.applyFlag:
@@ -139,7 +147,10 @@ def apply(self):
         if preprocessing_Data.completeFlag:
             DuplicatePR.SmoteData(self)
         else:
-            preprocessing_function.SmoteData(self)
+            try:
+                preprocessing_function.SmoteData(self)
+            except:
+                pass
 
     if preprocessing_Data.process == 5:
         if preprocessing_Data.applyFlag:
@@ -150,7 +161,10 @@ def apply(self):
         if preprocessing_Data.completeFlag:
             DuplicatePR.NormalizeData(self)
         else:
-            preprocessing_function.NormalizeData(self)
+            try:
+                preprocessing_function.NormalizeData(self)
+            except:
+                pass
 
 
 
