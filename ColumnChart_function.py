@@ -116,14 +116,35 @@ def secGraphColOnly(self):
         
         ##추가
         if yyy > 2:
-            fig_sec_height = 8 + (yyy - 2) * 4
-            self.fig_sec.set_size_inches(7.8, fig_sec_height)
-            self.canvas_sec = FigureCanvas(self.fig_sec)
-            self.scroll.setWidget(self.canvas_sec)
+            fig_sec_height = 6.5 + (yyy - 2) * 3.5
+            self.fig_sec.set_size_inches(6.65, fig_sec_height)
         else:
-            self.fig_sec.set_size_inches(7.8, 8)
-            self.canvas_sec = FigureCanvas(self.fig_sec)
-            self.scroll.setWidget(self.canvas_sec)
+            self.fig_sec.set_size_inches(6.65, 6.5)
+        if 1 <= yyy <= 2:
+            self.fig_sec.subplots_adjust(left=0.1,
+                                         bottom=0.05,
+                                         right=0.99,
+                                         top=0.95,
+                                         wspace=0.23,
+                                         hspace=0.23)
+        if 3 <= yyy <= 6:
+            top = 0.97 + (yyy - 3) * 0.005
+            bottom = 0.05 - (yyy - 3) * 0.01
+            self.fig_sec.subplots_adjust(left=0.1,
+                                         bottom=bottom,
+                                         right=0.99,
+                                         top=top,
+                                         wspace=0.23,
+                                         hspace=0.23)
+        if yyy >= 7:
+            self.fig_sec.subplots_adjust(left=0.1,
+                                         bottom=0.02,
+                                         right=0.99,
+                                         top=0.99,
+                                         wspace=0.23,
+                                         hspace=0.23)
+        self.canvas_sec = FigureCanvas(self.fig_sec)
+        self.scroll.setWidget(self.canvas_sec)
         ##
         
         self.ax_sec = self.fig_sec.add_subplot(yyy, xxx, j+1)
