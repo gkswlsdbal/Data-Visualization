@@ -1,4 +1,4 @@
-
+from matplotlib.backends.backend_template import FigureCanvas
 import data
 import numpy as np
 import math
