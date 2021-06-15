@@ -61,12 +61,12 @@ class WindowClass(QMainWindow, form_class):
         self.fig_sec = plt.figure(2)
         
         self.fig_sec.set_size_inches(8, 8)
-        self.fig_sec.subplots_adjust(left=0.125,
-                                     bottom=0.1,
-                                     right=0.9,
-                                     top=0.9,
-                                     wspace=0.25,
-                                     hspace=0.35)
+        self.fig_sec.subplots_adjust(left=0.1,
+                                     bottom=0.05,
+                                     right=0.99,
+                                     top=0.95,
+                                     wspace=0.23,
+                                     hspace=0.23)
         self.canvas_sec = FigureCanvas(self.fig_sec)
         self.fig.set_facecolor(QColor(244, 244, 244).name())
         self.scroll = QScrollArea()
