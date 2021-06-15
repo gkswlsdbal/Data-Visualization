@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+=======
+from matplotlib.backends.backend_template import FigureCanvas
+>>>>>>> 305cf1742f1aa1fb4ee8425890f239b4cea75a2d
 import data
 import numpy as np
 import math
